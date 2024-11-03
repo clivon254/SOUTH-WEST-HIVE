@@ -5,6 +5,8 @@ import mongoose from "mongoose"
 import cors from "cors"
 import "dotenv/config"
 import authRoute from "./route/authRoute.js"
+import userRoute from "./route/userRoute.js"
+
 
 const app = express()
 
@@ -22,8 +24,15 @@ mongoose.connect(process.env.MONGO_URL)
 .catch((err) => console.log(err))
 
 
+
 // ROUTE
 app.use('/api/auth', authRoute)
+
+
+app.use('/api/user', userRoute)
+
+
+
 
 // api
 app.get('/',(req,res) => {
@@ -31,6 +40,7 @@ app.get('/',(req,res) => {
     res.send("Hello COOP SOUTH WEST HIVE")
 
 })
+
 
 
 // listening
@@ -45,6 +55,7 @@ app.listen(PORT,(err) => {
         console.log(`server running on ${PORT}`)
     }
 })
+
 
 
 app.use((err,req,res,next) => {
