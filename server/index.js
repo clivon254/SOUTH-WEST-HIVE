@@ -7,6 +7,7 @@ import "dotenv/config"
 import authRoute from "./route/authRoute.js"
 import userRoute from "./route/userRoute.js"
 import postRoute from "./route/postRoute.js"
+import commentRoute from "./route/commentRoute.js"
 
 
 const app = express()
@@ -35,6 +36,8 @@ app.use('/api/user', userRoute)
 
 app.use('/api/post', postRoute)
 
+
+app.use('/api/comment' , commentRoute)
 
 
 
