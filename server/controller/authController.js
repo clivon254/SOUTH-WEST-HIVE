@@ -1,3 +1,4 @@
+
 import User from "../model/userModel.js"
 import { errorHandler } from "../utils/error.js"
 import jwt from "jsonwebtoken"
@@ -54,7 +55,7 @@ export const SignIn = async (req,res,next) => {
             return next(errorHandler(404,"User not found"))
         }
 
-        const isMatch = await bcryptjs.compare(password, user?.password)
+        const isMatch = await bcryptjs.compare(password, user.password)
 
         if(!isMatch)
         {
@@ -62,7 +63,11 @@ export const SignIn = async (req,res,next) => {
         }
 
         const token = jwt.sign(
-            {id:user._id , isAdmin:user.isAdmin},
+            {
+              id: user._id , 
+              isAdmin : user.isAdmin,
+              accountType: user.accountType
+            },
             process.env.JWT_SECRETE
         )
 

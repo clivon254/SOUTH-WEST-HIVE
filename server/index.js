@@ -6,6 +6,7 @@ import cors from "cors"
 import "dotenv/config"
 import authRoute from "./route/authRoute.js"
 import userRoute from "./route/userRoute.js"
+import postRoute from "./route/postRoute.js"
 
 
 const app = express()
@@ -30,6 +31,9 @@ app.use('/api/auth', authRoute)
 
 
 app.use('/api/user', userRoute)
+
+
+app.use('/api/post', postRoute)
 
 
 
