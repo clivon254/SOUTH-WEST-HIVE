@@ -8,6 +8,7 @@ import authRoute from "./route/authRoute.js"
 import userRoute from "./route/userRoute.js"
 import postRoute from "./route/postRoute.js"
 import commentRoute from "./route/commentRoute.js"
+import replyRoute from "./route/replyRoute.js"
 
 
 const app = express()
@@ -38,6 +39,9 @@ app.use('/api/post', postRoute)
 
 
 app.use('/api/comment' , commentRoute)
+
+
+app.use('/api/reply', replyRoute)
 
 
 

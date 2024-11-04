@@ -23,7 +23,7 @@ export const createComment = async (req,res,next) => {
 
         if(!post)
         {
-            return next(erroHandler(404, "post not found"))
+            return next(errorHandler(404, "post not found"))
         }
 
         const newComment = new Comment({
