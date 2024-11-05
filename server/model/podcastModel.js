@@ -8,7 +8,7 @@ const podcastSchema = new mongoose.Schema(
 
         audio:{type:String , required:true},
 
-        userId:{type:mongoose.Schema.Types.ObjectId, ref:"Post"},
+        userId:{type:mongoose.Schema.Types.ObjectId, ref:"User"},
 
         backgroundPicture:{type:String , required:true}
 
