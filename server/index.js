@@ -10,6 +10,7 @@ import postRoute from "./route/postRoute.js"
 import commentRoute from "./route/commentRoute.js"
 import replyRoute from "./route/replyRoute.js"
 import productRoute from "./route/productRoute.js"
+import cartRoute from "./route/cartRoute.js"
 
 
 const app = express()
@@ -46,6 +47,9 @@ app.use('/api/reply', replyRoute)
 
 
 app.use('/api/product' , productRoute)
+
+
+app.use("/api/cart", cartRoute)
 
 
 
