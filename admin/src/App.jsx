@@ -9,7 +9,7 @@ function App() {
    
     <div className="grid place-content-center h-screen">
 
-      <p className="text-3xl font-bold semibold">Hello SOUTHWEST HIVE</p>
+      <p className="text-3xl text-red-500 font-bold semibold">Hello SOUTHWEST HIVE</p>
 
     </div>
 
