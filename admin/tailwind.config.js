@@ -1,12 +1,38 @@
 
-/** @type {import('tailwindcss').Config} */
+
+const flowbite = require("flowbite-react/tailwind")
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    flowbite.content()
   ],
   theme: {
-    extend: {},
+    extend: {
+
+      colors:{
+
+        bgLight:'#DAF1DE',
+        textLight:'#0B2B26',
+        textSecondaryLight:'#051F20',
+        primaryLight:'#235347',
+        secondaryLight:'#8EB69B',
+        buttonLight:'#163832',
+
+        bgDark:'#190019',
+        textDark:'#dfb6b2',
+        textSecondaryDark:'#FBE4D8',
+        primaryDark:'#522B5B',
+        secondaryDark:'#854F6C',
+        buttonDark:'#2b124c',
+
+      }
+
+    },
   },
-  plugins: [],
+  plugins: [
+    flowbite.plugin(),
+    require('tailwind-scrollbar'),
+  ],
 }
