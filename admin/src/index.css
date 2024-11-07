@@ -13,7 +13,7 @@
 /* inputs */
 .input
 {
-    @apply bg-transparent rounded-md  border-slate-600 dark:border-slate-400
+    @apply bg-transparent rounded-md  border-slate-600 dark:border-slate-200
 }
 
 .label

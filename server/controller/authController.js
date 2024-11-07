@@ -162,11 +162,13 @@ export const ForgotPassword = async (req,res,next) => {
             }
         })
 
+        const url = process.env.FRONTEND_URL
+
         var mailOptons = {
             from:"COOPING SOUTHWESTHIVE",
             to:user.email,
-            subject:"Reset Password",
-            text:`Click on this link to reset your password: http://localhost:517reset-password/${token}`
+            subject:"RESET PASSWORD",
+            text:`Click on this link to reset your password: ${url}/reset-password/${token}`
         }
 
         transporter.sendMail(mailOptons ,(error, info) => {
