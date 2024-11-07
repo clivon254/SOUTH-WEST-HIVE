@@ -27,6 +27,12 @@ export default {
         secondaryDark:'#854F6C',
         buttonDark:'#2b124c',
 
+      },
+
+      fontFamily:{
+        logo:["Comfortaa","sans-serif"],
+        texting:["Kumbh Sans","serif"],
+        title:["Montserrat","sans-serif"]
       }
 
     },
