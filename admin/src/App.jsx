@@ -1,4 +1,5 @@
 
+
 import { useState } from 'react'
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 import {Toaster} from "sonner"
@@ -32,6 +33,8 @@ import Coupon from './pages/Coupon'
 import Users from './pages/Users'
 import Header from './components/Header'
 import DashSidebar from './components/DashSidebar'
+
+
 
 function Layout(){
 
@@ -68,8 +71,8 @@ function Layout(){
 
 }
 
-export default function App() {
 
+export default function App() {
 
   return (
    
