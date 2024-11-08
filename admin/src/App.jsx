@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 import {Toaster} from "sonner"
 import { useSelector } from "react-redux"
 import ForgotPassword from './pages/ForgotPassword'
@@ -30,6 +30,8 @@ import CheckOut from './pages/CheckOut'
 import Profile from './pages/Profile'
 import Coupon from './pages/Coupon'
 import Users from './pages/Users'
+import Header from './components/Header'
+import DashSidebar from './components/DashSidebar'
 
 function Layout(){
 
@@ -39,9 +41,29 @@ function Layout(){
 
     currentUser ? 
 
-      <div className=""></div>
+    <div className="">
+      
+      <Header />
+
+      <div className="w-full flex ">
+
+        {/* sidebar */}
+        <aside className="hidden md:block w-1/4  border-r  h-[80vh] overflow-hidden overflow-scroll-y sticky left-0 left-0">
+
+            <DashSidebar />
+
+        </aside>
+        
+        {/* otherside */}
+        <div className="w-full md:w-3/4">
+            <Outlet/>
+        </div>
+
+      </div>
+
+    </div>
       :
-      <Navigate to="sign-in"/>
+    <Navigate to="sign-in"/>
   )
 
 }
@@ -103,7 +125,7 @@ export default function App() {
 
               <Route path="/CheckOut" element={<CheckOut/>}/>
 
-              <Route path="/Profile/:userId" element={<Profile/>}/>
+              <Route path="/Profile" element={<Profile/>}/>
 
               <Route path="/coupon" element={<Coupon/>}/>
 

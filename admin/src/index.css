@@ -29,15 +29,23 @@
 /* fonts */
 .title
 {
-    @apply text-4xl  font-bold
+    @apply text-4xl  font-title font-bold text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 .title2
 {
-    @apply text-3xl
+    @apply text-4xl font-semibold font-title text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 .title3
 {
     @apply text-3xl font-title font-semibold text-textSecondaryLight dark:text-textSecondaryDark
+}
+
+
+
+/* topography */
+.section
+{
+    @apply px-5 w-full py-10
 }

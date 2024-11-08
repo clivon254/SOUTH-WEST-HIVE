@@ -13,6 +13,8 @@ export default function StoreContextProvider(props) {
 
   const url = "http://localhost:2500"
 
+  const [open,setOpen] = useState(false)
+
 
   useEffect(() => {
 
@@ -26,7 +28,8 @@ export default function StoreContextProvider(props) {
   const contextValue = 
   {
     url,
-    token,setToken
+    token,setToken,
+    open,setOpen
   }
 
   return (
