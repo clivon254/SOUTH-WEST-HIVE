@@ -49,7 +49,7 @@ export default function Header() {
 
     <>
 
-        <header className="mx-auto w-full p-5 border-b border-gray-300 dark:border-gray-700 sticky top-0 left-0">
+        <header className="mx-auto w-full p-5 border-b border-gray-300 dark:border-gray-700 z-50 sticky top-0 left-0 backdrop-blur-xl">
 
             <div className="flex items-center justify-between">
                 

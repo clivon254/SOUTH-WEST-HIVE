@@ -1,6 +1,5 @@
 
 
-import { useState } from 'react'
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 import {Toaster} from "sonner"
 import { useSelector } from "react-redux"
@@ -44,21 +43,21 @@ function Layout(){
 
     currentUser ? 
 
-    <div className="">
+    <div className="w-full">
       
       <Header />
 
       <div className="w-full flex ">
 
         {/* sidebar */}
-        <aside className="hidden md:block w-1/4  border-r  h-[80vh] overflow-hidden overflow-scroll-y sticky left-0 left-0">
+        <aside className="hidden md:block w-1/4  border-r  h-[80vh] overflow-hidden overflow-scroll-y sticky left-0">
 
             <DashSidebar />
 
         </aside>
         
         {/* otherside */}
-        <div className="w-full md:w-3/4">
+        <div className="w-full md:w-3/4 min-h-screen">
             <Outlet/>
         </div>
 
