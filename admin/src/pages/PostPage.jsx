@@ -7,15 +7,16 @@ import { useSelector } from "react-redux"
 import axios from 'axios'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
+import { MdArrowRight, MdChevronLeft, MdChevronRight } from "react-icons/md"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 // import required modules
-import { Navigation } from 'swiper/modules'
-
-
-
+import {  Autoplay,Navigation ,Pagination} from 'swiper/modules';
+import Popular from '../components/Popular'
 
 
 
@@ -132,9 +133,25 @@ export default function PostPage() {
               </div>
 
               {/* img */}
-              <div className="w-full md:w-1/2 ">
+              <div className="w-full md:w-1/2 relative">
 
-                <Swiper>
+                <Swiper
+                  className="mySwiper"
+                  navigation={true} 
+                  loop={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: true,
+                  }}
+                  modules={[Navigation,Pagination,Autoplay]} 
+                  // navigation={{
+                  //   prevEl:'.prev',
+                  //   nextEl:'.next'
+                  // }}
+                >
 
                   {post?.images.map((img,index) => (
 
@@ -145,7 +162,7 @@ export default function PostPage() {
                       <img 
                         src={img} 
                         alt="" 
-                        className="w-full h-auto md:h-[360px] 2xl:h-[460px] rounded object-cover" 
+                        className="w-full h-[300px] md:h-[360px] 2xl:h-[460px] rounded object-cover" 
                       />
 
                     </SwiperSlide>
@@ -153,19 +170,53 @@ export default function PostPage() {
                   ))}
                 </Swiper>
 
+                {/* <div className=".prev">
+                  <MdChevronLeft size={32}/>
+                </div>
+
+                <div className=".next">
+                  <MdChevronRight size={32}/>
+                </div> */}
 
               </div>
 
           </div>
 
           {/* bottom */}
-          <div className="">
+          <div className="w-full flex flex-col md:flex-row gap-x-10 2xl:gap-x-28 mt-10">
 
             {/* LEFT */}
-            <div className=""></div>
+            <div className="w-full md:w-2/3 flex flex-col ">
+                  
+              <div className="w-full">
+
+                <div className="flex justify-between p-3 max-w-2xl mx-auto text-xs">
+
+                  <span className="">
+                    {new Date(post?.createdAt).toLocaleDateString()}
+                  </span>
+
+                  <span className="italic">
+                    {(post?.description?.length/1000).toFixed(0)} mins read
+                  </span>
+
+                </div>
+
+                <div 
+                  className="p-3 max-w-2xl mx-auto w-full post-content"
+                  dangerouslySetInnerHTML={{__html:post?.description}}
+                />
+
+              </div>
+
+            </div>
 
             {/* RIGHT */}
-            <div className=""></div>
+            <div className="w-full md:w-1/3 p-2">
+
+              <Popular/>
+
+            </div>
 
           </div>
 
@@ -173,7 +224,8 @@ export default function PostPage() {
 
       )}
 
-       {loading && !error && (
+      {loading && !error && (
+       <>
 
         <div className="grid place-content-center">
 
@@ -184,6 +236,8 @@ export default function PostPage() {
           </div>
 
         </div>
+
+        </>
 
       )}
 

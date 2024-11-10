@@ -23,9 +23,9 @@ export default function StoreContextProvider(props) {
 
   const [postError,setPostError] = useState(false)
 
-  const [popularArticles ,setPopularArticles] = useState([])
+  const [popularArticles , setPopularArticles] = useState([])
 
-  const [popularWriters,setPopularWriters] = useState([])
+  const [popularWriters, setPopularWriters] = useState([])
 
   const [popularLoading,setPopularLoading] = useState(false)
 
@@ -64,7 +64,7 @@ export default function StoreContextProvider(props) {
   }
 
   // fetchPopular content
-  const popularContent = async () => {
+  const fetchPopularContent = async () => {
 
     try
     {
@@ -76,7 +76,7 @@ export default function StoreContextProvider(props) {
       {
         setPopularLoading(false)
 
-        setPopularArticles(res.data.post)
+        setPopularArticles(res.data.posts)
 
         setPopularWriters(res.data.writers)
       }
@@ -84,6 +84,8 @@ export default function StoreContextProvider(props) {
     catch(error)
     {
       console.log(error.message)
+
+      setPopularLoading(false)
     }
 
   }
@@ -93,7 +95,7 @@ export default function StoreContextProvider(props) {
 
     fetchPost()
 
-    popularContent()
+    fetchPopularContent()
 
   },[])
 
@@ -114,7 +116,11 @@ export default function StoreContextProvider(props) {
     postLoading,setPostLoading,
     postError,setPostError,
     posts,setPosts,
-    fetchPost
+    fetchPost,
+    popularArticles,setPopularArticles,
+    popularWriters,setPopularWriters,
+    popularLoading,setPopularLoading,
+    fetchPopularContent
   }
 
   return (

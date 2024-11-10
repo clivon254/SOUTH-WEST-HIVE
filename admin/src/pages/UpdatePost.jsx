@@ -278,6 +278,25 @@ export default function UpdatePost() {
 
               </div>
 
+              <div className="flex items-center gap-x-3 ">
+
+                  <label htmlFor="" className="font-bold">Status :</label>
+
+                  <select  
+                    className="input"
+                    value={formData.status}
+                    required
+                    onChange={(e) => setFormData({...formData ,status:e.target.value})}
+                  >
+
+                    <option value="false" >false</option>
+
+                    <option value="true" >true</option>
+
+                  </select>
+
+              </div>
+
               <ReactQuill 
                 theme="snow"
                 placeholder="write something"

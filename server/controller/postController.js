@@ -354,6 +354,7 @@ export const getPopularContent = async (req,res,next) => {
 
     try
     {
+
         const posts = await Post.aggregate([
             {
                 $match:{
@@ -364,9 +365,10 @@ export const getPopularContent = async (req,res,next) => {
                 $project:{
                     title:1,
                     slug:1,
-                    image:1,
+                    images:1,
+                    userId:1,
                     category:1,
-                    veiws:{$size:"$veiw"},
+                    veiws:{$size:"$veiws"},
                     createdAt:1
                 }
             },
@@ -378,7 +380,7 @@ export const getPopularContent = async (req,res,next) => {
             },
         ])
 
-        const writers = await Post.aggregate([
+        const writers = await User.aggregate([
             {
                 $match:{
                     accountType:"writer"

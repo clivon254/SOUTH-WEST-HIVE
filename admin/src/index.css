@@ -44,7 +44,7 @@
 
 .title3
 {
-    @apply text-2xl md:text-3xl font-title font-semibold text-textSecondaryLight dark:text-textSecondaryDark
+    @apply text-xl md:text-2xl font-title font-semibold text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 
@@ -63,4 +63,19 @@
 .loading
 {
     @apply h-6 w-6 block border-2 border-zinc-300  border-t-zinc-700 border-r-zinc-700 animate-spin rounded-full
+}
+
+.mySwiper
+{
+    @apply relative
+}
+
+.prev
+{
+    @apply absolute top-1/2
+}
+
+.next
+{
+    @apply absolute
 }
