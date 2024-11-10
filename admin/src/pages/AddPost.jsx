@@ -36,7 +36,7 @@ export default function AddPost() {
 
   const navigate = useNavigate()
 
-  console.log(formData)
+
 
   // handleImageSubmit
   const handleImageSubmit = (e) => {

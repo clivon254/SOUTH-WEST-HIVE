@@ -1,6 +1,8 @@
 
 
+import axios from 'axios'
 import React, { createContext, useEffect, useState } from 'react'
+import { FaSleigh } from 'react-icons/fa'
 
 
 export const StoreContext = createContext(null)
@@ -15,6 +17,85 @@ export default function StoreContextProvider(props) {
 
   const [open,setOpen] = useState(false)
 
+  const [posts ,setPosts] = useState([])
+
+  const [postLoading , setPostLoading] = useState(false)
+
+  const [postError,setPostError] = useState(false)
+
+  const [popularArticles ,setPopularArticles] = useState([])
+
+  const [popularWriters,setPopularWriters] = useState([])
+
+  const [popularLoading,setPopularLoading] = useState(false)
+
+
+
+  // fetchPost
+  const fetchPost = async () => {
+
+    try
+    {
+
+      setPostLoading(true)
+
+      setPostError(false)
+
+      const res = await axios.get(url + "/api/post/get-posts")
+
+      if(res.data.success)
+      {
+
+        setPostLoading(false)
+
+        setPostError(false)
+
+        setPosts(res.data.posts)
+      }
+
+    }
+    catch(error)
+    {
+      console.log(error.message)
+      
+      setPostError(true)
+    }
+
+  }
+
+  // fetchPopular content
+  const popularContent = async () => {
+
+    try
+    {
+      setPopularLoading(true)
+
+      const res = await axios.post(url + "/api/post/popular-content")
+
+      if(res.data.success)
+      {
+        setPopularLoading(false)
+
+        setPopularArticles(res.data.post)
+
+        setPopularWriters(res.data.writers)
+      }
+    }
+    catch(error)
+    {
+      console.log(error.message)
+    }
+
+  }
+
+
+  useEffect(() => {
+
+    fetchPost()
+
+    popularContent()
+
+  },[])
 
   useEffect(() => {
 
@@ -29,7 +110,11 @@ export default function StoreContextProvider(props) {
   {
     url,
     token,setToken,
-    open,setOpen
+    open,setOpen,
+    postLoading,setPostLoading,
+    postError,setPostError,
+    posts,setPosts,
+    fetchPost
   }
 
   return (

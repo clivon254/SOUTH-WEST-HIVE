@@ -26,20 +26,25 @@
     @apply bg-buttonLight dark:bg-buttonDark  text-bgLight dark:text-textDark font-semibold px-4 py-2
 }
 
+.btn2
+{
+    @apply bg-zinc-800 dark:bg-zinc-500  text-bgLight dark:text-textDark font-semibold px-4 py-2
+}
+
 /* fonts */
 .title
 {
-    @apply text-4xl  font-title font-bold text-textSecondaryLight dark:text-textSecondaryDark
+    @apply text-4xl  md:text-5xl font-title font-bold text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 .title2
 {
-    @apply text-4xl font-semibold font-title text-textSecondaryLight dark:text-textSecondaryDark
+    @apply text-3xl md:text-4xl font-semibold font-title text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 .title3
 {
-    @apply text-3xl font-title font-semibold text-textSecondaryLight dark:text-textSecondaryDark
+    @apply text-2xl md:text-3xl font-title font-semibold text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 
@@ -48,4 +53,14 @@
 .section
 {
     @apply px-5 w-full py-10
+}
+
+.table
+{
+    @apply table-auto overflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500
+}
+
+.loading
+{
+    @apply h-6 w-6 block border-2 border-zinc-300  border-t-zinc-700 border-r-zinc-700 animate-spin rounded-full
 }

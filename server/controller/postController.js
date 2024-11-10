@@ -66,13 +66,13 @@ export const getPost = async (req,res,next) => {
     {
         const {slug} = req.params
 
-        const userId = req.user.id
+        const {userId} = req.body
 
         const post = await Post.findOne({slug})
                                .populate({ path: "userId"})
 
         if(!post)
-        {
+        { 
             return next(errorHandler(404, "post not found"))
         }
 
