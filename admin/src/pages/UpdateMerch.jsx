@@ -187,15 +187,15 @@ export default function AddMerch() {
 
       setLoading(true)
 
-      const res = await axios.post(url + `/api/product/update-product/${formData._id}`,formData,{headers:{token}})
+      const res = await axios.put(url + `/api/product/update-product/${formData._id}`,formData,{headers:{token}})
 
       if(res.data.success)
       {
         setFormData({})
 
-        navigate(`/product/${res.data.newProduct._id}`)
+        navigate(`/product/${res.data.updatedProduct._id}`)
 
-        toast.success(`${res.data.newProduct.name} is added successfully`)
+        toast.success(`${res.data.newProduct.name} is updated successfully`)
 
         setLoading(false)
       }
@@ -254,7 +254,7 @@ export default function AddMerch() {
     
         <section className="section space-y-5">
 
-          <h1 className="title text-center">Add Merch</h1>
+          <h1 className="title text-center">Update Merch</h1>
 
           <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-5">
 
@@ -467,14 +467,20 @@ export default function AddMerch() {
                 disabled={loading || uploading}
                 type="submit"
               >
-              {loading ? 
-              (
-                  <>
-                    <span className="loading"/> ....
-                  </>
-              ) 
-              : 
-              ("update product")}
+                {loading ? 
+                (
+                    <>
+
+                      <div className="flex items-center justify-center gap-x-5">
+
+                        <span className="loading"/> loading ....
+
+                      </div>
+
+                    </>
+                ) 
+                : 
+                ("update product")}
               </button>
 
               {publishingError && (

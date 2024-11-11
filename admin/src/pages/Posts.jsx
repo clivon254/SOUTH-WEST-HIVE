@@ -69,7 +69,7 @@ export default function Posts() {
 
                   <Table>
 
-                    <Table.Body className="font-title">
+                    <Table.Body className="font-title uppercase">
 
                         <Table.Row>
 

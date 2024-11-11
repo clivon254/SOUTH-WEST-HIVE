@@ -31,6 +31,10 @@ export default function StoreContextProvider(props) {
 
     const [products ,setProducts] = useState([])
 
+    const [productsLoading ,setProductsLoading] = useState(false)
+
+    const [productsError ,setProductsError] = useState(false)
+
 
     // fetchPost
     const fetchPost = async () => {
@@ -59,6 +63,36 @@ export default function StoreContextProvider(props) {
       {
         console.log(error.message)
         
+        setPostError(true)
+      }
+
+    }
+
+    // fetchProducts
+    const fetchProducts = async () => {
+
+      try
+      {
+
+        setProductsLoading(true)
+
+        setProductsError(false)
+        
+        const res = await axios.get(url + "/api/product/get-products")
+
+        if(res.data.success)
+        {
+
+          setProductsLoading(false)
+
+          setProducts(res.data.products)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
         setPostError(true)
       }
 
@@ -98,6 +132,8 @@ export default function StoreContextProvider(props) {
 
       fetchPopularContent()
 
+      fetchProducts()
+
     },[])
 
     useEffect(() => {
@@ -108,6 +144,8 @@ export default function StoreContextProvider(props) {
       }
 
     },[])
+
+    console.log(products)
 
     const contextValue = 
     {
@@ -121,7 +159,11 @@ export default function StoreContextProvider(props) {
       popularArticles,setPopularArticles,
       popularWriters,setPopularWriters,
       popularLoading,setPopularLoading,
-      fetchPopularContent
+      fetchPopularContent,
+      products,setProducts,
+      productsLoading,setProductsLoading,
+      productsError,setProductsError,
+      fetchProducts
     }
 
   return (
