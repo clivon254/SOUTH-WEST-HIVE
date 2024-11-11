@@ -19,9 +19,9 @@ const productSchema = new mongoose.Schema(
 
         instock:{type:Number},
 
-        colors:{type:Array , default:undefined},
+        sizes:{type:Array ,default:undefined},
 
-        sizes:{type:Array ,default:undefined}
+        images:{type:Array , default:[]}
     },
     {
         timestamps: true,

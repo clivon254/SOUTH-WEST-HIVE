@@ -79,3 +79,23 @@
 {
     @apply absolute
 }
+
+.size
+{
+    @apply block  p-2 rounded-md font-title bg-teal-950 text-bgLight dark:bg-bgLight  dark:text-bgDark font-bold cursor-pointer
+}
+
+.size-active
+{
+    @apply border-4  border-rose-700 dark:border-amber-500
+}
+
+.color
+{
+    @apply h-10 w-10 rounded-full block cursor-pointer border
+}
+
+.color-active
+{
+    @apply border-4 border-zinc-600 dark:border-rose-700
+}

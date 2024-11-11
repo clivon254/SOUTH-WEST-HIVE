@@ -105,7 +105,7 @@ export default function App() {
 
               <Route path="/product/:merchId" element={<MerchPage/>}/>
 
-              <Route path="/merchs" element={<Merch/>}/>
+              <Route path="/merch" element={<Merch/>}/>
 
               <Route path="/add-food" element={<AddFood/>}/>
 

@@ -3,7 +3,11 @@
 import React from 'react'
 
 export default function MerchPage() {
+
   return (
-    <div>MerchPage</div>
+
+    <section className="section"></section>
+
   )
+
 }

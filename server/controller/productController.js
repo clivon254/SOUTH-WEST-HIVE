@@ -12,12 +12,12 @@ export const createMerchendise = async (req,res,next) => {
         return next(errorHandler(403,`You are not allowed to create a merchendise `))
     }
 
-    const {Item,name,category,instock,regularPrice,discountPrice,sizes,colors,offer} = req.body
+    const {Item,name,category,instock,regularPrice,discountPrice,sizes,offer,images} = req.body
 
     try
     {
         const newProduct = new Product({
-            Item,name,category,instock,regularPrice,discountPrice,sizes,colors,offer
+            Item,name,category,instock,regularPrice,discountPrice,sizes,offer,images
         })
 
         await newProduct.save()
@@ -39,12 +39,12 @@ export const createAccessories = async (req,res,next) => {
         return next(errorHandler(403,"You are not allowed to create an accesories"))
     }
     
-    const {Item,name,category,instock,regularPrice,discountPrice,offer} = req.body
+    const {Item,name,category,instock,regularPrice,discountPrice,offer,images} = req.body
 
     try
     {
         const newProduct = new Product({
-            Item,name,category,instock,regularPrice,discountPrice,offer
+            Item,name,category,instock,regularPrice,discountPrice,offer,images
         })
 
         await newProduct.save()
@@ -66,12 +66,12 @@ export const createFood = async (req,res,next) => {
         return next(errorHandler(403,"You are not allowed to create a merchendise"))
     }
     
-    const {Item,name,category,regularPrice,discountPrice,offer} = req.body
+    const {Item,name,category,regularPrice,discountPrice,offer,images} = req.body
 
     try
     {
         const newProduct = new Product({
-            Item,name,category,regularPrice,discountPrice,offer
+            Item,name,category,regularPrice,discountPrice,offer,images
         })
 
         await newProduct.save()
@@ -157,7 +157,8 @@ export const updateProduct = async (req,res,next) => {
                     offer:req.body.offer,
                     sizes:req.body.sizes,
                     colors:req.body.colors,
-                    instock:req.body.instock
+                    instock:req.body.instock,
+                    images:req.body.images
                 }
             },
             {new:true}

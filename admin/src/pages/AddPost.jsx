@@ -31,11 +31,10 @@ export default function AddPost() {
   const [loading , setLoading] = useState(false)
 
   const [formData , setFormData] = useState({
-    images:[]
+    images:[],
   })
 
   const navigate = useNavigate()
-
 
 
   // handleImageSubmit
@@ -62,7 +61,7 @@ export default function AddPost() {
           images:formData.images.concat(urls)
         })
 
-        setImageUploadError(false)
+        setImageUploadError(null)
 
         setUploading(false)
 

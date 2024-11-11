@@ -29,6 +29,7 @@ export default function StoreContextProvider(props) {
 
     const [popularLoading,setPopularLoading] = useState(false)
 
+    const [products ,setProducts] = useState([])
 
 
     // fetchPost

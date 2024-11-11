@@ -4,8 +4,17 @@ import React from 'react'
 
 export default function Merch() {
     
+
+  
   return (
-    <div>Merch</div>
+    
+    <section className="section">
+
+      <h1 className="title text-center">Merchindise</h1>
+
+      
+    </section>
+
   )
   
 }
