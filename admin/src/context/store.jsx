@@ -11,117 +11,117 @@ export const StoreContext = createContext(null)
 
 export default function StoreContextProvider(props) {
 
-  const [token ,setToken] = useState(null)
+    const [token ,setToken] = useState(null)
 
-  const url = "http://localhost:2500"
+    const url = "http://localhost:2500"
 
-  const [open,setOpen] = useState(false)
+    const [open,setOpen] = useState(false)
 
-  const [posts ,setPosts] = useState([])
+    const [posts ,setPosts] = useState([])
 
-  const [postLoading , setPostLoading] = useState(false)
+    const [postLoading , setPostLoading] = useState(false)
 
-  const [postError,setPostError] = useState(false)
+    const [postError,setPostError] = useState(false)
 
-  const [popularArticles , setPopularArticles] = useState([])
+    const [popularArticles , setPopularArticles] = useState([])
 
-  const [popularWriters, setPopularWriters] = useState([])
+    const [popularWriters, setPopularWriters] = useState([])
 
-  const [popularLoading,setPopularLoading] = useState(false)
+    const [popularLoading,setPopularLoading] = useState(false)
 
 
 
-  // fetchPost
-  const fetchPost = async () => {
+    // fetchPost
+    const fetchPost = async () => {
 
-    try
-    {
-
-      setPostLoading(true)
-
-      setPostError(false)
-
-      const res = await axios.get(url + "/api/post/get-posts")
-
-      if(res.data.success)
+      try
       {
 
-        setPostLoading(false)
+        setPostLoading(true)
 
         setPostError(false)
 
-        setPosts(res.data.posts)
+        const res = await axios.get(url + "/api/post/get-posts")
+
+        if(res.data.success)
+        {
+
+          setPostLoading(false)
+
+          setPostError(false)
+
+          setPosts(res.data.posts)
+        }
+
       }
-
-    }
-    catch(error)
-    {
-      console.log(error.message)
-      
-      setPostError(true)
-    }
-
-  }
-
-  // fetchPopular content
-  const fetchPopularContent = async () => {
-
-    try
-    {
-      setPopularLoading(true)
-
-      const res = await axios.post(url + "/api/post/popular-content")
-
-      if(res.data.success)
+      catch(error)
       {
-        setPopularLoading(false)
-
-        setPopularArticles(res.data.posts)
-
-        setPopularWriters(res.data.writers)
+        console.log(error.message)
+        
+        setPostError(true)
       }
+
     }
-    catch(error)
+
+    // fetchPopular content
+    const fetchPopularContent = async () => {
+
+      try
+      {
+        setPopularLoading(true)
+
+        const res = await axios.post(url + "/api/post/popular-content")
+
+        if(res.data.success)
+        {
+          setPopularLoading(false)
+
+          setPopularArticles(res.data.posts)
+
+          setPopularWriters(res.data.writers)
+        }
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setPopularLoading(false)
+      }
+
+    }
+
+
+    useEffect(() => {
+
+      fetchPost()
+
+      fetchPopularContent()
+
+    },[])
+
+    useEffect(() => {
+
+      if(localStorage.getItem("token"))
+      {
+        setToken(localStorage.getItem("token"))
+      }
+
+    },[])
+
+    const contextValue = 
     {
-      console.log(error.message)
-
-      setPopularLoading(false)
+      url,
+      token,setToken,
+      open,setOpen,
+      postLoading,setPostLoading,
+      postError,setPostError,
+      posts,setPosts,
+      fetchPost,
+      popularArticles,setPopularArticles,
+      popularWriters,setPopularWriters,
+      popularLoading,setPopularLoading,
+      fetchPopularContent
     }
-
-  }
-
-
-  useEffect(() => {
-
-    fetchPost()
-
-    fetchPopularContent()
-
-  },[])
-
-  useEffect(() => {
-
-    if(localStorage.getItem("token"))
-    {
-      setToken(localStorage.getItem("token"))
-    }
-
-  },[])
-
-  const contextValue = 
-  {
-    url,
-    token,setToken,
-    open,setOpen,
-    postLoading,setPostLoading,
-    postError,setPostError,
-    posts,setPosts,
-    fetchPost,
-    popularArticles,setPopularArticles,
-    popularWriters,setPopularWriters,
-    popularLoading,setPopularLoading,
-    fetchPopularContent
-  }
 
   return (
 
