@@ -53,7 +53,9 @@ export const getCommentReplies = async (req,res,next) => {
 
     try
     {
-        const replies = await Reply.find({commentId}).sort({createdAt:-1})
+        const replies = await Reply.find({commentId})
+                                    .sort({createdAt:-1})
+                                    .populate({path:'userId'})
 
         res.status(200).json({success:true , replies})
     }

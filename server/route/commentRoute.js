@@ -12,7 +12,7 @@ const commentRoute = express.Router()
 commentRoute.post("/create-comment/:postId",verifyToken, createComment)
 
 
-commentRoute.get("/get-PostComments/:postId",verifyToken, getPostComments)
+commentRoute.get("/get-PostComments/:postId", getPostComments)
 
 
 commentRoute.put("/update-comment/:commentId",verifyToken, updateComment)

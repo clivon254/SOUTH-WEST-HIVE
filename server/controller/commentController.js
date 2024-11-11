@@ -51,7 +51,9 @@ export const getPostComments = async (req,res,next) => {
 
     try
     {
-        const comments = await Comment.find({postId}).sort({createdAt:-1})
+        const comments = await Comment.find({postId})
+                                    .sort({createdAt:-1})
+                                    .populate({path:"userId"})
 
         res.status(200).json({success:true , comments})
     }
@@ -65,7 +67,7 @@ export const getPostComments = async (req,res,next) => {
 
 export const updateComment = async (req,res,next) => {
 
-    if(!req.user.id || !req.user.isAdmin)
+    if(!req.user.id)
     {
         return next(errorHandler(403, "You are not allowed to update this post"))
     }

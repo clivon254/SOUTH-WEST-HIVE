@@ -17,6 +17,7 @@ import 'swiper/css/navigation';
 // import required modules
 import {  Autoplay,Navigation ,Pagination} from 'swiper/modules';
 import Popular from '../components/Popular'
+import CommentSection from '../components/CommentSection'
 
 
 
@@ -183,10 +184,10 @@ export default function PostPage() {
           </div>
 
           {/* bottom */}
-          <div className="w-full flex flex-col md:flex-row gap-x-10 2xl:gap-x-28 mt-10">
+          <div className="w-full flex flex-col md:flex-row gap-y-12 gap-x-10 2xl:gap-x-28 mt-10">
 
             {/* LEFT */}
-            <div className="w-full md:w-2/3 flex flex-col ">
+            <div className="w-full md:w-2/3 flex flex-col gap-y-10">
                   
               <div className="w-full">
 
@@ -208,6 +209,8 @@ export default function PostPage() {
                 />
 
               </div>
+
+              <CommentSection postId={post?._id} />
 
             </div>
 

@@ -12,7 +12,7 @@ const replyRoute = express.Router()
 replyRoute.post("/create-reply/:commentId",verifyToken, createReply)
 
 
-replyRoute.get("/get-CommentReplies/:commentId",verifyToken, getCommentReplies)
+replyRoute.get("/get-CommentReplies/:commentId", getCommentReplies)
 
 
 replyRoute.put("/update-reply/:replyId",verifyToken, updateReply)
