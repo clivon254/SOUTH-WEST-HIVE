@@ -145,7 +145,7 @@ export default function StoreContextProvider(props) {
 
     },[])
 
-    console.log(products)
+   
 
     const contextValue = 
     {

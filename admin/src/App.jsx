@@ -14,16 +14,13 @@ import PostPage from './pages/PostPage'
 import WriterPage from './pages/WriterPage'
 import AddMerch from './pages/AddMerch'
 import UpdateMerch from './pages/UpdateMerch'
-import MerchPage from './pages/MerchPage'
 import Posts from './pages/Posts'
 import Merch from './pages/Merch'
 import AddFood from './pages/AddFood'
 import UpdateFood from './pages/UpdateFood'
-import FoodPage from './pages/FoodPage'
 import Food from './pages/Food'
 import AddAccess from './pages/AddAccess'
 import UpdateAccess from './pages/UpdateAccess'
-import AccessPage from './pages/AccessPage'
 import Access from './pages/Access'
 import Cart from './pages/Cart'
 import CheckOut from './pages/CheckOut'
@@ -32,6 +29,7 @@ import Coupon from './pages/Coupon'
 import Users from './pages/Users'
 import Header from './components/Header'
 import DashSidebar from './components/DashSidebar'
+import ProductPage from "./pages/ProductPage"
 
 
 
@@ -103,15 +101,11 @@ export default function App() {
 
               <Route path="/update-merch/:merchId" element={<UpdateMerch/>}/>
 
-              <Route path="/product/:merchId" element={<MerchPage/>}/>
-
               <Route path="/merch" element={<Merch/>}/>
 
               <Route path="/add-food" element={<AddFood/>}/>
 
               <Route path="/update-food/:foodId" element={<UpdateFood/>}/>
-
-              <Route path="/product/:food" element={<FoodPage/>}/>
 
               <Route path="/foods" element={<Food/>}/>
 
@@ -119,9 +113,9 @@ export default function App() {
 
               <Route path="/update-access/:accessId" element={<UpdateAccess/>}/>
 
-              <Route path="/product/:accessId" element={<AccessPage/>}/>
-
               <Route path="/access" element={<Access/>}/>
+
+              <Route path="/product/:productId" element={<ProductPage/>}/>
 
               <Route path="/cart" element={<Cart/>}/>
 
