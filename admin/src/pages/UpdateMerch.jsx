@@ -10,7 +10,7 @@ import { toast } from 'sonner'
 import { Alert } from 'flowbite-react'
 import Error from '../components/Error'
 
-export default function AddMerch() {
+export default function UpdateMerch() {
 
   const {url,token} = useContext(StoreContext)
 
