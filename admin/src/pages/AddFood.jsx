@@ -31,9 +31,9 @@ export default function AddFood() {
     const [formData ,setFormData] = useState({
       images:[],
       offer:false,
-      Item:'Merchendise',
+      Item:'Catering',
       discountPrice:0,
-      category:'Hoody'
+      category:'Breakfast'
     })
 
 
@@ -150,10 +150,9 @@ export default function AddFood() {
 
       try
       {
-
         setLoading(true)
 
-        const res = await axios.post(url + "/api/product/create-merch",formData,{headers:{token}})
+        const res = await axios.post(url + "/api/product/create-food",formData,{headers:{token}})
 
         if(res.data.success)
         {
@@ -177,36 +176,6 @@ export default function AddFood() {
     }
 
 
-    // addsizes
-    const addsizes = (size) => {
-
-      try
-      {
-        console.log("Hello")
-
-          setFormData((prev) => {
-
-            const newSizes = prev.sizes || []
-
-            if(newSizes.includes(size))
-            {
-              return {...prev ,sizes:newSizes.filter((s) => s !== size)}
-            }
-            else
-            {
-                return {...prev,sizes:[...newSizes,size]}
-            }
-
-          })
-
-      }
-      catch(error)
-      {
-        console.log(error.message)
-      }
-
-    }
-
 
   console.log(formData)
 
@@ -216,7 +185,7 @@ export default function AddFood() {
 
       <h1 className="title text-center">Add Food</h1>
 
-      <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-5">
+      <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-y-10 gap-x-5">
 
         <div className="w-full md:w-[60%] flex flex-col gap-y-4 gap-x-3 md:grid md:grid-cols-2">
 
@@ -236,7 +205,7 @@ export default function AddFood() {
                onChange={handleChange}
                value={formData.Item}
             >
-              <option value="Merch" >Merchendise</option>
+              <option value="Catering" >Catering</option>
             </select>
 
             <select
@@ -245,25 +214,15 @@ export default function AddFood() {
               value={formData.category}
               onChange={handleChange}
             >
-              <option value="Hoody" >Hoody</option>
+              <option value="Breakfast" >Breakfast</option>
 
-              <option value="Polo" >Polo</option>
+              <option value="Snack" >Snack</option>
 
-              <option value="T-shirt" >T-shirt</option>
+              <option value="lunch" >lunch</option>
 
-              <option value="Merch" >Merch</option>
+              <option value="supper" >supper</option>
 
             </select>
-
-            <input 
-              type="number" 
-              className="input w-full"
-              placeholder='instock'
-              required
-              name="instock"
-              value={formData.instock}
-              onChange={handleChange}
-            />
 
 
             <input 
@@ -306,56 +265,7 @@ export default function AddFood() {
 
             )}
             
-            {/* sizes */}
-            <div className="space-y-1">
-
-              <p className="label">Sizes</p>
-
-              <div className="flex  items-center gap-x-1">
-
-                <div onClick={() => addsizes("S")}>
-
-                  <span className={`size ${formData?.sizes?.includes("S") ? "size-active" :""}`}>S</span>
-
-                </div>
-
-                <div onClick={() => addsizes("M")}>
-
-                  <span className={`size ${formData?.sizes?.includes("M") ? "size-active" :""}`}>M</span>
-
-                </div>
-
-
-                <div onClick={() => addsizes("X")}>
-
-                  <span className={`size ${formData?.sizes?.includes("X") ? "size-active" :"X"}`}>X</span>
-
-                </div>
-
-                <div onClick={() => addsizes("XL")}>
-
-                  <span className={`size ${formData?.sizes?.includes("XL") ? "size-active" :""}`}>XL</span>
-
-                </div>
-
-                <div onClick={() => addsizes("XXL")}>
-
-                  <span className={`size ${formData?.sizes?.includes("XXL") ? "size-active" :""}`}>XXL</span>
-
-                </div>
-
-                <div onClick={() => addsizes("XXXL")}>
-
-                  <span className={`size ${formData?.sizes?.includes("XXXL") ? "size-active" :""}`}>XXXL</span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            
+           
         </div>
      
         <div className="w-full md:w-[40%] space-y-3">
@@ -434,7 +344,7 @@ export default function AddFood() {
               </>
            ) 
            : 
-           ("Add product")}
+           ("Add Food")}
           </button>
 
           {publishingError && (

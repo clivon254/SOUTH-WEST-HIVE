@@ -247,7 +247,7 @@ export default function AddMerch() {
 
       <h1 className="title text-center">Add Merch</h1>
 
-      <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-5">
+      <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-y-10 gap-x-5">
 
         <div className="w-full md:w-[60%] flex flex-col gap-y-4 gap-x-3 md:grid md:grid-cols-2">
 
@@ -267,7 +267,7 @@ export default function AddMerch() {
                onChange={handleChange}
                value={formData.Item}
             >
-              <option value="Merch" >Merchendise</option>
+              <option value="Merchendise" >Merchendise</option>
             </select>
 
             <select
@@ -465,7 +465,7 @@ export default function AddMerch() {
               </>
            ) 
            : 
-           ("Add product")}
+           ("Add Merchendise")}
           </button>
 
           {publishingError && (

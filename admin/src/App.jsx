@@ -113,7 +113,7 @@ export default function App() {
 
               <Route path="/product/:food" element={<FoodPage/>}/>
 
-              <Route path="/food" element={<Food/>}/>
+              <Route path="/foods" element={<Food/>}/>
 
               <Route path="/add-access" element={<AddAccess/>}/>
 
