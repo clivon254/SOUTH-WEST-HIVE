@@ -289,15 +289,19 @@ export default function ProductPage() {
 
         {loading && (
 
-            <div className="grid place-content-center gap-x-4">
+            <>
 
-                <div className="flex items-center mt-20 gap-x-4">
+                <div className="grid place-content-center gap-x-4">
 
-                    <span className="loading"/> Loading .....
+                    <div className="flex items-center mt-20 gap-x-4">
+
+                        <span className="loading"/> Loading .....
+
+                    </div>
 
                 </div>
 
-            </div>
+            </>
 
         )}
 

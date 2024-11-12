@@ -30,6 +30,9 @@ import Users from './pages/Users'
 import Header from './components/Header'
 import DashSidebar from './components/DashSidebar'
 import ProductPage from "./pages/ProductPage"
+import AddReels from "./pages/AddReels"
+import UpdateReel from "./pages/UpdateReel"
+import Reels from "./pages/Reels"
 
 
 
@@ -126,6 +129,12 @@ export default function App() {
               <Route path="/coupon" element={<Coupon/>}/>
 
               <Route path="/users" element={<Users/>}/>
+
+              <Route path="/add-reel" element={<AddReels/>}/>
+
+              <Route path="/update-reel/:reelId" element={<UpdateReel/>}/>
+
+              <Route path="/reels" element={<Reels/>}/>
 
           </Route>
 

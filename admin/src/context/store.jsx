@@ -35,6 +35,12 @@ export default function StoreContextProvider(props) {
 
     const [productsError ,setProductsError] = useState(false)
 
+    const [reels ,setReels] = useState([])
+
+    const [reelLoading ,setReelLoading] = useState(false)
+
+    const [reelError ,setReelError] = useState(false)
+
 
     // fetchPost
     const fetchPost = async () => {
@@ -125,7 +131,34 @@ export default function StoreContextProvider(props) {
 
     }
 
+    // fetchReel
+    const fetchReels = async () => {
 
+      try
+      {
+        setReelLoading(true)
+
+        setReelLoading(false)
+
+        const res = await axios.get(url + "/api/reel/get-reels")
+
+        if(res.data.success)
+        {
+          setReelLoading(false)
+
+          setReels(res.data.reels)
+        }
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setReelError(true)
+      }
+
+    }
+
+    
     useEffect(() => {
 
       fetchPost()
@@ -133,6 +166,8 @@ export default function StoreContextProvider(props) {
       fetchPopularContent()
 
       fetchProducts()
+
+      fetchReels()
 
     },[])
 
@@ -146,7 +181,6 @@ export default function StoreContextProvider(props) {
     },[])
 
    
-
     const contextValue = 
     {
       url,
@@ -163,7 +197,11 @@ export default function StoreContextProvider(props) {
       products,setProducts,
       productsLoading,setProductsLoading,
       productsError,setProductsError,
-      fetchProducts
+      fetchProducts,
+      reels,setReels,
+      reelLoading,setReelLoading,
+      reelError,setReelError,
+      fetchReels
     }
 
   return (
