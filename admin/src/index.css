@@ -109,3 +109,23 @@
 {
     @apply bg-zinc-300 dark:bg-zinc-700 block animate-pulse
 }
+
+
+/* thumb */
+.thumb
+{
+    @apply h-20 w-20 cursor-pointer  border-primaryLight dark:border-primaryDark backdrop-blur-0
+}
+
+
+.thumb-active
+{
+    @apply h-20 w-20 cursor-pointer border-2 border-primaryLight dark:border-primaryDark backdrop-blur-0
+    transition ease-in-out 
+}
+
+.quantity
+{
+    @apply h-14 w-14 border border-primaryLight dark:border-primaryDark grid place-content-center
+    font-title font-bold
+}
