@@ -1,6 +1,7 @@
 
 
 import axios from 'axios'
+import { set } from 'mongoose'
 import React, { createContext, useEffect, useState } from 'react'
 import { FaSleigh } from 'react-icons/fa'
 
@@ -58,6 +59,13 @@ export default function StoreContextProvider(props) {
     const [userLoading ,setUserLoading] = useState(false)
 
     const [userError ,setUserError] = useState(false)
+
+    const [podcasts ,setPodcasts] = useState([])
+
+    const [podcastLoading ,setPodcastLoading] = useState(false)
+
+    const [podcastError ,setPodcastError] = useState(false)
+
 
 
 
@@ -252,7 +260,7 @@ export default function StoreContextProvider(props) {
         {
           setUserLoading(false)
 
-          setUsers(res.data.users)
+          setUsers(res.data.usersWithoutPassword)
         }
 
       }
@@ -263,6 +271,37 @@ export default function StoreContextProvider(props) {
         setUserLoading(false)
 
         setUserError(true)
+      }
+
+    }
+
+
+    // fetchPodcast
+    const fetchPodcast = async () => {
+
+      try
+      {
+        setPodcastLoading(true)
+
+        setPodcastError(false)
+
+        const res = await axios.get(url + "/api/podcast/get-podcasts")
+
+        if(res.data.success)
+        {
+          setPodcastLoading(false)
+
+          setPodcasts(res.data.podcasts)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setPodcastError(true)
+
+        setPodcastLoading(false)
       }
 
     }
@@ -284,6 +323,8 @@ export default function StoreContextProvider(props) {
 
       fetchUser()
 
+      fetchPodcast()
+
     },[])
 
 
@@ -297,7 +338,6 @@ export default function StoreContextProvider(props) {
     },[])
 
 
-   
     const contextValue = 
     {
       url,
@@ -330,7 +370,11 @@ export default function StoreContextProvider(props) {
       users,setUsers,
       userLoading,setUserLoading,
       userError,setUserError,
-      fetchUser
+      fetchUser,
+      podcasts,setPodcasts,
+      podcastLoading,setPodcastLoading,
+      podcastError,setPodcastError,
+      fetchPodcast
     }
 
   return (

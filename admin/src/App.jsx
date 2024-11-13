@@ -40,6 +40,10 @@ import AddBrand from "./pages/AddBrand"
 import UpdateBrand from "./pages/UpdateBrand"
 import Brand from "../../server/model/brandModel"
 import Brands from "./pages/Brands"
+import UpdateUser from "./pages/UpdateUser"
+import AddPodcast from "./pages/AddPodcast"
+import Podcast from "./pages/Podcast"
+import UpdatePodcast from "./pages/UpdatePodcast"
 
 
 
@@ -137,6 +141,8 @@ export default function App() {
 
               <Route path="/users" element={<Users/>}/>
 
+              <Route path="/update-user/:userId" element={<UpdateUser/>}/>
+
               <Route path="/add-reel" element={<AddReels/>}/>
 
               <Route path="/update-reel/:reelId" element={<UpdateReel/>}/>
@@ -154,6 +160,12 @@ export default function App() {
               <Route path="/update-brand/:brandId" element={<UpdateBrand/>}/>
 
               <Route path="/brand" element={<Brands/>}/>
+
+              <Route path="/add-podcast" element={<AddPodcast/>}/>
+
+              <Route path="/podcasts" element={<Podcast/>}/>
+
+              <Route path="/update-podcast/:podcastId" element={<UpdatePodcast/>}/>
 
           </Route>
 
