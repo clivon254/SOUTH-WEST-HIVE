@@ -1,25 +1,25 @@
 
 import express from  "express"
-import { createBrand, deleteBrand, getBrand, updateBrand } from "../controller/brandController.js"
+import { createBrand, deleteBrand, getBrand, getBrands, updateBrand } from "../controller/brandController.js"
 import { verifyToken } from "../utils/verify.js"
 
 
 const brandRoute = express.Router()
 
 
-brandRoute.post('/create-film',verifyToken, createBrand)
+brandRoute.post('/create-brand',verifyToken, createBrand)
 
 
-brandRoute.get('/get-film/:filmId', getBrand)
+brandRoute.get('/get-brand/:brandId', getBrand)
 
 
-brandRoute.get('/get-films', createBrand)
+brandRoute.get('/get-brands', getBrands)
 
 
-brandRoute.put('/update-film/:filmId',verifyToken, updateBrand)
+brandRoute.put('/update-brand/:brandId',verifyToken, updateBrand)
 
 
-brandRoute.post('/delete-film/:filmId',verifyToken, deleteBrand)
+brandRoute.delete('/delete-brand/:brandId',verifyToken, deleteBrand)
 
 
 export default brandRoute

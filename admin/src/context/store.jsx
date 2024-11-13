@@ -11,7 +11,7 @@ export const StoreContext = createContext(null)
 
 export default function StoreContextProvider(props) {
 
-    const [token ,setToken] = useState(null)
+    const [token ,setToken] = useState(localStorage.getItem("token"))
 
     const url = "http://localhost:2500"
 
@@ -46,6 +46,19 @@ export default function StoreContextProvider(props) {
     const [filmLoading ,setFilmLoading] = useState(false)
 
     const [filmError ,setFilmError] = useState(false)
+
+    const [brands ,setBrands] = useState([])
+
+    const [brandLoading , setBrandLoading] = useState(false)
+
+    const [brandError ,setBrandError] = useState(false)
+
+    const [users ,setUsers] = useState([])
+
+    const [userLoading ,setUserLoading] = useState(false)
+
+    const [userError ,setUserError] = useState(false)
+
 
 
     // fetchPost
@@ -194,6 +207,66 @@ export default function StoreContextProvider(props) {
 
     }
 
+    // fetchBrand
+    const fetchBrand = async () => {
+
+      try
+      {
+        setBrandLoading(true)
+
+        setBrandError(false)
+
+        const res = await axios.get(url + "/api/brand/get-brands")
+
+        if(res.data.success)
+        {
+          setBrandLoading(false)
+
+          setBrands(res.data.brands)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setBrandError(true)
+
+        setBrandLoading(true)
+      }
+
+    }
+
+    //fetchUsers
+    const fetchUser = async () => {
+
+      try
+      {
+        setUserLoading(true)
+
+        setUserError(false)
+
+        const res = await axios.get(url + "/api/user/get-users",{headers:{token}})
+
+        if(res.data.success)
+        {
+          setUserLoading(false)
+
+          setUsers(res.data.users)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setUserLoading(false)
+
+        setUserError(true)
+      }
+
+    }
+
     
     useEffect(() => {
 
@@ -207,7 +280,12 @@ export default function StoreContextProvider(props) {
 
       fetchFilms()
 
+      fetchBrand()
+
+      fetchUser()
+
     },[])
+
 
     useEffect(() => {
 
@@ -218,7 +296,7 @@ export default function StoreContextProvider(props) {
 
     },[])
 
-    console.log(films)
+
    
     const contextValue = 
     {
@@ -245,6 +323,14 @@ export default function StoreContextProvider(props) {
       filmLoading,setFilmLoading,
       filmError,setFilmError,
       fetchFilms,
+      brands,setBrands,
+      brandLoading,setBrandLoading,
+      brandError,setBrandError,
+      fetchBrand,
+      users,setUsers,
+      userLoading,setUserLoading,
+      userError,setUserError,
+      fetchUser
     }
 
   return (

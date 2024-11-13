@@ -12,7 +12,6 @@ export const createBrand = async (req,res,next) => {
         return next(errorHandler(403,"You are not allowed to create a brand"))
     }
 
-    const userId = req.user.id
      
     const {image,name} = req.body
 
@@ -20,8 +19,7 @@ export const createBrand = async (req,res,next) => {
     {
         const newBrand = new Brand({
             image,
-            name,
-            userId
+            name
         })
 
         await newBrand.save()
@@ -87,7 +85,7 @@ export const updateBrand = async (req,res,next) => {
 
     try
     {
-        const brand = await brand.findById(brandId)
+        const brand = await Brand.findById(brandId)
 
         if(!brand)
         {

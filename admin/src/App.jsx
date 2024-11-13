@@ -36,6 +36,10 @@ import Reels from "./pages/Reels"
 import AddFilm from "./pages/AddFilm"
 import Films from "./pages/Films"
 import UpdateFilm from "./pages/UpdateFilm"
+import AddBrand from "./pages/AddBrand"
+import UpdateBrand from "./pages/UpdateBrand"
+import Brand from "../../server/model/brandModel"
+import Brands from "./pages/Brands"
 
 
 
@@ -144,6 +148,12 @@ export default function App() {
               <Route path="/update-film/:filmId" element={<UpdateFilm/>}/>
 
               <Route path="/film" element={<Films/>}/>
+
+              <Route path="/add-brand" element={<AddBrand/>}/>
+
+              <Route path="/update-brand/:brandId" element={<UpdateBrand/>}/>
+
+              <Route path="/brand" element={<Brands/>}/>
 
           </Route>
 
