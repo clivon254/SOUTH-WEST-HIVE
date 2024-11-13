@@ -62,14 +62,14 @@ export default function Posts() {
 
         {!postLoading && !postError && (
 
-            <div className="table">
+            <div className="tabler">
 
               {posts.length > 0 ? 
                 (
 
                   <Table>
 
-                    <Table.Body className="font-title uppercase">
+                    <Table.Body className="table-title">
 
                         <Table.Row>
 

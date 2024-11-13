@@ -66,7 +66,7 @@ export default function Food() {
 
         {!productsLoading && !productsError && (
 
-          <div className="table">
+          <div className="tabler">
               {food.length > 0 ? 
                 (
                   

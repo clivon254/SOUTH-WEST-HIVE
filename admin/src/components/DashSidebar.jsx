@@ -7,7 +7,7 @@ import { toggleTheme } from '../redux/theme/themeSlice'
 import { MdAccessibility, MdAccessibilityNew, MdAccessible, MdAddAlarm, MdAddAlert, MdAddAPhoto, MdAddBusiness, MdAirlineSeatIndividualSuite, MdAnalytics, MdCollections, MdCompost, MdDarkMode, MdDashboard, MdFlipCameraIos, MdFoodBank, MdLightMode, MdLogoDev, MdMerge, MdOutlineSwapVert, MdPanorama, MdPodcasts, MdPostAdd } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { StoreContext } from '../context/store'
-import { FaUsers } from "react-icons/fa"
+import { FaFilm, FaTradeFederation, FaUsers } from "react-icons/fa"
 
 
 export default function DashSidebar() {
@@ -282,6 +282,7 @@ export default function DashSidebar() {
                         </Sidebar.Item>
 
                     </Link>
+                    
 
                     <Sidebar.Item className="">
 

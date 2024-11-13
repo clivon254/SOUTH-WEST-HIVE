@@ -66,7 +66,7 @@ export default function Merch() {
 
         {!productsLoading && !productsError && (
 
-          <div className="table">
+          <div className="tabler">
               {merch.length > 0 ? 
                 (
                   

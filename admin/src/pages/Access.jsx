@@ -64,7 +64,7 @@ export default function Access() {
 
         {!productsLoading && !productsError && (
 
-          <div className="table">
+          <div className="tabler">
               {access.length > 0 ? 
                 (
                   

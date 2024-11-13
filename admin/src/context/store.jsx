@@ -41,6 +41,12 @@ export default function StoreContextProvider(props) {
 
     const [reelError ,setReelError] = useState(false)
 
+    const [films ,setFilms] = useState([])
+
+    const [filmLoading ,setFilmLoading] = useState(false)
+
+    const [filmError ,setFilmError] = useState(false)
+
 
     // fetchPost
     const fetchPost = async () => {
@@ -158,6 +164,36 @@ export default function StoreContextProvider(props) {
 
     }
 
+    // fetchFilm
+    const fetchFilms = async () => {
+
+      try
+      {
+        setFilmLoading(true)
+
+        setFilmError(false)
+
+        const res = await axios.get( url + "/api/film/get-films")
+
+        if(res.data.success)
+        {
+          setFilmLoading(false)
+
+          setFilms(res.data.shortFilms)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setFilmLoading(false)
+
+        setFilmError(true)
+      }
+
+    }
+
     
     useEffect(() => {
 
@@ -168,6 +204,8 @@ export default function StoreContextProvider(props) {
       fetchProducts()
 
       fetchReels()
+
+      fetchFilms()
 
     },[])
 
@@ -180,6 +218,7 @@ export default function StoreContextProvider(props) {
 
     },[])
 
+    console.log(films)
    
     const contextValue = 
     {
@@ -201,7 +240,11 @@ export default function StoreContextProvider(props) {
       reels,setReels,
       reelLoading,setReelLoading,
       reelError,setReelError,
-      fetchReels
+      fetchReels,
+      films,setFilms,
+      filmLoading,setFilmLoading,
+      filmError,setFilmError,
+      fetchFilms,
     }
 
   return (

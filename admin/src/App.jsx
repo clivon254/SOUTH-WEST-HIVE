@@ -33,6 +33,9 @@ import ProductPage from "./pages/ProductPage"
 import AddReels from "./pages/AddReels"
 import UpdateReel from "./pages/UpdateReel"
 import Reels from "./pages/Reels"
+import AddFilm from "./pages/AddFilm"
+import Films from "./pages/Films"
+import UpdateFilm from "./pages/UpdateFilm"
 
 
 
@@ -135,6 +138,12 @@ export default function App() {
               <Route path="/update-reel/:reelId" element={<UpdateReel/>}/>
 
               <Route path="/reels" element={<Reels/>}/>
+
+              <Route path="/add-film" element={<AddFilm/>}/>
+
+              <Route path="/update-film/:filmId" element={<UpdateFilm/>}/>
+
+              <Route path="/film" element={<Films/>}/>
 
           </Route>
 

@@ -11,16 +11,17 @@ export const createShortFilm = async (req,res,next) => {
         return next(errorHandler(403,"You are not allowed to create a film"))
     }
 
-    const userId = req.user.id
+    const UserId = req.user.id
      
-    const {Link,description} = req.body
+    const {Link,description,title} = req.body
 
     try
     {
         const newShortFilm = new ShortFilm({
             Link,
             description,
-            userId
+            title,
+            UserId
         })
 
         await newShortFilm.save()
@@ -95,7 +96,8 @@ export const updateShortFilm = async (req,res,next) => {
             {
                 $set:{
                     Link:req.body.Link,
-                    description:req.body.description
+                    description:req.body.description,
+                    title:req.body.title
                 }
             },
             {new:true}
