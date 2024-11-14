@@ -1,0 +1,11 @@
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
+.app__videos
+{
+    position: relative;
+    height: 65vh;
+    width: 70%;
+}

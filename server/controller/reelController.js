@@ -63,7 +63,7 @@ export const getReels = async (req,res,next) => {
 
     try
     {
-        const reels = await Reel.find({}).sort({_id:-1})
+        const reels = await Reel.find({}).sort({_id:-1}).populate({path:'userId'})
 
         res.status(200).json({success:true ,reels})
 

@@ -129,3 +129,23 @@
     @apply h-14 w-14 border border-primaryLight dark:border-primaryDark grid place-content-center
     font-title font-bold
 }
+
+
+/* Reeels */
+/* hide scrollbar for chrome,safari and operamini */
+.app__videos::-webkit-scrollbar
+{
+    display: none;
+}
+
+/* hide scrollbar for firefox,edge and operamini */
+.app__videos
+{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.ticker
+{
+    @apply w-[60%] ml-8 mb-5 h-fit 
+}
