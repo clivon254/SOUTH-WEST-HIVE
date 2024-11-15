@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { set } from 'mongoose'
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import { FaSleigh } from 'react-icons/fa'
 
 
@@ -66,6 +66,30 @@ export default function StoreContextProvider(props) {
 
     const [podcastError ,setPodcastError] = useState(false)
 
+    const audioRef = useRef()
+
+    const seekBg = useRef()
+
+    const seekBar = useRef()
+
+    const [track ,setTrack] = useState()
+
+
+    const [playStatus ,setPlayStatus] = useState(false)
+
+    
+    const [time ,setTime] = useState({
+      currentTime:{
+        hour:(0).toString().padStart(2, '0'),
+        second:(0).toString().padStart(2, '0'),
+        minute:(0).toString().padStart(2, '0')
+      },
+      totalTime:{
+        hour:(0).toString().padStart(2, '0'),
+        second:(0).toString().padStart(2, '0'),
+        minute:(0).toString().padStart(2, '0')
+      }
+    })
 
 
 
@@ -292,6 +316,8 @@ export default function StoreContextProvider(props) {
           setPodcastLoading(false)
 
           setPodcasts(res.data.podcasts)
+
+          setTrack(res.data.podcasts[0])
         }
 
       }
@@ -306,7 +332,25 @@ export default function StoreContextProvider(props) {
 
     }
 
-    
+    // play
+    const play = () => {
+
+      audioRef.current.play()
+
+      setPlayStatus(true)
+
+    }
+
+    // pause
+    const pause = () => {
+
+      audioRef.current.pause()
+
+      setPlayStatus(false)
+    }
+
+
+    // fetching
     useEffect(() => {
 
       fetchPost()
@@ -327,6 +371,67 @@ export default function StoreContextProvider(props) {
 
     },[])
 
+    // playWithId
+     const playWithId = async (podcastId) => {
+
+      const podcast = podcasts.find((pod) => pod._id === podcastId)
+
+      await setTrack(podcast)
+
+      await audioRef.current.play()
+
+      setPlayStatus(true)
+     }
+
+    // previous
+    const previous = () => {
+
+      podcasts.map( async (item,index) => {
+
+        if(track?._id === item._id && index > 0)
+        {
+          await setTrack(podcasts[index - 1])
+
+          await audioRef.current.play()
+
+          setPlayStatus(true)
+        }
+
+      })
+    }
+
+    // next
+    const next = () => {
+
+      podcasts.map( async (item,index) => {
+
+        if(track?._id === item._id && index < podcasts.length)
+        {
+          await setTrack(podcasts[index + 1])
+
+          await audioRef.current.play()
+
+          setPlayStatus(true)
+        }
+        // else
+        // {
+        //   await setTrack(podcasts[0])
+
+        //   await audioRef.current.play()
+
+        //   setPlayStatus(true)
+        // }
+
+      })
+    }
+
+    // seekSong
+    const seekSong = async (e) => {
+
+      audioRef.current.currentTime = ((e.nativeEvent.offsetX /seekBg.current.offsetWidth) * audioRef.current.duration)
+
+    }
+
 
     useEffect(() => {
 
@@ -336,6 +441,34 @@ export default function StoreContextProvider(props) {
       }
 
     },[])
+
+
+    useEffect(() => {
+
+      setTimeout(() => {
+
+        audioRef.current.ontimeupdate = () => {
+          
+          seekBar.current.style.width = (Math.floor(audioRef.current.currentTime/audioRef.current.duration*100)) + "%"
+
+          setTime({
+            currentTime:{
+              hour:Math.floor(audioRef.current.currentTime / 3600).toString().padStart(2, '0'),
+              minute:Math.floor((audioRef.current.currentTime % 3600) / 60).toString().padStart(2, '0'),
+              second:Math.floor(audioRef.current.currentTime % 60).toString().padStart(2, '0')
+            },
+            totalTime:{
+              hour:Math.floor(audioRef.current.duration / 3600).toString().padStart(2, '0'),
+              minute:Math.floor((audioRef.current.duration % 3600) / 60).toString().padStart(2, '0'),
+              second:Math.floor(audioRef.current.duration % 60).toString().padStart(2, '0')
+            }
+          })
+
+        }
+
+      },1000)
+
+    },[audioRef])
 
 
     const contextValue = 
@@ -374,7 +507,14 @@ export default function StoreContextProvider(props) {
       podcasts,setPodcasts,
       podcastLoading,setPodcastLoading,
       podcastError,setPodcastError,
-      fetchPodcast
+      fetchPodcast,
+      audioRef,
+      seekBg,
+      seekBar,
+      track,setTrack,
+      playStatus,setPlayStatus,
+      time,setTime,
+      play,pause,playWithId,next,previous,seekSong
     }
 
   return (

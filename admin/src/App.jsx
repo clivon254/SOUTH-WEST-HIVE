@@ -69,7 +69,7 @@ function Layout(){
         </aside>
         
         {/* otherside */}
-        <div className="w-full md:w-3/4 min-h-screen">
+        <div className="w-full md:w-3/4 ">
             <Outlet/>
         </div>
 
@@ -89,7 +89,7 @@ export default function App() {
    
     <BrowserRouter>
 
-      <div className="w-full min-h-screen">
+      <div className="w-full ">
 
         <Toaster richColors/>
 

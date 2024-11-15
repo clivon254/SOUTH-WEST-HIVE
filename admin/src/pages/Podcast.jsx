@@ -9,10 +9,11 @@ import { Table } from 'flowbite-react'
 import { FaTrash } from 'react-icons/fa'
 import { MdEdit } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import Player from '../components/Player'
 
 export default function Podcast() {
 
-    const {url,token,podcasts,podcastLoading ,podcastError ,fetchPodcast ,setPodcasts} = useContext(StoreContext)
+    const {url,token,podcasts,podcastLoading ,podcastError ,fetchPodcast ,setPodcasts,audioRef,track,playWithId} = useContext(StoreContext)
 
     const [open ,setOpen] = useState(false)
 
@@ -43,15 +44,16 @@ export default function Podcast() {
     }
 
   return (
+
     <>
 
-        <section className="section">
+        <section className="section relative h-[90vh]">
 
             <h1 className="text-center title">Podcasts</h1>
 
             {!podcastLoading && !podcastError && (
 
-                <div className="table">
+                <div className="tabler h-[90%] bg-red-100 overflow-hidden ">
 
                     {podcasts.length > 0 ? 
                         (
@@ -70,13 +72,18 @@ export default function Podcast() {
                                             </Table.Cell>
 
                                             <Table.Cell>
+                                                Duration
+                                            </Table.Cell>
+
+                                            <Table.Cell>
                                                 actions
                                             </Table.Cell>
 
 
                                         </Table.Row>
 
-                                    </Table.Body>
+                                </Table.Body>
+
                                 {podcasts?.map((podcast,index) => (
 
                                     <Table.Body key={index}>
@@ -97,6 +104,17 @@ export default function Podcast() {
 
                                             <Table.Cell>
                                                 {podcast.title}
+                                            </Table.Cell>
+
+                                            <Table.Cell 
+                                                className="cursor-pointer"
+                                                onClick={() => playWithId(podcast._id)}
+                                            >
+
+                                                {Math.floor(podcast.duration / 3600).toString().padStart(2, '0')}:
+                                                {Math.floor((podcast.duration % 3600) / 60).toString().padStart(2, '0')}:
+                                                {Math.floor(podcast.duration % 60).toString().padStart(2, '0')}
+                    
                                             </Table.Cell>
 
                                             <Table.Cell>
@@ -133,17 +151,23 @@ export default function Podcast() {
                                         </Table.Row>
 
                                     </Table.Body>
+
                                 ))}
 
                             </Table>
                         ) 
                         : 
-                      (
-                        <p className="text-center title3">
-                            There are no podcasts yet !!!!!
-                        </p>
-                      )
+                        (
+                            <p className="text-center title3">
+                                There are no podcasts yet !!!!!
+                            </p>
+                        )
                    }
+
+                   {/* player */}
+                   <Player />
+
+                   <audio ref={audioRef} src={track?.audio} preload='auto'></audio>
 
                 </div>
 

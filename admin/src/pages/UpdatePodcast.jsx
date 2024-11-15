@@ -238,154 +238,170 @@ export default function UpdatePodcast() {
         {!fetching && !fetchingError && (
 
         
-        <section className="section space-y-10">
+            <section className="section space-y-10">
 
-            <h1 className="title text-center">Update Podcast</h1>
+                <h1 className="title text-center">Update Podcast</h1>
 
-            <div className="w-full">
+                <div className="w-full">
 
-                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-y-6">
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-y-6">
 
-                    {/* title */}
-                    <div className="flex flex-col gap-y-2">
+                        {/* title */}
+                        <div className="flex flex-col gap-y-2">
 
-                        <label className="label">Title</label>
+                            <label className="label">Title</label>
 
-                        <input 
-                            type="text" 
-                            className="input" 
-                            placeholder='Podcast title . . . . . '
-                            onChange={handleChange}
-                            value={formData?.title}
-                            name="title"
-                        />
+                            <input 
+                                type="text" 
+                                className="input" 
+                                placeholder='Podcast title . . . . . '
+                                onChange={handleChange}
+                                value={formData?.title}
+                                name="title"
+                            />
 
-                    </div>
+                        </div>
 
-                    {/* audio */}
-                    <div className="flex flex-col gap-y-3">
+                        {/* description */}
+                        <div className="flex flex-col gap-y-2">
 
-                        <input 
-                            type="file" 
-                            className="input" 
-                            accept='mp3/*'
-                            onChange={(e) => setAudio(e.target.files[0])}
-                        />
+                            <label className="label">description</label>
+
+                            <textarea
+                                type="text" 
+                                className="input" 
+                                placeholder='type here . . . . . '
+                                onChange={handleChange}
+                                value={formData?.description}
+                                name="description"
+                            />
+
+                        </div>
+
+                        {/* audio */}
+                        <div className="flex flex-col gap-y-3">
+
+                            <input 
+                                type="file" 
+                                className="input" 
+                                accept='mp3/*'
+                                onChange={(e) => setAudio(e.target.files[0])}
+                            />
+
+                            <button 
+                                className="btn2 rounded-full"
+                                type="button"
+                                onClick={handleUploadAudio}
+                                disabled={audioUploading}
+                            >
+                                {
+                                    audioUploading ? 
+                                    (
+                                        <div className="flex items-center gap-x-2 justify-center">
+
+                                            <span className="loading"/> {audioUploadProgress} %
+
+                                        </div>
+                                    )
+                                        : 
+                                    'Upload Audio'
+                                }
+                            </button>
+
+                            {audioUploadError && (
+
+                                <Alert color="failure">{audioUploadError}</Alert>
+                            )}
+
+                            {formData?.audio && (
+
+                                <audio controls>
+
+                                    <source src={formData.audio} type="audio/mp3" />
+                        
+                                </audio>
+
+                            )}
+
+                        </div>
+                        
+                        {/* photo */}
+                        <div className="flex flex-col gap-y-2">
+
+                            <input 
+                                type="file" 
+                                className="input" 
+                                accept='image/*'
+                                onChange={(e) => setPhoto(e.target.files[0])}
+                            />
+
+                            <button 
+                                className="btn2 rounded-full"
+                                type="button"
+                                onClick={handleUploadPhoto}
+                                disabled={photoUploading}
+                            >
+                                {photoUploading ? 
+                                    (
+                                        <div className="flex items-center justify-center gap-x-2">
+
+                                            <span className="loading"/> {photoUploadProgress} %
+
+                                        </div>
+                                    ) 
+                                    :
+                                    ("upload background photo")
+                                }
+                            
+                            </button>
+
+                            {photoUploadError && (
+
+                                <Alert color="failure">{photoUploadError}</Alert>
+
+                            )}
+
+                            {formData?.backgroundPicture && (
+
+                                <img 
+                                    src={formData.backgroundPicture}
+                                    alt="" 
+                                    className="w-full h-[300px] md:h-[50vh]" 
+                                />
+                            )}
+
+                        </div>
 
                         <button 
-                            className="btn2 rounded-full"
-                            type="button"
-                            onClick={handleUploadAudio}
-                            disabled={audioUploading}
+                            className="btn rounded-md"
+                            type="submit"
+                            disabled={loading || audioUploading || photoUploading}
                         >
-                            {
-                                audioUploading ? 
+                            {loading ? 
                                 (
-                                    <div className="flex items-center gap-x-2 justify-center">
+                                    <div className="flex items-center justify-center gap-x-3">
 
-                                        <span className="loading"/> {audioUploadProgress} %
-
-                                    </div>
-                                )
-                                    : 
-                                'Upload Audio'
-                            }
-                        </button>
-
-                        {audioUploadError && (
-
-                            <Alert color="failure">{audioUploadError}</Alert>
-                        )}
-
-                        {formData?.audio && (
-
-                            <audio controls>
-
-                                <source src={formData.audio} type="audio/mp3" />
-                    
-                            </audio>
-
-                        )}
-
-                    </div>
-                    
-                    {/* photo */}
-                    <div className="flex flex-col gap-y-2">
-
-                        <input 
-                            type="file" 
-                            className="input" 
-                            accept='image/*'
-                            onChange={(e) => setPhoto(e.target.files[0])}
-                        />
-
-                        <button 
-                            className="btn2 rounded-full"
-                            type="button"
-                            onClick={handleUploadPhoto}
-                            disabled={photoUploading}
-                        >
-                            {photoUploading ? 
-                                (
-                                    <div className="flex items-center justify-center gap-x-2">
-
-                                        <span className="loading"/> {photoUploadProgress} %
+                                        <span className="loading"/> Loading ....
 
                                     </div>
                                 ) 
-                                :
-                                ("upload background photo")
+                                : 
+                                (
+                                    "Update podcast"
+                                )
                             }
-                        
                         </button>
 
-                        {photoUploadError && (
+                        {error && (
 
-                            <Alert color="failure">{photoUploadError}</Alert>
-
+                            <Alert color="failure">{error}</Alert>
                         )}
 
-                        {formData?.backgroundPicture && (
+                    </form>
 
-                            <img 
-                                src={formData.backgroundPicture}
-                                alt="" 
-                                className="w-full h-[300px] md:h-[50vh]" 
-                            />
-                        )}
+                </div>
 
-                    </div>
-
-                    <button 
-                        className="btn rounded-md"
-                        type="submit"
-                        disabled={loading || audioUploading || photoUploading}
-                    >
-                        {loading ? 
-                            (
-                                <div className="flex items-center justify-center gap-x-3">
-
-                                    <span className="loading"/> Loading ....
-
-                                </div>
-                            ) 
-                            : 
-                            (
-                                "Update podcast"
-                            )
-                        }
-                    </button>
-
-                    {error && (
-
-                        <Alert color="failure">{error}</Alert>
-                    )}
-
-                </form>
-
-            </div>
-
-        </section>
+            </section>
 
         )}
 

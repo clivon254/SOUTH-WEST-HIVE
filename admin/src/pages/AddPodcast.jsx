@@ -217,6 +217,22 @@ export default function AddPodcast() {
 
                 </div>
 
+                {/* description */}
+                <div className="flex flex-col gap-y-2">
+
+                    <label className="label">description</label>
+
+                    <textarea
+                        type="text" 
+                        className="input" 
+                        placeholder='type here . . . . . '
+                        onChange={handleChange}
+                        value={formData?.description}
+                        name="description"
+                    />
+
+                </div>
+
                 {/* audio */}
                 <div className="flex flex-col gap-y-3">
 
