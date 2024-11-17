@@ -92,6 +92,15 @@ export default function StoreContextProvider(props) {
     })
 
 
+    const [stats , setStats] = useState([])
+
+
+    const [statsLoading , setStatsLoading] = useState([])
+
+
+    const [statsError , setStatsError] = useState([])
+
+
 
     // fetchPost
     const fetchPost = async () => {
@@ -332,6 +341,39 @@ export default function StoreContextProvider(props) {
 
     }
 
+
+    // fetchStats
+    const fetchStats = async () => {
+
+      try
+      {
+
+        setStatsLoading(true)
+
+        setStatsError(false)
+
+        const res = await axios.post( url + "/api/post/stats",{},{headers:{token}})
+
+        if(res.data.success)
+        {
+          setStatsLoading(false)
+
+          setStats(res.data)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setStatsError(true)
+
+        setStatsLoading(false)
+      }
+
+    }
+
+
     // play
     const play = () => {
 
@@ -350,7 +392,7 @@ export default function StoreContextProvider(props) {
     }
 
 
-    // fetching
+    // fetching All 
     useEffect(() => {
 
       fetchPost()
@@ -369,7 +411,10 @@ export default function StoreContextProvider(props) {
 
       fetchPodcast()
 
+      fetchStats()
+
     },[])
+
 
     // playWithId
      const playWithId = async (podcastId) => {
@@ -431,6 +476,7 @@ export default function StoreContextProvider(props) {
       audioRef.current.currentTime = ((e.nativeEvent.offsetX /seekBg.current.offsetWidth) * audioRef.current.duration)
 
     }
+
 
 
     useEffect(() => {
@@ -508,6 +554,9 @@ export default function StoreContextProvider(props) {
       podcastLoading,setPodcastLoading,
       podcastError,setPodcastError,
       fetchPodcast,
+      stats,setStats,
+      statsLoading,setStatsLoading,
+      statsError,setStatsError,
       audioRef,
       seekBg,
       seekBar,
@@ -516,6 +565,7 @@ export default function StoreContextProvider(props) {
       time,setTime,
       play,pause,playWithId,next,previous,seekSong
     }
+
 
   return (
 

@@ -62,7 +62,7 @@
 
 .table-title
 {
-    @apply font-title uppercase font-bold text-textSecondaryLight dark:text-textSecondaryDark
+    @apply font-title uppercase font-semibold text-textSecondaryLight dark:text-textSecondaryDark
 }
 
 .loading

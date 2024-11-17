@@ -2,6 +2,11 @@ import mongoose from "mongoose"
 import Follower from "../model/followersModel.js"
 import Post from "../model/postModel.js"
 import User from "../model/userModel.js"
+import ShortFilm from "../model/shortfilmsModel.js"
+import Product from "../model/productModel.js"
+import Reel from "../model/reelsModel.js"
+import Brand from "../model/brandModel.js"
+import Podcast from "../model/podcastModel.js"
 import Veiw from "../model/veiwModel.js"
 import { errorHandler } from "../utils/error.js"
 
@@ -128,6 +133,58 @@ export const getPosts = async (req,res,next) => {
 }
 
 
+export const savePosts = async (req,res,next) => {
+
+    const userId = req.user.id
+
+    const {postId} = req.params
+
+    try
+    {
+        const post = await Post.findById(postId)
+
+        if(!post)
+        {
+            return next(errorHandler(404,"post not found"))
+        }
+
+        const user = await User.findById(userId)
+
+        if(!user)
+        {
+            return next(errorHandler(404,"user not found"))
+        }
+
+        const {pass:password , ...rest} = user._doc
+
+        // check if the post already exist
+        const postIndex = user.savedPost.indexOf(postId)
+
+        if(postIndex === -1)
+        {
+            user.savedPost.push(postId)
+
+            await user.save()
+
+            return res.status(200).json({success:true , rest ,message:'Post saved'})
+        }
+        else
+        {
+            user.savedPost.splice(postIndex,1)
+
+            await user.save()
+
+            return res.status(200).json({success:true , rest ,message:'removed from saved post'})
+        }
+    }
+    catch(error)
+    {
+        next(error)
+    }
+
+}
+
+
 export const updatePost = async (req,res,next) => {
 
     if(!req.user.isAdmin || req.user.accountType !== "writer")
@@ -227,10 +284,46 @@ export const stats = async (req,res,next) => {
         const totalWriterAdmin = await User.find({ accountType: "writer" }).countDocuments()
 
 
+        const totalSalespersonAdmin = await User.find({ accountType: "salesperson" }).countDocuments()
+
+
+        const totalCatererAdmin = await User.find({ accountType: "caterer" }).countDocuments()
+
+
+        const totalMediaAdmin = await User.find({ accountType: "media" }).countDocuments()
+
+
+        const totalBrandsAdmin = await Brand.find().countDocuments()
+
+
+        const totalShortfilmsAdmin = await ShortFilm.find().countDocuments()
+
+
+        const totalPodcastsAdmin = await Podcast.find().countDocuments()
+
+
+        const totalReelsAdmin = await Reel.find().countDocuments()
+
+        
+        const totalCateringAdmin = await Product.find({ Item: "Catering" }).countDocuments()
+
+
+        const totalAccessoriesAdmin = await Product.find({ Item: "Accessories" }).countDocuments()
+
+
+        const totalMerchendiseAdmin = await Product.find({ Item: "Merchendise" }).countDocuments()
+
+
         const last5PostsAdmin = await Post.find({}).limit(5).sort({ _id : -1 })
 
 
         const last5UsersAdmin = await User.find({}).limit(5).sort({ _id : -1 })
+
+
+        const last5AccessoriesAdmin = await Product.find({ Item: "Accessories" }).limit(5).sort({ _id : -1 })
+
+
+        const last5MerchendiseAdmin = await Product.find({ Item: "Merchendise" }).limit(5).sort({ _id : -1 })
 
 
         const veiwStatsAdmin = await Veiw.aggregate([
@@ -301,7 +394,8 @@ export const stats = async (req,res,next) => {
             { $sort: {_id: 1 } }
         ])
 
-        const followerStats = await Veiw.aggregate([
+
+        const followerStats = await User.aggregate([
             {
                 $match:{
                     userId:new mongoose.Types.ObjectId(userId),
@@ -319,10 +413,167 @@ export const stats = async (req,res,next) => {
             { $sort: {_id: 1 } }
         ])
 
+
+
         // Sales
+        const totalBrandsSalesperson = await Brand.find().countDocuments()
+
+
+        const totalAccessoriesSalesperson = await Product.find({ Item: "Accessories" }).countDocuments()
+
+
+        const totalMerchendiseSalesperson = await Product.find({ Item: "Merchendise" }).countDocuments()
+
+
+        const last5AccessoriesSalesperson = await Product.find({ Item: "Accessories" }).limit(5).sort({ _id : -1 })
+
+
+        const last5MerchendiseSalesperson = await Product.find({ Item: "Merchendise" }).limit(5).sort({ _id : -1 })
+        
+
+        const last5Brands = await Brand.find().limit(5).sort({ _id : -1 })
+
+
+        const accessStatsSalesperson = await Product.aggregate([
+            {
+                $match:{
+                    createdAt:{$gte:startDate ,$lte:currentDate},
+                    Item:"Accessories"
+                }
+            },
+            {
+                $group:{
+                    _id:{
+                        $dateToString:{format:"%Y-%m-%d" , date:"$createdAt"}
+                    },
+                    Total:{$sum:1}
+                }
+            },
+            {$sort: {_id: 1}}
+        ])
+
+
+        const merchStatsSalesperson = await Product.aggregate([
+            {
+                $match:{
+                    createdAt:{$gte:startDate ,$lte:currentDate},
+                    Item:"Merchendise"
+                }
+            },
+            {
+                $group:{
+                    _id:{
+                        $dateToString:{format:"%Y-%m-%d" , date:"$createdAt"}
+                    },
+                    Total:{$sum:1}
+                }
+            },
+            {$sort: {_id: 1}}
+        ])
 
 
         // food
+        const totalCateringCaterer = await Product.find({ Item: "Catering" }).countDocuments()
+
+
+        const last5CateringCaterer = await Product.find({ Item: "Catering" }).limit(5).sort({ _id : -1 })
+
+
+        const cateringStatsCaterer = await Product.aggregate([
+            {
+                $match:{
+                    createdAt:{$gte:startDate ,$lte:currentDate},
+                    Item:"Catering"
+                }
+            },
+            {
+                $group:{
+                    _id:{
+                        $dateToString:{format:"%Y-%m-%d" , date:"$createdAt"}
+                    },
+                    Total:{$sum:1}
+                }
+            },
+            {$sort: {_id: 1}}
+        ])
+
+
+        // media
+        const totalShortfilmsMedia = await ShortFilm.find({userId:userId}).countDocuments()
+
+
+        const totalPodcastsMedia = await Podcast.find({userId:userId}).countDocuments()
+
+
+        const totalReelsMedia = await Reel.find({userId:userId}).countDocuments()
+
+
+        const last5ReelsMedia = await Reel.find({userId: userId}).limit(5).sort({ _id : -1 })
+
+
+        const last5FilmsMedia = await ShortFilm.find({userId: userId}).limit(5).sort({ _id : -1 })
+
+
+        const last5PodcastMedia = await Podcast.find({userId: userId}).limit(5).sort({ _id : -1 })
+
+
+        const shortFilmStatsMedia = await ShortFilm.aggregate([
+            {
+                $match:{
+                    userId:new mongoose.Types.ObjectId(userId),
+                    createdAt:{$gte:startDate , $lte:currentDate}
+                }
+            },
+            {
+                $group:{
+                    _id:{
+                        $dateToString: { format : "%Y-%m-%d", date:"$createdAt"}
+                    },
+                    Total: { $sum: 1 }
+                }
+            },
+            { $sort: {_id: 1 } }
+        ])
+
+
+        const reelStatsMedia = await Reel.aggregate([
+            {
+                $match:{
+                    userId:new mongoose.Types.ObjectId(userId),
+                    createdAt:{$gte:startDate , $lte:currentDate}
+                }
+            },
+            {
+                $group:{
+                    _id:{
+                        $dateToString: { format : "%Y-%m-%d", date:"$createdAt"}
+                    },
+                    Total: { $sum: 1 }
+                }
+            },
+            { $sort: {_id: 1 } }
+        ])
+        
+
+        const podcastStatsMedia = await Podcast.aggregate([
+            {
+                $match:{
+                    userId:new mongoose.Types.ObjectId(userId),
+                    createdAt:{$gte:startDate , $lte:currentDate}
+                }
+            },
+            {
+                $group:{
+                    _id:{
+                        $dateToString: { format : "%Y-%m-%d", date:"$createdAt"}
+                    },
+                    Total: { $sum: 1 }
+                }
+            },
+            { $sort: {_id: 1 } }
+        ])
+
+
 
 
         res.status(200).json({
@@ -331,15 +582,51 @@ export const stats = async (req,res,next) => {
             totalWriterAdmin,
             totalUsersAdmin,
             last5PostsAdmin,
+            last5AccessoriesAdmin,
+            last5Brands,
+            last5MerchendiseAdmin,
             last5UsersAdmin,
             veiwStatsAdmin,
             usersStatsAdmin,
+            totalMerchendiseAdmin,
+            totalAccessoriesAdmin,
+            totalBrandsAdmin,
+            totalCateringAdmin,
+            totalCatererAdmin,
+            totalSalespersonAdmin,
+            totalMediaAdmin,
+            totalPodcastsAdmin,
+            totalShortfilmsAdmin,
+            totalReelsAdmin,
+
             totalPosts,
             totalFollowers,
             last5Followers,
             last5Posts,
             veiwStats,
-            followerStats
+            followerStats,
+
+            totalMerchendiseSalesperson,
+            totalAccessoriesSalesperson,
+            totalBrandsSalesperson,
+            last5AccessoriesSalesperson,
+            last5MerchendiseSalesperson,
+            accessStatsSalesperson,
+            merchStatsSalesperson,
+
+            totalCateringCaterer,
+            last5CateringCaterer,
+            cateringStatsCaterer,
+
+            totalShortfilmsMedia,
+            totalReelsMedia,
+            totalPodcastsMedia,
+            last5FilmsMedia,
+            last5ReelsMedia,
+            last5PodcastMedia,
+            shortFilmStatsMedia,
+            reelStatsMedia,
+            podcastStatsMedia
         })
 
     }
