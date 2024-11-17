@@ -3,7 +3,7 @@
 import { Avatar } from 'flowbite-react'
 import React, { useRef, useState } from 'react'
 import { MdCameraAlt, MdChevronLeft, MdMusicNote } from 'react-icons/md'
-import Ticker from "react-ticker"
+
 
 
 

@@ -164,7 +164,7 @@ export default function App() {
 
               <Route path="/add-podcast" element={<AddPodcast/>}/>
 
-              <Route path="/podcasts" element={<Podcast/>}/>
+              <Route path="/podcast" element={<Podcast/>}/>
 
               <Route path="/update-podcast/:podcastId" element={<UpdatePodcast/>}/>
 

@@ -17,7 +17,7 @@ export default function Player() {
 
   return (
 
-    <div className="absolute bottom-0 left-0  bg-primaryLight w-full ">
+    <div className="absolute bottom-0 left-0  bg-primaryLight dark:bg-primaryDark w-full ">
        
        <div className="w-full flex items-center justify-between px-4 py-2">
 
@@ -82,7 +82,7 @@ export default function Player() {
 
                     <div onClick={seekSong} ref={seekBg} className="w-[30vh] md:w-[40vh] max-w-[500px] bg-zinc-200 rounded-full cursor-pointer">
 
-                        <hr ref={seekBar} className="h-1 border-none w-10 bg-secondaryLight rounded-full"/>
+                        <hr ref={seekBar} className="h-1 border-none w-10 bg-secondaryLight dark:bg-secondaryDark rounded-full"/>
 
                     </div>
 

@@ -90,7 +90,7 @@ export default function Stats() {
 
         {!statsLoading && !statsError && (
 
-            <div className="grid gid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-8 gap-x-5 ">
+            <div className="grid gid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-y-8 gap-x-5 ">
 
                 {data.map((stat,index) => (
 

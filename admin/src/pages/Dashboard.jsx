@@ -191,7 +191,7 @@ export default function Dashboard() {
 
               <h1 className="title3 mb-5">Last 5 Brands</h1>
 
-              {stats?.lastAdmin?.length > 0 ? 
+              {stats?.last5Brands?.length > 0 ? 
                 (
                   <div className="tabler">
                     
@@ -207,14 +207,14 @@ export default function Dashboard() {
 
                       </Table.Body>
 
-                      {stats?.last5MerchendiseAdmin?.map((product,index) => (
+                      {stats?.last5Brands?.map((product,index) => (
 
                         <Table.Body>
 
 
                           <Table.Cell>
                             <img 
-                              src={product?.images[0]}
+                              src={product?.image}
                               alt="" 
                               className="h-10 w-10 object-fit" 
                             />

@@ -53,7 +53,7 @@ export default function Podcast() {
 
             {!podcastLoading && !podcastError && (
 
-                <div className="tabler h-[90%] bg-red-100 overflow-hidden ">
+                <div className="tabler h-[90%]  overflow-hidden ">
 
                     {podcasts.length > 0 ? 
                         (
