@@ -184,9 +184,9 @@ export default function AddAccess() {
 
       <h1 className="title text-center">Add Merch</h1>
 
-      <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-y-10 gap-x-5">
+      <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-y-10 gap-x-5 ">
 
-        <div className="w-full md:w-[60%] flex flex-col gap-y-4 gap-x-3 md:grid md:grid-cols-2">
+        <div className="w-full lg:w-[60%] flex flex-col gap-y-4 gap-x-3 lg:grid lg:grid-cols-2">
 
             <input 
               type="text" 
@@ -276,7 +276,7 @@ export default function AddAccess() {
         
         </div>
      
-        <div className="w-full md:w-[40%] space-y-3">
+        <div className="w-full lg:w-[40%] space-y-3">
 
           {/* upload images */}
           <div className="flex flex-col gap-y-2">

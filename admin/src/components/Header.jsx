@@ -49,12 +49,12 @@ export default function Header() {
 
     <>
 
-        <header className="mx-auto w-full p-5 border-b border-gray-300 dark:border-gray-700 z-50 sticky top-0 left-0 backdrop-blur-xl">
+        <header className="w-full fixed top-0 z-50  p-4 shadow backdrop-blur-xl">
 
             <div className="flex items-center justify-between">
                 
                 {/*  toggle*/}
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     {
                         open ?
                         <button className="">
@@ -165,9 +165,9 @@ export default function Header() {
         <Drawer
             open={open}
             onClose={() => setOpen(false)}
-            className="bg-bgLight dark:bg-bgDark"
+            className=""
         >
-            <DrawerItems>
+            <DrawerItems className="pt-10">
                 
                 <span className="flex justify-end">
 
@@ -184,7 +184,6 @@ export default function Header() {
             </DrawerItems>
 
         </Drawer>
-
 
     </>
 

@@ -38,7 +38,6 @@ import Films from "./pages/Films"
 import UpdateFilm from "./pages/UpdateFilm"
 import AddBrand from "./pages/AddBrand"
 import UpdateBrand from "./pages/UpdateBrand"
-import Brand from "../../server/model/brandModel"
 import Brands from "./pages/Brands"
 import UpdateUser from "./pages/UpdateUser"
 import AddPodcast from "./pages/AddPodcast"
@@ -55,22 +54,24 @@ function Layout(){
 
     currentUser ? 
 
-    <div className="w-full">
-      
-      <Header />
+    <div className="w-full h-screen flex flex-col">
 
-      <div className="w-full flex ">
+      <Header />
+    
+      <div className="w-full h-full flex border-t pt-24">
 
         {/* sidebar */}
-        <aside className="hidden md:block w-1/4  border-r  h-[80vh] overflow-hidden overflow-scroll-y sticky left-0">
+        <aside className="hidden lg:flex mb-5 overflow-y-scroll">
 
-            <DashSidebar />
+          <DashSidebar />
 
         </aside>
         
         {/* otherside */}
-        <div className="w-full md:w-3/4 ">
+        <div className="w-full flex-1 overflow-y-scroll">
+
             <Outlet/>
+            
         </div>
 
       </div>
@@ -89,7 +90,7 @@ export default function App() {
    
     <BrowserRouter>
 
-      <div className="w-full ">
+      <div className="w-full min-h-screen">
 
         <Toaster richColors/>
 

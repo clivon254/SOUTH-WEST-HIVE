@@ -4,10 +4,19 @@ import { Sidebar } from 'flowbite-react'
 import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../redux/theme/themeSlice'
-import { MdAccessibility, MdAccessibilityNew, MdAccessible, MdAddAlarm, MdAddAlert, MdAddAPhoto, MdAddBusiness, MdAirlineSeatIndividualSuite, MdAnalytics, MdBarcodeReader, MdCollections, MdCompost, MdDarkMode, MdDashboard, MdFlipCameraIos, MdFoodBank, MdLightMode, MdLogoDev, MdMerge, MdOutlineSwapVert, MdPanorama, MdPodcasts, MdPostAdd } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { MdAccessibility, MdAccessibilityNew, MdAccessible, MdAddAlarm, MdAddAlert, MdAddAPhoto, MdAddBusiness, MdAirlineSeatIndividualSuite, MdAnalytics, MdBarcodeReader, MdCollections, MdCompost, MdDarkMode, MdDashboard, MdFlipCameraIos, MdFoodBank, MdLightMode, MdLogoDev, MdMerge, MdOutlinePodcasts, MdOutlineSwapVert, MdPanorama, MdPodcasts, MdPostAdd } from 'react-icons/md'
+import { Link, NavLink } from 'react-router-dom'
 import { StoreContext } from '../context/store'
 import { FaBlog, FaFilm, FaTradeFederation, FaUsers } from "react-icons/fa"
+import { DiGoogleAnalytics } from "react-icons/di";
+import { FaBlogger } from "react-icons/fa";
+import { FaBowlFood } from "react-icons/fa6";
+import { GiLoincloth , GiClothes ,GiAccordion} from "react-icons/gi";
+import { SiMicrosoftaccess, SiPodcastindex } from "react-icons/si";
+import { BsCameraReelsFill } from "react-icons/bs";
+import { FcFilmReel } from "react-icons/fc";
+import { SiBrandfolder } from "react-icons/si";
+import { TbBrandBooking } from "react-icons/tb";
 
 
 export default function DashSidebar() {
@@ -20,331 +29,191 @@ export default function DashSidebar() {
 
   return (
 
-    <Sidebar className="">
+    <>
 
-        <Sidebar.Items className="bg-bgLight dark:bg-bgDark">
+        <div className="pt-10 border-r border-zinc-700 px-3 overflow-y-scroll">
 
-            <Sidebar.ItemGroup className="bg-bgLight dark:bg-bgDark p-3">
-                
-                <div className="flex flex-col gap-y-2">
+            <div className="flex flex-col gap-y-3">
 
-                    <Link 
-                        to="/"
-                        onClick={() => setOpen(false)}
-                    >
+                <NavLink 
+                    to="/"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                    onClick={() => setOpen(false)}
+                >
+                     <span className=""> <MdDashboard /> </span> Dashboard
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/'}
-                            ad="div"
-                            icon={MdDashboard}
-                        >
-                            Dashboard
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/analytic"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <DiGoogleAnalytics /> </span> Analytic
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/analytic'}
-                            ad="div"
-                            icon={MdAnalytics}
-                        >
-                            Analytics
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/add-post"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <MdPostAdd /> </span> Add Posts
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-post'}
-                            ad="div"
-                            icon={MdPostAdd}
-                        >
-                            Add Post
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/posts"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <FaBlogger /> </span> Posts
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/posts'}
-                            ad="div"
-                            icon={MdCompost}
-                        >
-                            Posts
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/add-food"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <FaBowlFood /> </span> Add Food
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-food'}
-                            ad="div"
-                            icon={MdLogoDev}
-                        >
-                            Add Food
-                        </Sidebar.Item>
 
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/foods"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <MdDashboard /> </span> Foods
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/foods'}
-                            ad="div"
-                            icon={MdFoodBank}
-                        >
-                            Food
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/add-merch"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <GiLoincloth /> </span> Add Merchendise
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-merch'}
-                            ad="div"
-                            icon={MdMerge}
-                        >
-                            Add Merch
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/merch"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <GiClothes /> </span> Merchndise
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/merch'}
-                            ad="div"
-                            icon={MdOutlineSwapVert}
-                        >
-                            Merch
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/add-access"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <GiAccordion /> </span> Add Accessories
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-access'}
-                            ad="div"
-                            icon={MdAccessibility}
-                        >
-                            Add Acsess
-                        </Sidebar.Item>
 
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/access"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <SiMicrosoftaccess /> </span> Accessories
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/access'}
-                            ad="div"
-                            icon={MdCollections}
-                        >
-                            Access
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/add-film"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <BsCameraReelsFill /> </span> Add Film
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-film'}
-                            ad="div"
-                            icon={MdAddAPhoto}
-                        >
-                            Add Film
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/film"
-                    onClick={() => setOpen(false)}
-                    >
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                >
+                     <span className=""> <BsCameraReelsFill/> </span> Film
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/film'}
-                            ad="div"
-                            icon={MdFlipCameraIos}
-                        >
-                            Film
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/add-reel"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <FcFilmReel /> </span> Add Reel
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-reel'}
-                            ad="div"
-                            icon={MdAddBusiness}
-                        >
-                            Add Reels
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
+                <NavLink 
                     to="/reels"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <FcFilmReel/> </span> Reels
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/reels'}
-                            ad="div"
-                            icon={MdAirlineSeatIndividualSuite}
-                        >
-                            Reels
-                        </Sidebar.Item>
 
-                    </Link>
+                <NavLink 
+                    to="/add-brand"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                    onClick={() => setOpen(false)}
+                >
+                     <span className=""> <SiBrandfolder /> </span> Add Brand
+                </NavLink>
 
-                    <Link 
+                <NavLink 
+                    to="/brand"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                    onClick={() => setOpen(false)}
+                >
+                     <span className=""> <TbBrandBooking /> </span> Brand
+                </NavLink>
+
+                <NavLink 
                     to="/add-podcast"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <MdOutlinePodcasts /> </span> Add Podcast
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-podcast'}
-                            ad="div"
-                            icon={MdPanorama }
-                        >
-                            Add Podcast
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
-                    to="/podcasts"
+                <NavLink 
+                    to="/podcast"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
                     onClick={() => setOpen(false)}
-                    >
+                >
+                     <span className=""> <SiPodcastindex/> </span> Podcast
+                </NavLink>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/podcasts'}
-                            ad="div"
-                            icon={MdPodcasts}
+                <NavLink 
+                    to="/users"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                    onClick={() => setOpen(false)}
+                >
+                     <span className=""> <FaUsers/> </span> users
+                </NavLink>
+
+                <div className="md:hidden">
+                    {
+                        theme === "light" ?
+                        <button 
+                            onClick={() => dispatch(toggleTheme())}
+                            className="h-7 w-7 grid place-content-center border border-gray-500 dark:border-gray-200 rounded-full"
                         >
-                            Podcast
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    <Link 
-                        to="/add-brand"
-                        onClick={() => setOpen(false)}
-                    >
-
-                        <Sidebar.Item
-                            active={window.location.pathname === '/add-brand'}
-                            ad="div"
-                            icon={FaBlog}
+                            <MdDarkMode />
+                        </button>
+                        :
+                        <button 
+                            onClick={() => dispatch(toggleTheme())}
+                            className="h-7 w-7 grid place-content-center border border-gray-500 dark:border-gray-200 rounded-full"
                         >
-                            Add Brand
-                        </Sidebar.Item>
+                            <MdLightMode/>
+                        </button>
+                    }
+                 </div>
 
-                    </Link>
 
-                      
-                    <Link 
-                        to="/brand"
-                        onClick={() => setOpen(false)}
-                    >
+            </div>
 
-                        <Sidebar.Item
-                            active={window.location.pathname === '/brand'}
-                            ad="div"
-                            icon={MdBarcodeReader}
-                        >
-                            Brand
-                        </Sidebar.Item>
+        </div>
 
-                    </Link>
-
-                    <Link 
-                        to="/users"
-                        onClick={() => setOpen(false)}
-                    >
-
-                        <Sidebar.Item
-                            active={window.location.pathname === '/users'}
-                            ad="div"
-                            icon={FaUsers}
-                        >
-                            Users
-                        </Sidebar.Item>
-
-                    </Link>
-
-                    
-                    <Sidebar.Item className="">
-
-                        <div className="md:hidden">
-                            {
-                                theme === "light" ?
-                                <button 
-                                    onClick={() => dispatch(toggleTheme())}
-                                    className="h-7 w-7 grid place-content-center border border-gray-500 dark:border-gray-200 rounded-full"
-                                >
-                                    <MdDarkMode />
-                                </button>
-                                :
-                                <button 
-                                    onClick={() => dispatch(toggleTheme())}
-                                    className="h-7 w-7 grid place-content-center border border-gray-500 dark:border-gray-200 rounded-full"
-                                >
-                                    <MdLightMode/>
-                                </button>
-                            }
-                        </div>
-
-                    </Sidebar.Item>
-
-                </div>
-
-            </Sidebar.ItemGroup>
-
-        </Sidebar.Items>
-
-    </Sidebar>
+    </>
 
   )
 

@@ -111,6 +111,11 @@
 }
 
 
+.form
+{
+    @apply mx-auto max-w-xl
+}
+
 /* thumb */
 .thumb
 {
@@ -148,4 +153,15 @@
 .ticker
 {
     @apply w-[60%] ml-8 mb-5 h-fit 
+}
+
+/* active */
+.active
+{
+    @apply flex items-center gap-x-3 px-3 py-2
+}
+
+.active-link
+{
+    @apply flex items-center gap-x-3 px-3 py-2 text-zinc-100 bg-primaryLight dark:bg-primaryDark rounded-md
 }
