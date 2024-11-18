@@ -1,3 +1,167 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Comfortaa:wght@300..700&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,500;1,700;1,900&display=swap');
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* inputs */
+.input
+{
+    @apply bg-transparent rounded-md  border-slate-600 dark:border-slate-200
+}
+
+.label
+{
+    @apply text-sm font-semibold text-textSecondaryLight dark:text-textSecondaryDark
+}
+
+.btn
+{
+    @apply bg-buttonLight dark:bg-buttonDark  text-bgLight dark:text-textDark font-semibold px-4 py-2
+}
+
+.btn2
+{
+    @apply bg-zinc-800 dark:bg-zinc-500  text-bgLight dark:text-textDark font-semibold px-4 py-2
+}
+
+/* fonts */
+.title
+{
+    @apply text-4xl  md:text-5xl font-title font-bold text-textSecondaryLight dark:text-textSecondaryDark
+}
+
+.title2
+{
+    @apply text-3xl md:text-4xl font-semibold font-title text-textSecondaryLight dark:text-textSecondaryDark
+}
+
+.title3
+{
+    @apply text-xl md:text-2xl font-title font-semibold text-textSecondaryLight dark:text-textSecondaryDark
+}
+
+
+
+/* topography */
+.section
+{
+    @apply px-5 w-full py-10
+}
+
+.tabler
+{
+    @apply table-auto overflow-x-scroll md:mx-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500
+}
+
+.table-title
+{
+    @apply font-title uppercase font-semibold text-textSecondaryLight dark:text-textSecondaryDark
+}
+
+.loading
+{
+    @apply h-6 w-6 block border-2 border-zinc-300  border-t-zinc-700 border-r-zinc-700 animate-spin rounded-full
+}
+
+.mySwiper
+{
+    @apply relative
+}
+
+.prev
+{
+    @apply absolute top-1/2
+}
+
+.next
+{
+    @apply absolute
+}
+
+.size
+{
+    @apply block  p-2 rounded-md font-title bg-teal-950 text-bgLight dark:bg-bgLight  dark:text-bgDark font-bold cursor-pointer
+}
+
+.size-active
+{
+    @apply border-4  border-rose-700 dark:border-amber-500
+}
+
+.color
+{
+    @apply h-10 w-10 rounded-full block cursor-pointer border
+}
+
+.color-active
+{
+    @apply border-4 border-zinc-600 dark:border-rose-700
+}
+
+.pulse
+{
+    @apply bg-zinc-300 dark:bg-zinc-700 block animate-pulse
+}
+
+
+.form
+{
+    @apply mx-auto max-w-xl
+}
+
+/* thumb */
+.thumb
+{
+    @apply h-20 w-20 cursor-pointer  border-primaryLight dark:border-primaryDark backdrop-blur-0
+}
+
+
+.thumb-active
+{
+    @apply h-20 w-20 cursor-pointer border-2 border-primaryLight dark:border-primaryDark backdrop-blur-0
+    transition ease-in-out 
+}
+
+.quantity
+{
+    @apply h-14 w-14 border border-primaryLight dark:border-primaryDark grid place-content-center
+    font-title font-bold
+}
+
+
+/* Reeels */
+/* hide scrollbar for chrome,safari and operamini */
+.app__videos::-webkit-scrollbar
+{
+    display: none;
+}
+
+/* hide scrollbar for firefox,edge and operamini */
+.app__videos
+{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.ticker
+{
+    @apply w-[60%] ml-8 mb-5 h-fit 
+}
+
+/* active */
+.active
+{
+    @apply flex items-center gap-x-3 px-3 py-2
+}
+
+.active-link
+{
+    @apply flex items-center gap-x-3 px-3 py-2 text-zinc-100 bg-primaryLight dark:bg-primaryDark rounded-md
+}
