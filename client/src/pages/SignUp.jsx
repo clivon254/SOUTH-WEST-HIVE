@@ -1,5 +1,4 @@
 
-
 import React, { useContext, useState } from 'react'
 import LOGO from "../assets/LOGO.png"
 import Logo from '../components/Logo'
@@ -10,24 +9,26 @@ import axios from "axios"
 import {toast} from "sonner"
 import {Alert} from "flowbite-react"
 import { StoreContext } from '../context/store'
+import Loading from '../components/Loading'
 import Divider from '../components/Divider'
 import OAuth from '../components/OAuth'
 
 
-export default function SignIn() {
+export default function SignUp() {
 
 
   const [formData ,setFormData] = useState({})
 
-  const {loading,error} = useSelector(state => state.user)
+  const [loading ,setLoading] = useState(false)
 
   const {url,setToken,token} = useContext(StoreContext)
 
-  const dispatch = useDispatch()
+  const [confirm ,setConfirm]  = useState(null)
+
+  const [errors, setErrors] = useState(null)
 
   const navigate = useNavigate()
 
-  console.log(formData)
 
   // handleChange
   const handleChange = (e) => {
@@ -41,27 +42,37 @@ export default function SignIn() {
 
     e.preventDefault()
 
+    setErrors(null)
+
+    if(formData.password !== confirm)
+    {
+        return setErrors("The passwords do not match")
+    }
+
+    setLoading(true)
+
     try
     {
 
-      dispatch(signInStart())
-
-      const res = await axios.post(url + "/api/auth/sign-in",formData)
+      const res = await axios.post(url + "/api/auth/sign-up",formData)
 
       if(res.data.success)
       {
-          dispatch(signInSuccess(res.data.rest))
 
-          toast.success("You have signed successfully")
+          setLoading(false)
 
-          navigate('/')
+          toast.success("You have Signed Up successfully")
 
-          setToken(res.data.token)
-
-          localStorage.setItem("token", res.data.token)
+          navigate('/sign-in')
 
           setFormData({})
 
+      }
+      else
+      {
+        setLoading(false)
+
+        setErrors(res.data.message)
       }
 
     }
@@ -69,7 +80,9 @@ export default function SignIn() {
     {
       console.log(error.message)
 
-      dispatch(signInFailure(error.message))
+      setErrors(error.message)
+
+      setLoading(false)
     }
 
   }
@@ -77,7 +90,7 @@ export default function SignIn() {
 
   return (
 
-    <div className="w-full min-h-[75vh] flex-col gap-y-5 px-8 flex items-center justify-center mx-auto max-w-xl">
+    <div className="w-full min-h-[75vh] px-8 flex flex-col items-center justify-center mx-auto max-w-xl">
 
       <div className="flex flex-col w-full gap-y-5">
 
@@ -95,14 +108,36 @@ export default function SignIn() {
 
           </div> */}
 
-          <h1 className="title3">Sign In</h1>
+          <h1 className="title3">Sign Up</h1>
 
         </div>
 
         <div className="w-full max-w-md mx-auto">
 
           <form onSubmit={handleSubmit} className="w-full space-y-4">
+            
+            {/* email */}
+            <div className="w-full flex flex-col gap-2">
+               
+              <label 
+                htmlFor="" 
+                className="label"
+              >
+                username
+              </label>
 
+              <input 
+                type="text" 
+                placeholder="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className="input" 
+              />
+                
+            </div>
+
+            {/* email */}
             <div className="w-full flex flex-col gap-2">
                
               <label 
@@ -122,7 +157,8 @@ export default function SignIn() {
               />
                 
             </div>
-
+            
+            {/* password */}
             <div className="w-full flex flex-col gap-2">
                
               <label 
@@ -143,42 +179,49 @@ export default function SignIn() {
                 
             </div>
 
+            {/* confirm password */}
+            <div className="w-full flex flex-col gap-2">
+               
+              <label 
+                htmlFor="" 
+                className="label"
+              >
+                confirm password
+              </label>
+
+              <input 
+                type="password" 
+                className="input"
+                placeholder="*********" 
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+              />
+                
+            </div>
+
             <button 
               className="btn w-full rounded-md"
               type='submit'
               disabled={loading}
             >
               {loading ? 
-               ('Loading .....')
+              <>
+                <Loading />
+              </>
                 :
-               ("Sign in")
+               ("Sign up")
               }
             </button>
 
-            <div className="flex items-center justify-between"> 
+            <div className=""> 
 
-              <span className="text-xs font-bold">
-
-                <Link to="/forgot-password" className="cursor-pointer text-secondaryDark dark:text-amber-400 hover:underline">
-                    forgot password ?
-                </Link>
-
-              </span>
-
-              <span className="text-xs font-bold">
-
-                <Link to="/sign-up" className="cursor-pointer text-secondaryDark dark:text-amber-400 hover:underline">
-                    Don't have an account ? 
-                </Link>
-
-              </span>
-              
+              <span className="text-xs font-bold">Already have an account? <Link to="/sign-in" className="cursor-pointer text-secondaryDark dark:text-amber-400 hover:underline">click here</Link></span>
 
             </div>
 
-            {error && (
+            {errors && (
                
-               <Alert color="failure">{error}</Alert>
+               <Alert color="failure">{errors}</Alert>
 
             )}
 
@@ -192,6 +235,7 @@ export default function SignIn() {
       <Divider label="or"/>
 
       <OAuth />
+
 
     </div>
 

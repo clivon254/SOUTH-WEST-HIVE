@@ -98,7 +98,7 @@ export default function Stats() {
                         
                         <div className="flex items-center justify-between">
 
-                            <h1 className="font-title text-xl ">{stat.title}</h1>
+                            <h1 className="font-title text-base font-semibold">{stat.title}</h1>
 
                             <span className="">{stat.icon}</span>
 
@@ -118,7 +118,7 @@ export default function Stats() {
 
         {statsLoading && !statsError && (
 
-            <div className="grid gid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-y-5 gap-x-3 ">
+            <div className="grid gid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-y-5 gap-x-3 ">
 
                     {loader.map((stat,index) => (
 

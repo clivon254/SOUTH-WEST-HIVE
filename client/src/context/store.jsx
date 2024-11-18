@@ -3,7 +3,11 @@
 import axios from 'axios'
 import React, { createContext, useEffect, useRef, useState } from 'react'
 import { FaSleigh } from 'react-icons/fa'
-
+import { IoHomeOutline } from "react-icons/io5";
+import { MdOutlineArticle,MdOutlinePodcasts ,MdContactSupport} from "react-icons/md";
+import { CiShop } from "react-icons/ci";
+import { IoRestaurant } from "react-icons/io5";
+import { FcAbout } from "react-icons/fc";
 
 export const StoreContext = createContext(null)
 
@@ -14,6 +18,44 @@ export default function StoreContextProvider(props) {
     const [token ,setToken] = useState(localStorage.getItem("token"))
 
     const url = "http://localhost:2500"
+
+    const [NavLinks , setNavLinks] = useState([
+      {
+        path: "/",
+        name:"Home",
+        icons:<IoHomeOutline size={24}/>
+      },
+      {
+        path: "/articles",
+        name:"Articles",
+        icons:<MdOutlineArticle size={24}/>
+      },
+      {
+        path: "/podcasts",
+        name:"Podcasts",
+        icons:<MdOutlinePodcasts size={24}/>
+      },
+      {
+        path: "/shop",
+        name:"Shop",
+        icons:<CiShop size={24}/>
+      },
+      {
+        path: "/la elite",
+        name:"La elite",
+        icons:<IoRestaurant size={24}/>
+      },
+      // {
+      //   path: "/contact",
+      //   name:"contact-us",
+      //   icons:<MdContactSupport size={24}/>
+      // },
+      // {
+      //   path: "/about",
+      //   name:"About us",
+      //   icons:<FcAbout size={24}/>
+      // }
+    ])
 
     const [open,setOpen] = useState(false)
 
@@ -562,7 +604,8 @@ export default function StoreContextProvider(props) {
       track,setTrack,
       playStatus,setPlayStatus,
       time,setTime,
-      play,pause,playWithId,next,previous,seekSong
+      play,pause,playWithId,next,previous,seekSong,
+      NavLinks,setNavLinks
     }
 
 
