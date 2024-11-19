@@ -77,6 +77,12 @@ export default function StoreContextProvider(props) {
 
     const [productsError ,setProductsError] = useState(false)
 
+    const merch = products?.filter((product) => product.Item === "Merchendise")
+
+    const access = products?.filter((product) => product.Item === "Accessories")
+
+    const food = products?.filter((product) => product.Item === "Catering")
+
     const [reels ,setReels] = useState([])
 
     const [reelLoading ,setReelLoading] = useState(false)
@@ -605,7 +611,8 @@ export default function StoreContextProvider(props) {
       playStatus,setPlayStatus,
       time,setTime,
       play,pause,playWithId,next,previous,seekSong,
-      NavLinks,setNavLinks
+      NavLinks,setNavLinks,
+      merch,access,food
     }
 
 

@@ -1,6 +1,6 @@
 
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StoreContext } from '../context/store'
 import { MdClose, MdMenu } from "react-icons/md"
 import Logo from './Logo'
@@ -24,6 +24,8 @@ export default function Header() {
 
   const {theme} = useSelector(state => state.theme)
 
+  const [isSticky ,setIsSticky] = useState(false)
+
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
@@ -46,13 +48,46 @@ export default function Header() {
         console.log(error.message)
     }
 
-  }
+   }
+
+   useEffect(() => {
+
+    let prevScrollPosition = 0 ;
+
+    const handleScroll = () => {
+
+      const scrollPosition = window.scrollY ;
+
+      const scrollDirection = scrollPosition - prevScrollPosition
+
+      prevScrollPosition = scrollPosition
+
+      if(scrollDirection < 0 && scrollPosition > 0)
+      {
+        setIsSticky(true)
+      }
+      else if(scrollDirection > 0)
+      {
+        setIsSticky(false)
+      }
+
+    }
+
+    window.addEventListener('scroll',handleScroll)
+
+    return () => {
+
+      window.removeEventListener('scroll', handleScroll)
+    }
+
+   },[])
+
 
   return (
  
     <>
 
-      <header className="w-full fixed top-0 z-50  p-4 shadow backdrop-blur-2xl border-b dark:border-zinc-500">
+      <header className={`w-full ${isSticky ? "sticky top-0":""} z-50 p-4 shadow backdrop-blur-2xl border-b dark:border-zinc-500`}>
 
         <div className="flex items-center justify-between">
 

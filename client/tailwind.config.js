@@ -21,7 +21,7 @@ export default {
         textSecondaryLight:'#051F20',
         primaryLight:'#235347',
         secondaryLight:'#8EB69B',
-        buttonLight:'#163832',
+        buttonLight:'#7ABF5A',
 
         bgDark:'#190019',
         textDark:'#dfb6b2',

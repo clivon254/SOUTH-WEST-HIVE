@@ -1,23 +1,116 @@
 
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect ,useState} from 'react'
 import { StoreContext } from '../context/store'
 import Popular from '../components/Popular'
 import PostCard from '../components/PostCard'
+import { GiClothes } from "react-icons/gi";
+import { MdCastForEducation, MdOutlineSports } from 'react-icons/md';
+import { SiDcentertainment } from "react-icons/si";
+import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate'
+import Banner1 from '../components/Banner1';
+import SlideProducts from '../components/SlideProducts';
 
 export default function Home() {
 
-  const {posts} = useContext(StoreContext)
+  const {posts,merch,access,food} = useContext(StoreContext)
+
+  const [currentItems ,setCurrentItems] = useState([])
+
+  const [itemOffset, setItemOffset] = useState(0);
+
+  const [pageCount ,setPageCount] = useState(0)
+
+  const postPerPage = 3
+
+
+
+  useEffect(() => {
+
+    const endOffset = itemOffset + postPerPage;
+    
+    setCurrentItems(posts.slice(itemOffset ,endOffset))
+
+    setPageCount(Math.ceil(posts.length / postPerPage))
+
+  },[posts,itemOffset,postPerPage])
+
+
+
+  //  pageClick
+  const handlePageClick = (event) => {
+
+    const newOffset = (event.selected * postPerPage) % posts.length;
+    
+    setItemOffset(newOffset);
+
+  };
+
+
+  const CATEGORIES = [
+    {
+      label:"Fashion",
+      color:"bg-[#e11d48]",
+      text:"text-[#fff]",
+      icon:<GiClothes size={24} className="text-white"/>
+    },
+    {
+      label:"Sports",
+      color:"bg-[#2563eb]",
+      text:"text-[#fff]",
+      icon:<MdOutlineSports size={24} className="text-white"/>
+    },
+
+    {
+      label:"Education",
+      color:"bg-[#ca8a04]",
+      text:"text-[#fff]",
+      icon:<MdCastForEducation size={24} className="text-white"/>
+    },
+
+    {
+      label:"Entertainment",
+      color:"bg-[#9333ea]",
+      text:"text-[#fff]",
+      icon:<SiDcentertainment size={24} className="text-white"/>
+    },
+  ]
 
   return (
 
-    <section className="section">
+    <section className="">
 
       {/*  banner1*/}
-      <div className=""></div>
+      <Banner1 />
+
+      {/* categories */}
+      <div className="section space-y-5">
+
+        <h1 className="title2">Popular catergories</h1>
+
+        <div className="w-full flex flex-wrap gap-y-3 gap-x-3 md:gap-x-5  lg:gap-x-7">
+
+          {CATEGORIES?.map((cat) => (
+
+            <Link
+              key={cat.label}
+              to={`/category?category=${cat?.label}`}
+              className={`flex items-center justify-center gap-3 ${cat.color} rounded-md cursor-pointer px-4 py-2 `}
+            >
+              {cat.icon}
+              <span className="lg:text-xl font-logo font-semibold text-white">{cat.label}</span>
+            </Link>
+
+          ))}
+
+        </div>
+
+      </div>
+
 
       {/* posts */}
-      <div className="w-full flex flex-col lg:flex-row gap-20 2xl:gap-20">
+      <div id="posts" className="section w-full flex flex-col lg:flex-row gap-20 2xl:gap-20 py-10">
 
           {/* left */}
           <div className="w-full lg:w-2/3 space-y-10">
@@ -41,6 +134,15 @@ export default function Home() {
             <Popular />
 
           </div>
+
+      </div>
+      
+      {/* merchendise */}
+      <div className="section space-y-5">
+
+        <h1 className="title2">Merchendise</h1>
+
+        <SlideProducts products={merch}/>
 
       </div>
 

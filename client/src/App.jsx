@@ -17,6 +17,9 @@ import Podcasts from './pages/Podcasts'
 import Shop from './pages/Shop'
 import LaElite from './pages/LaElite'
 import PostPage from './pages/PostPage'
+import Catergory from './pages/Catergory'
+import WriterPage from './pages/WriterPage'
+import ProductPage from './pages/ProductPage'
 
 
 export default function App() {
@@ -32,7 +35,7 @@ export default function App() {
 
         <Header />
 
-        <div className="flex-1 pt-20 lg:pt-40">
+        <div className="flex-1 ">
 
           <Routes>
 
@@ -57,6 +60,12 @@ export default function App() {
             <Route path="/post/:slug" element={<PostPage/>}/>
 
             <Route path="/la elite" element={<LaElite/>}/>
+
+            <Route path="/category" element={<Catergory/>}/>
+
+            <Route path="/product/:productId" element={<ProductPage/>}/>
+
+            <Route path="/writer/:userId" element={<WriterPage/>}/>
 
           </Routes>
 

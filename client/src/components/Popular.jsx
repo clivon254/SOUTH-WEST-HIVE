@@ -23,7 +23,7 @@ export default function Popular() {
 
                     <h2 className="title3">Popular Articles</h2>
 
-                    <div className="">
+                    <div className="flex flex-col gap-y-5">
 
                         {popularArticles?.map((post ,index) => (
 
@@ -45,7 +45,7 @@ export default function Popular() {
                                             to={`/post/${post?.slug}`}
                                             className="font-semibold"
                                         >
-                                            {post?.title}
+                                            {post?.title?.slice(0, 30) + "..."}
                                         </Link>
 
                                         <div className="flex gap-2 text-sm">

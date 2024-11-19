@@ -37,9 +37,10 @@ export default function ProductCard({product}) {
 
                 )}
 
-                <span className="text-xl">
+                <span className="">
                     {product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
                 </span>
+        
 
             </div>
            

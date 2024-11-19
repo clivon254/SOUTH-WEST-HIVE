@@ -117,9 +117,13 @@ export const getPosts = async (req,res,next) => {
    
     try
     {
-        const posts = await Post.find({})
-                                .sort({_id:-1})
-                                .populate({path:"userId"})
+        const posts = await Post.find({
+                         ...(req.query.postId && {_id : req.query.postId}),
+                         ...(req.query.category && {category : req.query.category}),
+                         ...(req.query.userId && {userId : req.query.userId}),
+                         })
+                        .sort({_id:-1})
+                        .populate({path:"userId"})
 
         const totalPosts = await Post.countDocuments()
 
