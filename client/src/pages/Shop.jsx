@@ -5,7 +5,11 @@ export default function Shop() {
 
   return (
 
-    <div>Shop</div>
+    <section className="section">
+
+      <div className=""></div>
+      
+    </section>
     
   )
 

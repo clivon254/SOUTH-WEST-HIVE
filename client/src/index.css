@@ -170,12 +170,12 @@
 /* active-navs */
 .active-nav
 {
-    @apply flex items-center gap-x-1 text-sm uppercase font-title font-semibold
+    @apply flex items-center gap-x-1  text-xs uppercase font-title 
 }
 
 .active-nav-link
 {
-    @apply flex items-center gap-x-1 text-sm uppercase font-title font-semibold relative text-rose-600  py-1 transition-all duration-500
+    @apply flex items-center gap-x-1 uppercase font-title text-xs relative text-rose-600  py-1 transition-all duration-500
     after:w-full after:h-[2px] after:bg-rose-600 after:absolute after:-bottom-1 after:right-1 after:translate-x-1 ease-in-out 
     before:w-full before:h-[2px] before:bg-rose-600 before:absolute before:-top-1 before:left-1 before:-translate-x-1
 }

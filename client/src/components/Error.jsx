@@ -12,13 +12,13 @@ export default function Error({retry}) {
 
           <p className="text-center font-semibold">Check your connection to the internet and try again.</p>
 
-          <div className="text-center">
+          <div className=" text-center">
 
             <span 
-                onClick={() => retry()} 
-                className="border border-textSecondaryLight dark:border-textSecondaryDark px-5 py-1 rounded-full font-semibold cursor-pointer"
+              onClick={() => retry()} 
+              className="border border-textSecondaryLight dark:border-textSecondaryDark px-5 py-1 rounded-full font-semibold cursor-pointer"
             >
-              Retry
+                Retry
             </span>
 
           </div>

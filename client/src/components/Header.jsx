@@ -49,10 +49,10 @@ export default function Header() {
   }
 
   return (
-
+ 
     <>
 
-      <header className="w-full fixed top-0 z-50  p-4 shadow backdrop-blur-xl border-b dark:border-zinc-500">
+      <header className="w-full fixed top-0 z-50  p-4 shadow backdrop-blur-2xl border-b dark:border-zinc-500">
 
         <div className="flex items-center justify-between">
 

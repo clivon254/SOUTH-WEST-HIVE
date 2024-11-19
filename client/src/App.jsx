@@ -16,6 +16,7 @@ import Articles from './pages/Articles'
 import Podcasts from './pages/Podcasts'
 import Shop from './pages/Shop'
 import LaElite from './pages/LaElite'
+import PostPage from './pages/PostPage'
 
 
 export default function App() {
@@ -52,6 +53,8 @@ export default function App() {
             <Route path="/podcasts" element={<Podcasts/>}/>
 
             <Route path="/shop" element={<Shop/>}/>
+
+            <Route path="/post/:slug" element={<PostPage/>}/>
 
             <Route path="/la elite" element={<LaElite/>}/>
 
