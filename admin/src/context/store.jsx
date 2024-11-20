@@ -3,6 +3,7 @@
 import axios from 'axios'
 import React, { createContext, useEffect, useRef, useState } from 'react'
 import { FaSleigh } from 'react-icons/fa'
+import {useSelector} from "react-router-dom"
 
 
 export const StoreContext = createContext(null)
@@ -14,6 +15,8 @@ export default function StoreContextProvider(props) {
     const [token ,setToken] = useState(localStorage.getItem("token"))
 
     const url = "https://south-west-hive-server.onrender.com"
+
+    const {currentUser} = useSelector()
 
     const [open,setOpen] = useState(false)
 
@@ -485,9 +488,11 @@ export default function StoreContextProvider(props) {
       if(localStorage.getItem("token"))
       {
         setToken(localStorage.getItem("token"))
+
+        fetchStats()
       }
 
-    },[])
+    },[token,currentUser])
 
 
     useEffect(() => {
