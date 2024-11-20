@@ -66,9 +66,9 @@ export const SignIn = async (req,res,next) => {
             {
               id: user._id , 
               isAdmin : user.isAdmin,
-              accountType: user.accountType
             },
-            process.env.JWT_SECRETE
+            process.env.JWT_SECRETE,
+            { expiresIn: '12h' }
         )
 
         const {password:pass ,...rest} = user._doc
@@ -93,7 +93,8 @@ export const Google = async (req,res,next) => {
         {
             const token = jwt.sign(
                 {id:user._id , isAdmin:user.isAdmin},
-                process.env.JWT_SECRETE
+                process.env.JWT_SECRETE,
+                { expiresIn: '2h' }
             )
     
             const {password:pass ,...rest} = user._doc
@@ -118,7 +119,8 @@ export const Google = async (req,res,next) => {
 
             const token = jwt.sign(
                 {id:newUser._id , isAdmin:newUser.isAdmin},
-                process.env.JWT_SECRETE
+                process.env.JWT_SECRETE,
+                { expiresIn: '12h' }
             )
 
             const {password:pass, ...rest} = newUser._doc

@@ -13,7 +13,7 @@ import axios from "axios"
 
 export default function AddPodcast() {
 
-    const {url,token} = useContext(StoreContext)
+    const {url,token,fetchPodcasts} = useContext(StoreContext)
 
     const [formData ,setFormData] = useState()
 
@@ -163,6 +163,16 @@ export default function AddPodcast() {
 
         e.preventDefault()
 
+        if(!formData.audio)
+        {
+            return setError("please upload an audio")
+        }
+    
+        if(!formData.backgroundPhoto)
+        {
+            return setError("please upload an photo")
+        }
+
         try
         {
             setLoading(true)
@@ -178,6 +188,16 @@ export default function AddPodcast() {
                 navigate('/podcasts')
 
                 toast.success("Podcast is added successfully")
+
+                navigate('/podcast')
+
+                fetchPodcasts()
+            }
+            else
+            {
+                setError(res.data.message)
+
+                setLoading(false)
             }
         }
         catch(error)
@@ -193,7 +213,7 @@ export default function AddPodcast() {
      
   return (
 
-    <section className="section space-y-10">
+    <section className="section space-y-10 max-w-xl mx-auto">
 
         <h1 className="title text-center">Add Podcast</h1>
 

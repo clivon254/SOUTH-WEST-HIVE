@@ -137,7 +137,7 @@ export default function Dashboard() {
 
               <h1 className="title3 mb-3">Last 5 Accessories</h1>
 
-              {stats?.last5AccesoriesAdmin?.length > 0 ? 
+              {stats?.last5AccessoriesAdmin?.length > 0 ? 
                 (
                   <div className="tabler">
                     

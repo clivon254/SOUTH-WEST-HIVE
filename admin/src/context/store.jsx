@@ -99,6 +99,8 @@ export default function StoreContextProvider(props) {
 
     const [statsError , setStatsError] = useState([])
 
+    const [days ,setDays] = useState(28)
+
 
 
     // fetchPost
@@ -351,7 +353,7 @@ export default function StoreContextProvider(props) {
 
         setStatsError(false)
 
-        const res = await axios.post( url + "/api/post/stats",{},{headers:{token}})
+        const res = await axios.post( url + `/api/post/stats?query=${days}`,{},{headers:{token}})
 
         if(res.data.success)
         {
@@ -556,13 +558,15 @@ export default function StoreContextProvider(props) {
       stats,setStats,
       statsLoading,setStatsLoading,
       statsError,setStatsError,
+      fetchStats,
       audioRef,
       seekBg,
       seekBar,
       track,setTrack,
       playStatus,setPlayStatus,
       time,setTime,
-      play,pause,playWithId,next,previous,seekSong
+      play,pause,playWithId,next,previous,seekSong,
+      setDays,days
     }
 
 

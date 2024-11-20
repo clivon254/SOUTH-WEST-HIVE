@@ -52,7 +52,7 @@ function Layout(){
 
   return(
 
-    currentUser ? 
+    currentUser && currentUser.isAdmin ? 
 
     <div className="w-full h-screen flex flex-col">
 

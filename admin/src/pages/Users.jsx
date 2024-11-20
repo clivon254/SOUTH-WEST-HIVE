@@ -13,7 +13,7 @@ import {HiExclamationCircle} from "react-icons/hi"
 
 export default function Users() {
 
-    const {url,token,users,setUsers,userLoading ,userError,fetchUsers} =  useContext(StoreContext)
+    const {url,token,users,setUsers,userLoading ,userError,fetchUser} =  useContext(StoreContext)
 
     const [open ,setOpen] = useState(false)
 
@@ -166,7 +166,7 @@ export default function Users() {
 
           {userError && (
 
-            <Error retry={fetchUsers}/>
+            <Error retry={fetchUser}/>
 
           )}
 

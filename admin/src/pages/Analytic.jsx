@@ -1,16 +1,28 @@
 
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Graph from '../components/Graph'
 import { StoreContext } from '../context/store'
 
 export default function Analytic() {  
 
-  const [days ,setDays] = useState(28)
+  
 
-  const {stats} = useContext(StoreContext)
+  const {stats,days,setDays,fetchStats} = useContext(StoreContext)
 
   console.log(stats)
+
+  // handleChange
+  const handleChange = (e) => {
+
+    setDays(e.target.value)
+  }
+
+  useEffect(() => {
+
+    fetchStats()
+
+  },[days])
 
   return (
 
@@ -21,7 +33,7 @@ export default function Analytic() {
        <h1 className="title2">Analytics</h1>
 
         <select 
-            onChange={(e) => setDays(e.target.value)}
+            onChange={handleChange}
             value={days} 
             className="input"
           >

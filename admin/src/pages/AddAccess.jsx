@@ -8,6 +8,7 @@ import { app } from '../firebase'
 import axios from 'axios'
 import { toast } from 'sonner'
 import { Alert } from 'flowbite-react'
+import Loading from '../components/Loading'
 
 export default function AddAccess() {
 
@@ -28,7 +29,7 @@ export default function AddAccess() {
   const [formData ,setFormData] = useState({
     images:[],
     offer:false,
-    Item:'Access',
+    Item:'Accessories',
     discountPrice:0,
     category:'customized'
   })
@@ -145,6 +146,11 @@ export default function AddAccess() {
 
     e.preventDefault(e)
 
+    if(formData?.images?.length < 0)
+    {
+      return setPublishingError("Upload atleast one image")
+    }
+
     try
     {
 
@@ -182,7 +188,7 @@ export default function AddAccess() {
 
     <section className="section space-y-5">
 
-      <h1 className="title text-center">Add Merch</h1>
+      <h1 className="title text-center">Add Accessories</h1>
 
       <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-y-10 gap-x-5 ">
 
@@ -347,11 +353,7 @@ export default function AddAccess() {
           >
            {loading ? 
            (
-              <div className="flex items-center justify-center gap-x-5">
-
-                <span className="loading"/> loading ....
-
-              </div>
+              <Loading />
            ) 
            : 
            ("Add Accessory")}
@@ -359,7 +361,7 @@ export default function AddAccess() {
 
           {publishingError && (
 
-            <Alert>{publishingError}</Alert>
+            <Alert color="failure">{publishingError}</Alert>
 
           )}
 

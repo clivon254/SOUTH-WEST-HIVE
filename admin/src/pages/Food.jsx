@@ -147,7 +147,7 @@ export default function Food() {
 
                               </span>
 
-                              <span className="">
+                              <span className="cursor-pointer">
                                 <FaTrash size={24}  onClick={() => {setProductIdToDelete(merch._id) ; setOpen(true)}}/> 
                               </span>
 
@@ -277,7 +277,7 @@ export default function Food() {
 
             <HiExclamationCircle size={40} className="mx-auto"/>
 
-            <h2 className="text-center font-semibold font-title">Are you sure you want delete this Merchandise?</h2>
+            <h2 className="text-center font-semibold font-title">Are you sure you want delete this food?</h2>
 
             <div className="flex justify-between items-center">
 

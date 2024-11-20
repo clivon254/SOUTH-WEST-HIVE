@@ -31,7 +31,7 @@ export default function DashSidebar() {
 
     <>
 
-        <div className="pt-10 border-r border-zinc-700 px-3 overflow-y-scroll">
+        <div className="pt-10 border-r border-zinc-700 px-3 overflow-y-scroll side">
 
             <div className="flex flex-col gap-y-3">
 

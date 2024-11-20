@@ -14,7 +14,7 @@ import SlideProducts from '../components/SlideProducts';
 
 export default function Home() {
 
-  const {posts,merch,access,food} = useContext(StoreContext)
+  const {posts,merch,access,food,brands} = useContext(StoreContext)
 
   const [currentItems ,setCurrentItems] = useState([])
 
@@ -140,7 +140,7 @@ export default function Home() {
       {/* merchendise */}
       <div className="section space-y-5">
 
-        <h1 className="title2">Merchendise</h1>
+        <h1 className="title2">Get Our Merchendise</h1>
 
         <SlideProducts products={merch}/>
 
@@ -150,16 +150,47 @@ export default function Home() {
       <div className=""></div>
 
       {/* La Elite */}
-      <div className=""></div>
+      <div className="">
+
+      </div>
 
       {/* banner3 */}
       <div className=""></div>
 
-      {/*products */}
+      {/* accessories */}
       <div className=""></div>
 
       {/* brands */}
-      <div className=""></div>
+      <div className="section bg-black  dark:bg-black/30">
+            
+          <div className="flex items-center justify-center gap-x-10 overflow-x-scroll">
+
+            {brands.map((brand,index) => (
+
+              <div className="">
+
+                <div className="h-20 w-20">
+
+                   <img 
+                      src={brand?.image}
+                      alt="" 
+                      className="h-full w-full" 
+                    />
+
+                </div>
+
+              {/* 
+                <span className="block ">
+                  {brand?.name}
+                </span> */}
+
+              </div>
+
+            ))}
+
+           </div>
+
+      </div>
 
     </section>
 

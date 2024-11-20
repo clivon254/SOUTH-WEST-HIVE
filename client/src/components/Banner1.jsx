@@ -66,7 +66,7 @@ export default function Banner1() {
 
                 <button className="btn rounded-md  items-center gap-x-2">
 
-                  <Link to="/posts" className="flex ">
+                  <Link to="/podcasts" className="flex ">
                       Listen to podcast 
 
                       <MdHeadphones size={24}/>
@@ -90,8 +90,6 @@ export default function Banner1() {
                       Order now
                       <MdRestaurantMenu size={24}/>
                    </Link>
-
-                  
 
                 </button>
 

@@ -62,7 +62,7 @@ export default function AddFilm() {
 
   return (
 
-    <section className="section">
+    <section className="section max-w-xl mx-auto">
 
         <h2 className="title text-center">Add Film</h2>
 

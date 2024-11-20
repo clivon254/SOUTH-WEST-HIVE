@@ -7,7 +7,7 @@ import { StoreContext } from '../context/store'
 import { Alert } from 'flowbite-react'
 import axios from "axios"
 import {toast} from "sonner"
-
+import { useNavigate } from "react-router-dom"
 
 export default function AddBrand() {
 
@@ -25,9 +25,11 @@ export default function AddBrand() {
 
     const [loading ,setLoading] = useState(false)
 
-    const [error ,setError] = useState(false)
+    const [error ,setError] = useState(null)
 
     console.log(formData)
+    
+    const navigate = useNavigate()
 
     // handleImageUpload
     const handleImageUpload = async () => {
@@ -109,11 +111,17 @@ export default function AddBrand() {
 
         e.preventDefault()
 
+        
+        if(!formData?.image)
+        {
+            return setError("please upload an photo")
+        }
+
         try
         {
             setLoading(true)
 
-            setError(false)
+            setError(null)
 
             const res = await axios.post(url + "/api/brand/create-brand",formData,{headers:{token}})
 
@@ -124,6 +132,17 @@ export default function AddBrand() {
                 setFormData({})
 
                 toast.success("The brand has been created successfully")
+
+                fetchBrands()
+
+                navigate('/brand')
+                
+            }
+            else
+            {
+                setLoading(false)
+
+                setError(res.data.message)
             }
         }
         catch(error)
@@ -132,14 +151,14 @@ export default function AddBrand() {
 
             setLoading(false)
 
-            setError(true)
+            setError(error.message)
         }
 
     }
 
   return (
 
-    <section className="section space-y-10">
+    <section className="section space-y-10 max-w-xl mx-auto">
 
         <h1 className="title text-center">Add Brand</h1>
 

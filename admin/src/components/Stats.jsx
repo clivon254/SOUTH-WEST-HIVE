@@ -17,7 +17,6 @@ export default function Stats() {
 
   const {stats,statsLoading,statsError} = useContext(StoreContext)
 
-  console.log(stats)
 
   const data = [
     {

@@ -8,10 +8,11 @@ import { app } from '../firebase'
 import axios from 'axios'
 import { toast } from 'sonner'
 import { Alert } from 'flowbite-react'
+import Loading from '../components/Loading'
 
 export default function AddMerch() {
 
-  const {url,token} = useContext(StoreContext)
+  const {url,token,fetchProducts} = useContext(StoreContext)
 
   const [files ,setFiles] = useState([])
 
@@ -150,6 +151,11 @@ export default function AddMerch() {
 
     e.preventDefault(e)
 
+    if(formData?.images?.length < 0)
+    {
+      return setPublishingError("Please select atleast one image")
+    }
+
     try
     {
 
@@ -166,6 +172,14 @@ export default function AddMerch() {
         toast.success(`${res.data.newProduct.name} is added successfully`)
 
         setLoading(false)
+
+        fetchProducts()
+      }
+      else
+      {
+        setLoading(false)
+
+        setPublishingError(res.data.message)
       }
 
     }
@@ -249,7 +263,7 @@ export default function AddMerch() {
 
       <form onSubmit={handleSubmit} className="w-full flex flex-col md:flex-row gap-y-10 gap-x-5">
 
-        <div className="w-full md:w-[60%] flex flex-col gap-y-4 gap-x-3 md:grid md:grid-cols-2">
+        <div className="w-full md:w-[60%] flex flex-col gap-y-4 gap-x-3 ">
 
             <input 
               type="text" 
@@ -450,8 +464,8 @@ export default function AddMerch() {
                 </div>
 
               ))
-
           }
+
 
           <button 
             className="btn rounded-md w-full"
@@ -460,9 +474,7 @@ export default function AddMerch() {
           >
            {loading ? 
            (
-              <>
-                <span className="loading"/> ....
-              </>
+              <Loading />
            ) 
            : 
            ("Add Merchendise")}

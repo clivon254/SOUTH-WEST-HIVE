@@ -12,6 +12,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import { Alert } from 'flowbite-react'
 import axios from "axios"
 import {toast} from "sonner"
+import Loading from '../components/Loading'
 
 
 export default function AddPost() {
@@ -32,6 +33,7 @@ export default function AddPost() {
 
   const [formData , setFormData] = useState({
     images:[],
+    category:"Fashion"
   })
 
   const navigate = useNavigate()
@@ -236,7 +238,7 @@ export default function AddPost() {
           </div>
 
           {/* image upload */}
-          <div className="w-full md:w-[40%] space-y-4">
+          <div className="w-full md:w-[40%] space-y-5">
 
             <p className="">Images <span className="">The Images will cover here max(6)</span></p>
             
@@ -257,13 +259,8 @@ export default function AddPost() {
                   className="btn rounded-md"
                 >
                   {uploading ? 
-                    <div className="w-10 h10 grid place-content-center">
-
-                      <CircularProgressbar 
-                        value={imageUploadProgress}
-                        text={`${imageUploadProgress || 0}`}
-                      />
-
+                    <div className="flex items-center gap-5 justify-center">
+                      <span className="loading"/> {imageUploadProgress}%
                     </div>
                     :
                     'upload'
@@ -307,10 +304,16 @@ export default function AddPost() {
 
             <button 
               type="submit"
-              className="btn rounded-md"
+              className="btn rounded-md w-full"
               disabled={loading || uploading}
             >
-              {loading ? "publishing ...." : "Publish"}
+              {loading ? 
+              (
+                <Loading/>
+              ) 
+              : 
+              ("Publish")
+              }
             </button>
 
             {publishError && (
