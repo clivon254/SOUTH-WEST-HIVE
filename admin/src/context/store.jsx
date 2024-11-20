@@ -13,7 +13,7 @@ export default function StoreContextProvider(props) {
 
     const [token ,setToken] = useState(localStorage.getItem("token"))
 
-    const url = "http://localhost:2500"
+    const url = "https://south-west-hive-server.onrender.com"
 
     const [open,setOpen] = useState(false)
 
