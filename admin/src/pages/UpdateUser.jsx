@@ -232,7 +232,8 @@ export default function UpdateUser() {
         }
 
     }
-
+    
+    console.log(formData)
 
 
   return (
@@ -296,12 +297,12 @@ export default function UpdateUser() {
 
 
                 <input 
-                type="text" 
-                className="input" 
-                name="username"
-                placeholder='username'
-                onChange={handleChange}
-                defaultValue={formData?.username}
+                    type="text" 
+                    className="input" 
+                    name="username"
+                    placeholder='username'
+                    onChange={handleChange}
+                    defaultValue={formData?.username}
                 />
 
                 <input 

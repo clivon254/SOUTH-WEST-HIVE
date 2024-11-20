@@ -486,11 +486,9 @@ export default function StoreContextProvider(props) {
       if(localStorage.getItem("token"))
       {
         setToken(localStorage.getItem("token"))
-
-        fetchStats()
       }
 
-    },[token])
+    },[])
 
 
     useEffect(() => {
