@@ -354,7 +354,7 @@ export default function StoreContextProvider(props) {
 
         setStatsError(false)
 
-        const res = await axios.post( url + `/api/post/stats?query=${days}`,{},{headers:{token}})
+        const res = await axios.post( url + `/api/post/stats`,{},{headers:{token}})
 
         if(res.data.success)
         {
