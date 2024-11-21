@@ -20,6 +20,7 @@ import PostPage from './pages/PostPage'
 import Catergory from './pages/Catergory'
 import WriterPage from './pages/WriterPage'
 import ProductPage from './pages/ProductPage'
+import Cart from './pages/Cart'
 
 
 export default function App() {
@@ -66,6 +67,8 @@ export default function App() {
             <Route path="/product/:productId" element={<ProductPage/>}/>
 
             <Route path="/writer/:userId" element={<WriterPage/>}/>
+
+            <Route path="/cart" element={<Cart/>}/>
 
           </Routes>
 

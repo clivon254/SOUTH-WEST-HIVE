@@ -158,12 +158,18 @@ export default function Home() {
       <div className=""></div>
 
       {/* accessories */}
-      <div className=""></div>
+      <div className="section space-y-5">
+
+        <h1 className="title2">Get Our Accessories</h1>
+
+        <SlideProducts products={access}/>
+
+      </div>
 
       {/* brands */}
       <div className="section bg-black  dark:bg-black/30">
             
-          <div className="flex items-center justify-center gap-x-10 overflow-x-scroll">
+          <div className="flex items-center justify-center gap-x-10 overflow-x-scroll brand">
 
             {brands.map((brand,index) => (
 

@@ -3,7 +3,7 @@
 
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { StoreContext } from '../context/store'
 import Error from '../components/Error'
 import MPESA from "../assets/MPESA.png"
@@ -13,13 +13,18 @@ import {Swiper, SwiperSlide} from "swiper/react"
 import "swiper/css"
 import {Autoplay,Navigation} from "swiper/modules"
 import SlideProducts from '../components/SlideProducts'
+import {toast} from "sonner"
+import {useSelector} from "react-redux"
+import {Alert} from "flowbite-react"
 
 
 export default function ProductPage() {
 
-    const {url,token,products} = useContext(StoreContext)
+    const {url,token,products,fetchCart,cartItems} = useContext(StoreContext)
 
     const [product,setProduct] = useState(null)
+
+    const {currentUser} = useSelector(state => state.user)
 
     const [error ,setError] = useState(false)
 
@@ -29,9 +34,13 @@ export default function ProductPage() {
 
     const [image , setImage] = useState(null)
 
-    const [sizes ,setSizes] = useState(null)
+    const [size ,setSize] = useState(null)
 
     const Items = products?.filter((prev) => prev.Item === product?.Item)
+
+    const [alert ,setAlert] = useState(null)
+
+    const navigate = useNavigate()
 
     // fetchProduct
     const fetchProduct = async () => {
@@ -66,11 +75,68 @@ export default function ProductPage() {
 
     }
 
-    // addsize
-    const addSize = () => {}
-
-
     console.log(product)
+
+    console.log(size)
+
+
+    // Add to cart for product with sizes
+    const addToCart = async () => {
+
+        setAlert(null)
+
+        if(!currentUser)
+        {
+            navigate('/sign-in')
+        }
+
+        let data ;
+
+        if(product.sizes)
+        {
+            if(size === null)
+            {
+                return setAlert("Please choose a size")
+            }
+
+            data = {
+                itemId:productId,
+                size:size
+            }
+        }
+        else
+        {
+            data = {
+                itemId:productId
+            }
+        }
+        
+
+        try
+        {
+            const res = await axios.post(url + "/api/cart/add-cart",data,{headers:{token}})
+
+            if(res.data.success)
+            {
+                toast.success(res.data.message)
+
+                fetchCart()
+
+                setSizes(null)
+            }
+            else
+            {
+                console.log("check the api")
+            }
+        }
+        catch(error)
+        {
+            console.log(error.message)
+        }
+
+    }
+
+
 
     useEffect(() => {
 
@@ -206,20 +272,20 @@ export default function ProductPage() {
                             {/* size */}
                             {product?.sizes && (
 
-                                <div className="">
+                                <div className="space-y-2">
 
-                                    <h3 className="label">size</h3>
+                                    <h3 className="label">sizes available</h3>
 
                                     <div className="flex gap-x-2">
 
-                                        {product?.sizes?.map((size,index) => (
+                                        {product?.sizes?.map((sizes,index) => (
 
                                             <div 
-                                                className={`size ${size === sizes ? "size-active":""}`}
-                                                onClick={() => addSize(size)}
+                                                className={`size ${sizes === size ? "size-active":""}`}
+                                                onClick={() => setSize(sizes)}
                                                 key={index}
                                             >
-                                                {size}
+                                                {sizes}
                                             </div>
 
                                         ))}
@@ -231,24 +297,38 @@ export default function ProductPage() {
                             )}
 
                             {/* quantity */}
-                            <div className="flex flex-col gap-1">
-                                
-                                <span className="text-sm font-semibold">Quantity (1 in cart)</span>
+                            {!product?.sizes && (
 
-                                <div className="flex items-center">
+                                <div className="flex flex-col gap-y-2">
+                                    
+                                    <span className="text-sm font-semibold">
+                                        quantity ({cartItems[productId]} in cart)
+                                    </span>
 
-                                    <span className="quantity ">-</span>
+                                    <div className="flex items-center">
 
-                                    <span className="quantity">3</span>
+                                        <span className="quantity ">-</span>
 
-                                    <span className="quantity">+</span>
+                                        <span className="quantity"></span>
+
+                                        <span className="quantity">+</span>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
+                            )}
+
+                            {alert && (
+
+                                <Alert color='failure'>{alert}</Alert>
+                            )}
 
                             {/* addToCart */}
-                            <button className="btn h-14 text-xl uppercase">
+                            <button 
+                                className="btn h-14 text-xl uppercase"
+                                onClick={() => addToCart()}
+                            >
                                 Add to Cart
                             </button>
 

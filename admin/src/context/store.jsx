@@ -94,11 +94,9 @@ export default function StoreContextProvider(props) {
 
     const [stats , setStats] = useState([])
 
+    const [statsLoading , setStatsLoading] = useState(false)
 
-    const [statsLoading , setStatsLoading] = useState([])
-
-
-    const [statsError , setStatsError] = useState([])
+    const [statsError , setStatsError] = useState(false)
 
     const [days ,setDays] = useState(28)
 
@@ -354,7 +352,7 @@ export default function StoreContextProvider(props) {
 
         setStatsError(false)
 
-        const res = await axios.post( url + `/api/post/stats`,{},{headers:{token}})
+        const res = await axios.post( url + `/api/post/stats?query=${days}`,{},{headers:{token}})
 
         if(res.data.success)
         {

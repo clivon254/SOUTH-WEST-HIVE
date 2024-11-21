@@ -142,10 +142,22 @@ export default function StoreContextProvider(props) {
     const [stats , setStats] = useState([])
 
 
-    const [statsLoading , setStatsLoading] = useState([])
+    const [statsLoading , setStatsLoading] = useState(false)
 
 
-    const [statsError , setStatsError] = useState([])
+    const [statsError , setStatsError] = useState(false)
+
+
+    const [cartItems , setCartItems] = useState([])
+
+    
+    const [cartData ,setCartData] = useState([])
+    
+
+    const [cartCount ,setCartCount] = useState(null)
+
+
+    const [cartAmount ,setCartAmount] = useState(null)
 
 
 
@@ -421,21 +433,26 @@ export default function StoreContextProvider(props) {
     }
 
 
-    // play
-    const play = () => {
+    // fetchCart
+    const fetchCart = async () => {
 
-      audioRef.current.play()
+      try
+      {
+        const res = await axios.get(url + "/api/cart/get-cart",{headers:{token}})
 
-      setPlayStatus(true)
+        if(res.data.success)
+        {
+          setCartAmount(res.data.cartAmount)
 
-    }
+          setCartCount(res.data.itemCount)
 
-    // pause
-    const pause = () => {
-
-      audioRef.current.pause()
-
-      setPlayStatus(false)
+          setCartItems(res.data.cartData)
+        }
+      }
+      catch(error)
+      {
+        console.log(error.message)
+      }
     }
 
 
@@ -462,6 +479,23 @@ export default function StoreContextProvider(props) {
 
     },[])
 
+
+    // play
+    const play = () => {
+
+      audioRef.current.play()
+
+      setPlayStatus(true)
+
+    }
+
+    // pause
+    const pause = () => {
+
+      audioRef.current.pause()
+
+      setPlayStatus(false)
+    }
 
     // playWithId
      const playWithId = async (podcastId) => {
@@ -531,6 +565,8 @@ export default function StoreContextProvider(props) {
       if(localStorage.getItem("token"))
       {
         setToken(localStorage.getItem("token"))
+
+        fetchCart()
       }
 
     },[])
@@ -562,6 +598,49 @@ export default function StoreContextProvider(props) {
       },1000)
 
     },[audioRef])
+
+
+    useEffect(() => {
+
+      const tempData = []
+
+      for(const items in cartItems)
+      {
+
+        if (typeof cartItems[items] === 'object')
+        {
+
+          for(const item in cartItems[items])
+          {
+
+            if(cartItems[items][item] > 0 )
+            {
+              tempData.push({
+                _id:items,
+                size:item,
+                quantity:cartItems[items][item]
+              })
+            }
+
+          }
+
+        }
+        else
+        {
+          if(cartItems[items] > 0)
+          {
+            tempData.push({
+              _id:items,
+              quantity:cartItems[items]
+            })
+          }
+        }
+
+      }
+
+      setCartData(tempData)
+
+    },[cartItems])
 
 
     const contextValue = 
@@ -612,7 +691,12 @@ export default function StoreContextProvider(props) {
       time,setTime,
       play,pause,playWithId,next,previous,seekSong,
       NavLinks,setNavLinks,
-      merch,access,food
+      merch,access,food,
+      cartItems,setCartItems,
+      cartData,setCartData,
+      cartAmount,setCartAmount,
+      cartCount,setCartCount,
+      fetchCart
     }
 
 

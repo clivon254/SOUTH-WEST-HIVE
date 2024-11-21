@@ -157,6 +157,22 @@
     scrollbar-width: none;
 }
 
+
+
+/* brand */
+/* hide scrollbar for chrome,safari and operamini */
+.brand::-webkit-scrollbar
+{
+    display: none;
+}
+
+/* hide scrollbar for firefox,edge and operamini */
+.brand
+{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
 .ticker
 {
     @apply w-[60%] ml-8 mb-5 h-fit 
