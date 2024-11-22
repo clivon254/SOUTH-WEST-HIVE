@@ -10,64 +10,88 @@ import axios from "axios"
 // mpesa
 export const mpesa = async (req,res,next) => {
 
+    const {items,address,paymentmethod,amount} = req.body
+
+    const userId = req.user.id
+
     const token = req.token;
 
-    const phone = req.body.phone.substring(1) ;
+    const phone = address.phone.substring(1)
 
-    const amount = req.body.amount ;
+    try
+    {
+        
+        // creating new order
+        const order = new Order({
+            items,
+            address,
+            paymentmethod,
+            amount,
+            userId
+        })
 
-    const date = new Date();
+        await order.save()
 
-    const timestamp = 
-      date.getFullYear() + 
-      ("0" + (date.getMonth() + 1)).slice(-2) +
-      ("0" + date.getDate()).slice(-2) +
-      ("0" + date.getHours()).slice(-2) +
-      ("0" + date.getMinutes()).slice(-2) +
-      ("0" + date.getSeconds()).slice(-2) 
+        const date = new Date();
 
-    const shortcode = process.env.PAYBILL 
+        const timestamp = 
+        date.getFullYear() + 
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        ("0" + date.getDate()).slice(-2) +
+        ("0" + date.getHours()).slice(-2) +
+        ("0" + date.getMinutes()).slice(-2) +
+        ("0" + date.getSeconds()).slice(-2) 
 
-    const passkey = process.env.PASS_KEY ;
+        const shortcode = process.env.PAYBILL 
 
-    const password = new Buffer.from(shortcode + passkey + timestamp).toString("base64")
-    
-    
-    await axios.post(
-        "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
-        {    
-            "BusinessShortCode": shortcode,    
-            "Password": password,    
-            "Timestamp":timestamp,    
-            "TransactionType":"CustomerPayBillOnline",//"customerBuyGoodsOnline"    
-            "Amount": amount,    
-            "PartyA":`254${phone}`,    
-            "PartyB":shortcode,    
-            "PhoneNumber":`254${phone}`,    
-            "CallBackURL":"https://7559-41-90-173-207.ngrok-free.app/api/order/callback",
-            "AccountReference":`SOUTHWEST HIVE`,
-            "TransactionDesc":"Test"
-        },
-        {
-            headers:{
-                "Authorization":`Bearer ${token}`,
-                "Content-Type":"application/json"
+        const passkey = process.env.PASS_KEY ;
+
+        const password = new Buffer.from(shortcode + passkey + timestamp).toString("base64")
+
+
+        await axios.post(
+            "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+            {    
+                "BusinessShortCode": shortcode,    
+                "Password": password,    
+                "Timestamp":timestamp,    
+                "TransactionType":"CustomerPayBillOnline",//"customerBuyGoodsOnline"    
+                "Amount": amount,    
+                "PartyA":`254${phone}`,    
+                "PartyB":shortcode,    
+                "PhoneNumber":`254${phone}`,    
+                "CallBackURL":`https://c7b1-41-90-173-207.ngrok-free.app/api/order/callback?orderId=${order._id}&userId=${userId}`,
+                "AccountReference":`SOUTHWEST HIVE`,
+                "TransactionDesc":"Test"
+            },
+            {
+                headers:{
+                    "Authorization":`Bearer ${token}`,
+                    "Content-Type":"application/json"
+                }
             }
-        }
-    )
-    .then((response) => {
+        )
+        .then((response) => {
 
-        res.status(200).json(response.data)
+            let resData = response.data
+            
+            res.status(200).json({success:true ,resData})
 
 
-    })
-    .catch((err) => {
+        })
+        .catch((err) => {
 
-        console.log(err.message)
+            console.log(err.message)
 
-        res.status(400).json(err.message)
+            res.status(400).json(err.message)
 
-    })
+        })
+
+  }
+  catch(error)
+  {
+    next(error)
+  }
     
 
 }
@@ -76,24 +100,35 @@ export const mpesa = async (req,res,next) => {
 // callback
 export const callback = async (req,res,next) => {
 
+    const { orderId ,userId} = req.query
 
     try
     {
         const callbackData = req.body
 
+        
         if(!callbackData.Body.stkCallback.CallbackMetadata)
         {
             console.log(callbackData.Body)
 
+            console.log(orderId)
+
             res.json("ok")
         }
 
-        
-        
-        // console.log(callbackData.Body.stkCallback)
+
         const body = req.body.Body.stkCallback.CallbackMetadata;
 
+
         console.log(body)
+
+        await Order.findByIdAndUpdate(orderId,{payment:true})
+        
+        console.log("order updated")
+
+        await User.findByIdAndUpdate(userId ,{cartData:{}})
+
+        console.log("cart cleared")
 
         // Get amount
         const amountObj = body.Item.find(obj => obj.Name === 'Amount');
@@ -143,6 +178,87 @@ export const callback = async (req,res,next) => {
 }
 
 
+// cornfirmPayment
+export const cornfirmPayment = async (req,res,next) => {
+    
+    const {orderId} = req.body
+
+    const userId = req.user.id
+
+    try
+    {
+        const token = req.token
+
+        const auth = "Bearer " + token
+
+        const date = new Date()
+        
+        const url = "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query";
+
+        const timestamp = 
+        date.getFullYear() + 
+        ("0" + (date.getMonth() + 1)).slice(-2) +
+        ("0" + date.getDate()).slice(-2) +
+        ("0" + date.getHours()).slice(-2) +
+        ("0" + date.getMinutes()).slice(-2) +
+        ("0" + date.getSeconds()).slice(-2)
+
+
+        const shortcode = process.env.PAYBILL
+
+        const passkey = process.env.PASS_KEY
+
+        const password = new Buffer.from(shortcode + passkey + timestamp).toString("base64")
+
+        const requestBody = {
+            "BusinessShortCode":shortcode,
+            "Password":password,
+            "Timestamp":timestamp,
+            "CheckoutRequestID":req.params.CheckoutRequestID
+        }
+
+        const response = await axios.post(
+            url,
+            requestBody,
+            {
+                headers:{
+                    "Authorization":auth
+                }
+            }
+        )
+
+        
+        if(response.data.ResultCode === "0")
+        {
+            await Order.findByIdAndUpdate(orderId,{payment:true})
+        
+            console.log("order updated confrim controller")
+    
+            await User.findByIdAndUpdate(userId ,{cartData:{}})
+
+            console.log("cart updated confrim controller")
+
+            res.status(200).json({success:true ,data:response.data , message:'Transaction was successfull'})
+        }
+        else
+        {
+            await Order.findByIdAndDelete(orderId)
+
+            res.status(200).json({success:true ,data:response.data ,message:`Transaction failed ${response.data.ResultDesc}`})
+        }
+
+    }
+    catch(error)
+    {
+        console.log("something went wrong while confirming:", error.message);
+
+        res.status(503).send({message:"something went wrong" ,error:error.message || error})
+    }
+
+}
+
+
+
 // CASH ON DELIVERY
 export const  COD = async (req,res,next) => {
 
@@ -174,6 +290,7 @@ export const  COD = async (req,res,next) => {
 
 }
 
+
 // ADMIN ORDERS
 export const adminorders = async (req,res,next) => {
 
@@ -195,6 +312,8 @@ export const adminorders = async (req,res,next) => {
 
 }
 
+
+
 // USER OERDERS
 export const userorders = async (req,res,next) => {
 
@@ -215,6 +334,7 @@ export const userorders = async (req,res,next) => {
     }
 
 }
+
 
 
 // UPDATE STATUS

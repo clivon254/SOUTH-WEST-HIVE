@@ -157,9 +157,20 @@ export default function CheckOut() {
     {
       case 'MPESA':
         try
-        {}
+        {
+           const res = await axios.post(url + "/api/order/mpesa",orderData,{headers:{token}})
+
+           if(res.data.success)
+           {
+              toast.success("prompt sent to you phone")
+
+              fetchCart()
+           }
+        }
         catch(error)
-        {}
+        {
+          console.log(error.message)
+        }
         break ;
       case 'COD':
         try
@@ -199,7 +210,7 @@ export default function CheckOut() {
     }
 
   }
-
+   
 
   return (
 
