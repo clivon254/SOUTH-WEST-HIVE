@@ -15,6 +15,7 @@ import podcastRoute from "./route/podcastRoute.js"
 import reelRoute from "./route/reelRoute.js"
 import shortfilmRoute from "./route/shortfilmRoute.js"
 import brandRoute from "./route/brandRoute.js"
+import orderRoute from "./route/orderRoute.js"
 
 
 const app = express()
@@ -66,6 +67,10 @@ app.use("/api/film" ,shortfilmRoute)
 
 
 app.use("/api/brand" ,brandRoute)
+
+
+app.use("/api/order" ,orderRoute)
+
 
 
 

@@ -138,8 +138,13 @@
 
 .quantity
 {
-    @apply h-14 w-14 border border-primaryLight dark:border-primaryDark grid place-content-center
+    @apply h-8 w-8 md:h-14 md:w-14 border border-primaryLight dark:border-primaryDark grid place-content-center
     font-title font-bold
+}
+
+.hr
+{
+    @apply bg-zinc-600 dark:bg-zinc-300
 }
 
 

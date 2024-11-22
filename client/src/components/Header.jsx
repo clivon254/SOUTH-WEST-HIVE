@@ -246,7 +246,7 @@ export default function Header() {
 
                     </Link>
 
-                    <Link>
+                    <Link to="/orders">
 
                       <Dropdown.Item>Orders</Dropdown.Item>
 

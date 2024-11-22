@@ -4,24 +4,29 @@ import React, { useContext } from 'react'
 import { StoreContext } from '../context/store'
 import { MdArrowRight } from 'react-icons/md'
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Table } from 'flowbite-react';
+import SlideProducts from '../components/SlideProducts';
 
 export default function Cart() {
 
-  const {cartCount,cartData,products} = useContext(StoreContext)
+  const {cartCount,cartData,products,cartAmount} = useContext(StoreContext)
 
   console.log(cartData)
-  
+
+  const navigate = useNavigate()
+
+
+
   return (
 
    <section className="section">
 
       {cartCount > 0 ? 
         (
-          <div className="w-full">
+          <div className="w-full space-y-8">
 
-              {/* header */}
+            {/* header */}
             <div className="flex items-center justify-between">
 
               <h2 className="title3">Your Cart</h2>
@@ -34,7 +39,7 @@ export default function Cart() {
 
             </div>
 
-            <div className="w-full">
+            <div className="w-full space-y-16">
 
               {/* table */}
               <div className="tabler">
@@ -45,7 +50,7 @@ export default function Cart() {
 
                     <Table.Row>
 
-                      <Table.Cell>Product</Table.Cell>
+                      <Table.Cell colSpan={2}>Product</Table.Cell>
 
                       <Table.Cell>Quantity</Table.Cell>
 
@@ -57,33 +62,127 @@ export default function Cart() {
 
                   {cartData?.map((item,index) => {
 
-                    const productData = products.find((product) => product._id === item._id)
+                      const productData = products.find((product) => product._id === item._id)
 
-                    return(
+                      return(
 
-                      <Table.Body>
+                        <Table.Body>
 
-                        <Table.Row>
+                          <Table.Row>
 
-                            <Table.Cell>Product</Table.Cell>
+                              <Table.Cell colSpan={2}>
 
-                            <Table.Cell>Product</Table.Cell>
+                                <div className="flex gap-x-3">
 
-                            <Table.Cell>Product</Table.Cell>
+                                  <img 
+                                      src={productData?.images[0]} 
+                                      alt="" 
+                                      className="h-12 md:h-20 w-12 md:w-20 object-cover" 
+                                  />
 
-                        </Table.Row>
+                                  {/* details */}
+                                  <div className="">
 
-                      </Table.Body>
+                                    <span className="block font-bold text-textSecondaryLight dark:text-secondaryDark text-wrap">{productData?.name}</span>
 
-                    )
+                                    <span className="block">
+                                      {productData.discountPrice > 0 ? 
+                                        (productData?.discountPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' }))
+                                        :
+                                        (productData?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' }))
+                                      }
+                                    </span>
+
+                                    {item?.size && (
+
+                                    <span className="block">
+                                      Size: {item?.size}
+                                    </span>
+
+                                    )}
+
+                                  </div>
+
+                                </div>
+
+                              </Table.Cell>
+
+                              <Table.Cell>
+
+                                <div className="flex items-center">
+
+                                    <span className="quantity ">-</span>
+
+                                    <span className="quantity">{item.quantity}</span>
+
+                                    <span className="quantity">+</span>
+
+                                </div>
+
+                              </Table.Cell>
+
+                              <Table.Cell className="text-xl font-semibold">
+                                {(item.quantity * productData?.discountPrice > 0 ? productData.discountPrice : productData.regularPrice).toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
+                              </Table.Cell>
+
+                          </Table.Row>
+
+                        </Table.Body>
+
+                      )
 
                   })}
+
                 </Table>
 
               </div>
 
               {/* cart total */}
-              <div className=""></div>
+              <div className="w-full lg:flex justify-end">
+                    
+                    <div className="space-y-5 w-full lg:w-2/5">
+
+                        <h2 className="title3">Cart Total</h2>
+
+                        <div className="flex justify-between">
+
+                          <span className="text-xl font-semibold">Amount</span>
+
+                          <span className="text-xl font-semibold">
+                            {(cartAmount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
+                          </span>
+
+                        </div>
+
+                        {/* button */}
+                        <div className="w-full">
+
+                          <button className="w-full bg-black h-16 text-white text-xl font-semibold">
+                            
+                            <Link to="/checkout">
+                                 PROCEED TO CHECK OUT
+                            </Link>
+
+                          </button>
+
+                        </div>
+
+                    </div>
+                    
+              </div>
+
+              {/* featued products */}
+              <div className="space-y-5">
+
+                <h1 className="title2">Related Products</h1>
+
+                <div className="">
+
+                  <SlideProducts products={products}/>
+
+                </div>
+
+              </div>
 
             </div>
 

@@ -21,6 +21,9 @@ import Catergory from './pages/Catergory'
 import WriterPage from './pages/WriterPage'
 import ProductPage from './pages/ProductPage'
 import Cart from './pages/Cart'
+import CheckOut from './pages/CheckOut'
+import Orders from './pages/orders'
+
 
 
 export default function App() {
@@ -69,6 +72,10 @@ export default function App() {
             <Route path="/writer/:userId" element={<WriterPage/>}/>
 
             <Route path="/cart" element={<Cart/>}/>
+
+            <Route path="/checkout" element={<CheckOut/>}/>
+
+            <Route path="/orders" element={<Orders/>}/>
 
           </Routes>
 
