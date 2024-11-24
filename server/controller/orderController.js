@@ -75,7 +75,7 @@ export const mpesa = async (req,res,next) => {
 
             let resData = response.data
             
-            res.status(200).json({success:true ,resData})
+            res.status(200).json({success:true ,order ,resData})
 
 
         })
@@ -181,7 +181,7 @@ export const callback = async (req,res,next) => {
 // cornfirmPayment
 export const cornfirmPayment = async (req,res,next) => {
     
-    const {orderId} = req.body
+    const {orderId} = req.params
 
     const userId = req.user.id
 
@@ -244,7 +244,7 @@ export const cornfirmPayment = async (req,res,next) => {
         {
             await Order.findByIdAndDelete(orderId)
 
-            res.status(200).json({success:true ,data:response.data ,message:`Transaction failed ${response.data.ResultDesc}`})
+            res.status(200).json({success:true ,data:response.data ,message:`Transaction failed .${response.data.ResultDesc}`})
         }
 
     }

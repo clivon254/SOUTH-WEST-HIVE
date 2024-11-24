@@ -23,6 +23,7 @@ import ProductPage from './pages/ProductPage'
 import Cart from './pages/Cart'
 import CheckOut from './pages/CheckOut'
 import Orders from './pages/orders'
+import ConfirmPayment from './pages/ConfirmPayment'
 
 
 
@@ -74,6 +75,8 @@ export default function App() {
             <Route path="/cart" element={<Cart/>}/>
 
             <Route path="/checkout" element={<CheckOut/>}/>
+
+            <Route path="/confirm-payment/:CheckoutRequestID/:orderId" element={<ConfirmPayment/>}/>
 
             <Route path="/orders" element={<Orders/>}/>
 

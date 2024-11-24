@@ -10,206 +10,223 @@ import {toast} from "sonner"
 
 export default function CheckOut() {
   
-  const {token ,url ,cartData ,products ,cartItems,fetchCart,cartAmount} = useContext(StoreContext)
+    const {token ,url ,cartData ,products ,cartItems,fetchCart,cartAmount,setOrderId} = useContext(StoreContext)
 
-  const [data ,setData] = useState({})
+    const [data ,setData] = useState({})
 
-  const [paymentmethod , setPaymentMethod] = useState(null)
+    const [paymentmethod , setPaymentMethod] = useState(null)
 
-  const [shippingMethod, setShippingMethod] = useState(null)
+    const [shippingMethod, setShippingMethod] = useState(null)
 
-  const [error ,setError] = useState(null)
+    const [error ,setError] = useState(null)
 
-  const [Loading ,setLoading] = useState(false)
+    const [Loading ,setLoading] = useState(false)
 
-  const navigate = useNavigate()
+    const navigate = useNavigate()
 
-  const [shipping ,setShipping] = useState([
-    {
-      place:"self pick up",
-      value:0,
-    },
-    {
-      place:"Co operative",
-      value:20,
-    },
-    {
-      place:"Gataka",
-      value:50,
-    },
-    {
-      place:"Hardy",
-      value:100,
-    },
-    {
-      place:"Karen",
-      value:100,
-    },
-    {
-      place:"Rongai",
-      value:100,
-    },
-    {
-      place:"CBD",
-      value:150,
-    }
-  ])
-
-  const [paying ,setPaying] = useState([
-    {
-      value:"MPESA",
-      img:MPESA
-    },
-    {
-      value:"COD",
-      img:COD
-    }
-  ])
-
-
-  let TotalAmount = Number(cartAmount) + Number(shippingMethod || 0)
-
-
-  // onChangeData
-  const onChangeData = (e) => {
-
-    setData({...data, [e.target.name]:e.target.value})
-
-  }
-
-
-  // changeShippingMethod
-  const changeShippingMethod = (e) => {
-
-    setShippingMethod(e.target.value)
-
-  }
-
-
-  // placeOrder
-  const placeOrder = async () => {
-
-    setError(null)
-
-    setLoading(true)
-
-    if(!paymentmethod)
-    {
-      setError("Please select a method")
-    }
-
-    let orderItems = []
-
-    for(const items in cartItems)
+    const [shipping ,setShipping] = useState([
       {
+        place:"self pick up",
+        value:0,
+      },
+      {
+        place:"Co operative",
+        value:20,
+      },
+      {
+        place:"Gataka",
+        value:50,
+      },
+      {
+        place:"Hardy",
+        value:100,
+      },
+      {
+        place:"Karen",
+        value:100,
+      },
+      {
+        place:"Rongai",
+        value:100,
+      },
+      {
+        place:"CBD",
+        value:150,
+      }
+    ])
 
-        if (typeof cartItems[items] === 'object')
+    const [paying ,setPaying] = useState([
+      {
+        value:"MPESA",
+        img:MPESA
+      },
+      {
+        value:"COD",
+        img:COD
+      }
+    ])
+
+
+    let TotalAmount = Number(cartAmount) + Number(shippingMethod || 0)
+
+
+    // onChangeData
+    const onChangeData = (e) => {
+
+      setData({...data, [e.target.name]:e.target.value})
+
+    }
+
+
+    // changeShippingMethod
+    const changeShippingMethod = (e) => {
+
+      setShippingMethod(e.target.value)
+
+    }
+
+
+    // placeOrder
+    const placeOrder = async () => {
+
+      setError(null)
+
+      setLoading(true)
+
+      if(!paymentmethod)
+      {
+        setError("Please select a method")
+      }
+
+      let orderItems = []
+
+      for(const items in cartItems)
         {
 
-          for(const item in cartItems[items])
+          if (typeof cartItems[items] === 'object')
           {
 
-            if(cartItems[items][item] > 0 )
+            for(const item in cartItems[items])
             {
-               
+
+              if(cartItems[items][item] > 0 )
+              {
+                
+                const itemInfo = products.find((product) => product._id === items)
+
+                if(itemInfo)
+                {
+                  itemInfo.size = item
+
+                  itemInfo.quantity = cartItems[items][item]
+
+                  orderItems.push(itemInfo)
+                }
+              }
+
+            }
+
+          }
+          else
+          {
+            if(cartItems[items] > 0)
+            {
+
               const itemInfo = products.find((product) => product._id === items)
 
               if(itemInfo)
               {
-                itemInfo.size = item
-
-                itemInfo.quantity = cartItems[items][item]
+                itemInfo.quantity = cartItems[items]
 
                 orderItems.push(itemInfo)
               }
+              
             }
-
           }
 
-        }
-        else
-        {
-          if(cartItems[items] > 0)
+      }
+
+      let orderData = {
+        address:data,
+        items:orderItems,
+        paymentmethod,
+        amount:TotalAmount
+      }
+
+      switch(paymentmethod)
+      {
+        case 'MPESA':
+          try
           {
+            const res = await axios.post(url + "/api/order/mpesa",orderData,{headers:{token}})
 
-            const itemInfo = products.find((product) => product._id === items)
-
-            if(itemInfo)
+            if(res.data.success)
             {
-              itemInfo.quantity = cartItems[items]
+                toast.success("prompt sent to you phone")
 
-              orderItems.push(itemInfo)
+                setLoading(false)
+
+                navigate(`/confirm-payment/${res.data.resData.CheckoutRequestID}/${res.data.order._id}`)
+
+                setData({})
+
+                setShippingMethod(null)
+
+                setPaymentMethod(null)
             }
             
           }
-        }
-
-    }
-
-    let orderData = {
-      address:data,
-      items:orderItems,
-      paymentmethod,
-      amount:TotalAmount
-    }
-
-    switch(paymentmethod)
-    {
-      case 'MPESA':
-        try
-        {
-           const res = await axios.post(url + "/api/order/mpesa",orderData,{headers:{token}})
-
-           if(res.data.success)
-           {
-              toast.success("prompt sent to you phone")
-
-              fetchCart()
-           }
-        }
-        catch(error)
-        {
-          console.log(error.message)
-        }
-        break ;
-      case 'COD':
-        try
-        {
-          const res = await axios.post(url + `/api/order/COD`,orderData,{headers:{token}})
-
-          if(res.data.success)
+          catch(error)
           {
+            console.log(error.message)
+
             setLoading(false)
 
-            toast.success("Order completed successfully ")
-
-            navigate('/orders')
-
-            setPaymentMethod(null)
-
-            setShippingMethod(null)
-            
-            setData({})
-
-            fetchCart()
+            setError(error.message)
           }
+          break ;
+        case 'COD':
+          try
+          {
+            const res = await axios.post(url + `/api/order/COD`,orderData,{headers:{token}})
 
-        }
-        catch(error)
-        {
-          console.log(error.message)
+            if(res.data.success)
+            {
+              setLoading(false)
 
-          setError(error.message)
+              toast.success("Order completed successfully ")
 
-          setLoading(false)
-        }
-        break ;
-      default:
-        console.log("Invalid payment method")
-        break;
+              navigate('/orders')
+
+              setPaymentMethod(null)
+
+              setShippingMethod(null)
+              
+              setData({})
+
+              fetchCart()
+            }
+
+          }
+          catch(error)
+          {
+            console.log(error.message)
+
+            setError(error.message)
+
+            setLoading(false)
+          }
+          break ;
+        default:
+          
+          console.log("Invalid payment method")
+
+          setError("select a method of payment")
+
+          break;
+      }
+
     }
-
-  }
    
 
   return (

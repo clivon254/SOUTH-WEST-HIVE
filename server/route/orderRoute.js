@@ -14,7 +14,7 @@ orderRoute.post('/mpesa',verifyToken ,generateAccessToken, mpesa)
 orderRoute.post('/callback', callback)
 
 
-orderRoute.post('/confirm-payment/:CheckoutRequestID',verifyToken,generateAccessToken, cornfirmPayment)
+orderRoute.post('/confirm-payment/:CheckoutRequestID/:orderId',verifyToken,generateAccessToken, cornfirmPayment)
 
 
 orderRoute.post('/COD',verifyToken, COD)

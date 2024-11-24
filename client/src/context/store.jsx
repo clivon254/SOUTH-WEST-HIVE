@@ -160,6 +160,18 @@ export default function StoreContextProvider(props) {
     const [cartAmount ,setCartAmount] = useState(null)
 
 
+    const [paymentSuccess, setPaymentSuccess] = useState(false)
+
+
+    const [processingPayment ,setProcessingPayment] = useState(false)
+
+
+    const [paymentError ,setPaymentError] = useState(false)
+
+
+    const [OrderId , setOrderId] = useState(null)
+
+
 
     // fetchPost
     const fetchPost = async () => {
@@ -696,7 +708,11 @@ export default function StoreContextProvider(props) {
       cartData,setCartData,
       cartAmount,setCartAmount,
       cartCount,setCartCount,
-      fetchCart
+      fetchCart,
+      processingPayment,setProcessingPayment,
+      paymentSuccess,setPaymentSuccess,
+      paymentError,setPaymentError,
+      OrderId,setOrderId
     }
 
 
