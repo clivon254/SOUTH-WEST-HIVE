@@ -35,6 +35,7 @@ export const createShortFilm = async (req,res,next) => {
 
 }
 
+
 export const getShortFilm = async (req,res,next) => {
 
     const {filmId} = req.params
@@ -57,11 +58,12 @@ export const getShortFilm = async (req,res,next) => {
 
 }
 
+
 export const getShortFilms = async (req,res,next) => {
 
     try
     {
-        const shortFilms = await ShortFilm.find({}).sort({_id:-1})
+        const shortFilms = await ShortFilm.find({}).sort({_id:-1}).populate({path:"UserId"})
 
         res.status(200).json({success:true , shortFilms})
 
@@ -72,6 +74,7 @@ export const getShortFilms = async (req,res,next) => {
     }
 
 }
+
 
 export const updateShortFilm = async (req,res,next) => {
 

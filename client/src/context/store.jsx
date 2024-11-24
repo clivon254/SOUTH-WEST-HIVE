@@ -2,8 +2,8 @@
 
 import axios from 'axios'
 import React, { createContext, useEffect, useRef, useState } from 'react'
-import { FaSleigh } from 'react-icons/fa'
-import { IoHomeOutline } from "react-icons/io5";
+import { FaFilm, FaSleigh } from 'react-icons/fa'
+import { IoFilm, IoHomeOutline } from "react-icons/io5";
 import { MdOutlineArticle,MdOutlinePodcasts ,MdContactSupport} from "react-icons/md";
 import { CiShop } from "react-icons/ci";
 import { IoRestaurant } from "react-icons/io5";
@@ -44,17 +44,7 @@ export default function StoreContextProvider(props) {
         path: "/la elite",
         name:"La elite",
         icons:<IoRestaurant size={24}/>
-      },
-      // {
-      //   path: "/contact",
-      //   name:"contact-us",
-      //   icons:<MdContactSupport size={24}/>
-      // },
-      // {
-      //   path: "/about",
-      //   name:"About us",
-      //   icons:<FcAbout size={24}/>
-      // }
+      }
     ])
 
     const [open,setOpen] = useState(false)

@@ -24,6 +24,7 @@ import Cart from './pages/Cart'
 import CheckOut from './pages/CheckOut'
 import Orders from './pages/orders'
 import ConfirmPayment from './pages/ConfirmPayment'
+import Film from './pages/Films'
 
 
 
@@ -79,6 +80,8 @@ export default function App() {
             <Route path="/confirm-payment/:CheckoutRequestID/:orderId" element={<ConfirmPayment/>}/>
 
             <Route path="/orders" element={<Orders/>}/>
+
+            <Route path="/films" element={<Film/>}/>
 
           </Routes>
 

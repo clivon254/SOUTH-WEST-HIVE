@@ -4,8 +4,12 @@ import React, { useContext } from 'react'
 import { StoreContext } from '../context/store'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {MdLightMode ,MdDarkMode} from "react-icons/md"
+import {MdLightMode ,MdDarkMode, MdContactSupport} from "react-icons/md"
 import { toggleTheme } from '../redux/theme/themeSlice'
+import { IoFilm } from 'react-icons/io5'
+import { FaFilm } from 'react-icons/fa'
+import { FcAbout } from 'react-icons/fc'
+import { SiAbbott } from 'react-icons/si'
 
 
 export default function Sidebar() {
@@ -35,6 +39,39 @@ export default function Sidebar() {
               </NavLink>
 
             ))}
+
+             <NavLink 
+                to={`/films`}
+                onClick={() => setOpen(false)}
+                className={({isActive}) => isActive ? "active-link" : "active"}
+              >
+                <span className=""><IoFilm/></span> Films
+              </NavLink>
+
+              <NavLink 
+                to={`/reels`}
+                onClick={() => setOpen(false)}
+                className={({isActive}) => isActive ? "active-link" : "active"}
+              >
+                <span className=""><FaFilm/></span> Reels
+              </NavLink>
+
+
+              <NavLink 
+                to={`/contact`}
+                onClick={() => setOpen(false)}
+                className={({isActive}) => isActive ? "active-link" : "active"}
+              >
+                <span className=""><SiAbbott/></span> Contact us
+              </NavLink>
+
+              <NavLink 
+                to={`/about`}
+                onClick={() => setOpen(false)}
+                className={({isActive}) => isActive ? "active-link" : "active"}
+              >
+                <span className=""><MdContactSupport/></span> About us
+              </NavLink>
 
             {/* themeSwitch */}
             <div className="ml-10">

@@ -317,14 +317,14 @@ export const adminorders = async (req,res,next) => {
 // USER OERDERS
 export const userorders = async (req,res,next) => {
 
-    if(!req.user.isAdmin)
+    if(!req.user.id)
     {
         return next(errorHandler(403,"You are not allowed to seee the orders"))
     }
 
     try
     {
-        const orders = await Order.find({}).sort({_id:-1})
+        const orders = await Order.find({userId:req.user.id}).sort({_id:-1})
 
         res.status(200).json({success:true ,orders})
     }

@@ -9,7 +9,7 @@ const shortFilmSchema = new mongoose.Schema(
 
         title:{type:String , required:true},
 
-        UserId:{type:String , required:true},
+        UserId:{type:mongoose.Schema.Types.ObjectId, ref:"User"},
 
         description:{type:String , required:true}
 
