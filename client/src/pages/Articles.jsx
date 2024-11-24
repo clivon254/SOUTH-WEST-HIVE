@@ -106,14 +106,15 @@ export default function Articles() {
 
     <section className="section space-y-5">
 
+      {/* search bar */}
       <div className=" text-center">
 
         {/* searchbar */}
-        <div className="w-4/5 sm:w-1/2 inline-flex items-center border border-zinc-600 rounded-full gap-x-2 px-3 ">
+        <div className="search-bar">
 
           <input 
             type="text" 
-            className="flex-1 rounded-full bg-transparent border-none" 
+            className="search-input" 
             value={searchPost}
             onChange={(e) => setSearchPost(e.target.value)}
           />
@@ -137,7 +138,7 @@ export default function Articles() {
           </h2>
 
           {/* category */}
-          <div className={` space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden sm:block"}`}>
+          <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden sm:block"}`}>
 
             <h3 className="title3">CATEGORIES</h3>
 
@@ -228,11 +229,11 @@ export default function Articles() {
           </div>
 
           {/* post map */}
-          <div className="grid grid-cols-1 gap-y-10 gap-x-5 2xl:grid-cols-2"> 
+          <div > 
 
             {filteredPosts.length > 0 ? (
 
-              <>
+              <div className="grid grid-cols-1 gap-y-10 gap-x-5 2xl:grid-cols-2">
 
                 {filteredPosts?.map((post,index) => (
 
@@ -240,12 +241,12 @@ export default function Articles() {
 
                 ))}
 
-            </>
+             </div>
 
             ) 
             : 
             (
-              <p className="text-2xl">Sorry,artilce not found . . . </p>
+              <p className="text-2xl">Sorry,no article found . . . </p>
             )
           }
           </div>
