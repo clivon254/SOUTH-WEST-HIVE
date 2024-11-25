@@ -1,19 +1,20 @@
 
 
 import React, { useRef ,useEffect} from 'react'
-import chef from "../assets/chefs At work.jpeg"
-import LOGO from "../assets/Logo LaElite.png"
+import merchendise from "../assets/merchendise.jpeg"
+import LOGO from "../assets/merch.png"
 import { Link } from 'react-router-dom'
-import { MdRestaurantMenu } from 'react-icons/md'
+import { MdCollections, MdRestaurantMenu } from 'react-icons/md'
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { GiClothes } from 'react-icons/gi'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function Banner2() {
+export default function Banner3() {
 
-    const banner2Ref = useRef(null)
+    const banner3Ref = useRef(null)
 
     useEffect(() => {
   
@@ -23,7 +24,7 @@ export default function Banner2() {
           defaults:{ease:"power3.out", durartion: 0.6}
         })
   
-        tl.from('.banner2-logo',{
+        tl.from('.banner3-logo',{
           opacity:0,
           y:50,
           scale:0.95,
@@ -31,13 +32,13 @@ export default function Banner2() {
           delay:0.5,
           stagger:0.15,
           scrollTrigger:{
-              trigger: ".banner2-logo", 
+              trigger: ".banner3-logo", 
               start: "top 80%", 
               toggleActions: "play none none none"
           }
         },
         "-=0.4")
-        tl.from('.banner2-title',{
+        tl.from('.banner3-title',{
             opacity:0,
             y:50,
             scale:0.95,
@@ -45,7 +46,7 @@ export default function Banner2() {
             delay:0.5,
             stagger:0.15,
             scrollTrigger:{
-                trigger: ".banner2-title", 
+                trigger: ".banner3-title", 
                 start: "top 80%", 
                 toggleActions: "play none none none"
             }
@@ -53,7 +54,7 @@ export default function Banner2() {
           "-=0.4"
         )
   
-      },banner2Ref)
+      },banner3Ref)
   
       return () => ctx.revert()
   
@@ -62,26 +63,26 @@ export default function Banner2() {
   return (
 
     <div 
-        className="h-[60vh]  w-full " 
+        className="h-[60vh] lg:h-[50vh] w-full" 
         style={{
-            backgroundImage:`url(${chef})`,
+            backgroundImage:`url(${merchendise})`,
             backgroundSize: 'cover',
             backgroundPosition:`center`
         }}
-        ref={banner2Ref}
+        ref={banner3Ref}
     >
 
-        <div className="w-full h-full bg-primaryLight/60 dark:bg-primaryDark/60 flex flex-col-reverse md:flex-row justify-start items-center p-3">
+        <div className="w-full h-full bg-primaryLight/75 dark:bg-primaryDark/75 flex flex-col-reverse md:flex-row-reverse justify-start md:items-center p-2">
 
-            <div className="banner2-title flex flex-col items-center md:items-start gap-y-2 md:flex-1">
+            <div className="banner3-title flex flex-col items-center md:items-start gap-y-3 md:flex-1">
 
-                 <p className=" text-center md:text-start text-2xl md:text-3xl font-semibold text-zinc-300">
-                 From our kitchen to your heart, every bite tells a story of flavor, quality, and unforgettable culinary delight
+                <p className="text-center md:text-start text-2xl md:text-3xl font-semibold text-zinc-300">
+                    From casual vibes to statement pieces, find your perfect fit and wear your personality with pride in every look
                 </p>
                 
                 <button className="btn rounded-md">
-                    <Link to="/la elite" className="flex items-center gap-x-2">
-                        Order now <MdRestaurantMenu size={24} />
+                    <Link to="/shop" className="flex items-center gap-x-2">
+                        Order now <GiClothes size={24} />
                     </Link>
                 </button>
 
@@ -92,7 +93,7 @@ export default function Banner2() {
                 <img 
                   src={LOGO} 
                   alt="" 
-                  className="banner2-logo h-full" 
+                  className="banner3-logo h-full" 
                 />
 
             </div>

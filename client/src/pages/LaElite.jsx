@@ -119,7 +119,7 @@ export default function LaElite() {
               className="search-input" 
               placeholder='Search food ....'
               value={searchProduct}
-              onChange={() => setSearchProduct(e.target.value)}
+              onChange={(e) => setSearchProduct(e.target.value)}
           />
 
           <MdSearch size={32}/>
@@ -221,7 +221,7 @@ export default function LaElite() {
 
         </div>
 
-         {/* products */}
+        {/* products */}
         <div className="flex-1 space-y-5">
 
           {/* header */}
@@ -269,6 +269,7 @@ export default function LaElite() {
           </div>
 
         </div>
+
       </div>
 
     </section>

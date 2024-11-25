@@ -15,12 +15,16 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Banner2 from '../components/Banner2';
+import PostBanner from '../components/PostBanner';
+import Banner3 from '../components/Banner3';
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
 
   const {posts,merch,access,food,brands} = useContext(StoreContext)
+
+  const randomIndex = Math.floor(Math.random() * posts.length)
 
   const [currentItems ,setCurrentItems] = useState([])
 
@@ -122,6 +126,15 @@ export default function Home() {
       {/*  banner1*/}
       <Banner1 />
 
+      {/* POST BANNER */}
+      <div className="space-y-5 section ">
+
+        <h2 className="title2 ">Random articles</h2>
+
+        <PostBanner post={posts[randomIndex]}/>
+
+      </div>
+
       {/* categories */}
       <div className="section space-y-5">
 
@@ -179,14 +192,6 @@ export default function Home() {
 
       </div>
       
-      {/* merchendise */}
-      <div className="section space-y-5">
-
-        <h1 className="title2">Get Our Merchendise</h1>
-
-        <SlideProducts products={merch}/>
-
-      </div>
 
       {/* banner2 */}
       <div className="">
@@ -196,12 +201,30 @@ export default function Home() {
       </div>
 
       {/* La Elite */}
-      <div className="">
+      <div className="section space-y-5">
+          
+          <h2 className="title2">Taste happiness in every dish</h2>
+
+
+          <SlideProducts products={food}/>
 
       </div>
 
       {/* banner3 */}
-      <div className=""></div>
+      <div className="">
+
+        <Banner3 />
+
+      </div>
+
+      {/* merchendise */}
+      <div className="section space-y-5">
+
+        <h1 className="title2">Get Our Merchendise</h1>
+
+        <SlideProducts products={merch}/>
+
+      </div>
 
       {/* accessories */}
       <div className="section space-y-5">
@@ -213,13 +236,13 @@ export default function Home() {
       </div>
 
       {/* brands */}
-      <div className="section bg-black  dark:bg-black/30">
+      <div className="section bg-zinc-200/50  dark:bg-zinc-400/50">
             
-          <div className="flex items-center justify-center gap-x-10 overflow-x-scroll brand">
+          <div className="w-full  flex flex-row gap-x-5 overflow-y-auto brand">
 
             {brands.map((brand,index) => (
 
-              <div className="">
+              <div className="flex flex-col items-center gap-y-3">
 
                 <div className="h-20 w-20">
 
@@ -230,11 +253,10 @@ export default function Home() {
                     />
 
                 </div>
-
-              {/* 
-                <span className="block ">
+          
+                <span className="block uppercase txt-base md:text-xl font-title font-semibold">
                   {brand?.name}
-                </span> */}
+                </span>
 
               </div>
 

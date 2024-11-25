@@ -46,7 +46,7 @@ export default function PostCard({post}) {
 
             <div 
                 className="flex-1 overflow-hidden text-zinc-600 dark:text-zinc-100 text-justify"
-                dangerouslySetInnerHTML={{__html:post?.description?.slice(0, 250) + "....."}}
+                dangerouslySetInnerHTML={{__html:post?.description?.slice(0, 160) + "....."}}
             />
 
             <Link

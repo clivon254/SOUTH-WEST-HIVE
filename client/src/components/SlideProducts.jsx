@@ -68,7 +68,7 @@ export default function SlideProducts({products}) {
 
                             <div className="w-full  space-y-2">
 
-                                <div className="w-full h-[300px] pulse"/>
+                                <div className="w-full h-[250px] pulse"/>
 
                                 <div className="space-y-1">
 
@@ -97,7 +97,7 @@ export default function SlideProducts({products}) {
                     className="mySwiper"
                     spaceBetween={10}
                     slidesPerView={4}
-                    loop={true}
+                    // loop={true}
                     autoPlay={
                     {
                         delay:2000,
