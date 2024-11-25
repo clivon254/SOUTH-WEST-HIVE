@@ -34,7 +34,7 @@ export default function Film() {
             No films availble yet ....
           </p>
         )
-    }
+      }
 
     </section>
 

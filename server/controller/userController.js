@@ -19,8 +19,11 @@ export const getUser = async (req,res,next) => {
                                 options:{sort:{_id : -1}},
                                 perDocumentLimit:5,
                                 populate:{
-                                    path:"followerId"
+                                    path:"followerId",
                                 }
+                              })
+                              .populate({
+                                path:"savedPost"
                               })
 
         if(!user)

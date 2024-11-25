@@ -18,27 +18,54 @@ import 'swiper/css/navigation';
 import {  Autoplay,Navigation ,Pagination} from 'swiper/modules';
 import Popular from '../components/Popular'
 import CommentSection from '../components/CommentSection'
-
+import { toast } from 'sonner'
+import { CiBookmark } from "react-icons/ci";
+import { FaBookmark } from "react-icons/fa";
 
 
 
 export default function PostPage() {
    
-  const {url} = useContext(StoreContext)
+  const {url,token} = useContext(StoreContext)
 
   const {currentUser} = useSelector(state => state.user)
 
   const {slug} = useParams()
 
+
   const [post ,setPost] = useState(null)
 
+  const [user ,setUser] = useState(null)
+
   const [loading ,setLoading] = useState(false)
+
+  const [saved ,setSaved] = useState(false)
 
   const [error ,setError] = useState(null)
 
   const [formData,setFormData] = useState({
     userId:currentUser?._id
+    
   })
+
+  //  fetchWriter
+  const fetchUser = async () => {
+
+    try
+    {
+      const res = await axios.get(url + `/api/user/get-user/${currentUser._id}`)
+
+      if(res.data.success)
+      {
+        setUser(res.data.rest)
+      }
+    }
+    catch(error)
+    {
+      console.log(error)
+    }
+
+  }
 
   // fetchPost
   const fetchPost = async () => {
@@ -70,11 +97,42 @@ export default function PostPage() {
 
   }
 
+  const savedPostId = user?.savedPost?.map((user) => user?._id)
+
+  // save Post
+  const savePost = async () => {
+    
+
+    try
+    {
+      const res = await axios.post(url +`/api/post/save-post/${post._id}`,{},{headers:{token}})
+
+      if(res.data.success)
+      {
+        setSaved(!saved)
+
+        fetchUser()
+
+        toast.success(res.data.message)
+      }
+
+    }
+    catch(error)
+    {
+      console.log(error.message)
+    }
+
+  }
+
   useEffect(() => {
 
     fetchPost()
 
+    fetchUser()
+
   },[slug])
+
+  console.log(user)
 
   return (
 
@@ -85,25 +143,31 @@ export default function PostPage() {
         <section className="section">
 
           {/* top */}
-          <div className="w-full flex flex-col-reverse md:flex-row gap-2 gap-y- items-center">
+          <div className="w-full flex flex-col-reverse md:flex-row gap-x-10 gap-y-5 items-center">
 
               <div className="w-full md:w-1/2 flex flex-col gap-y-8">
 
                 <h1 className="title">{post?.title}</h1>
 
-                <div className="w-full flex items-center">
+                <div className="w-full flex items-center justify-between">
 
-                  <span className="flex-1 flex flex-col title3 ">
+                  <span className=" flex flex-col title3 ">
 
                     <span className="text-xs text-rose-600">category</span> {post?.category}
 
                   </span>
 
-                  <span className="flex-1 flex flex-col title3 items-center">
+                  <span className="flex flex-col title3 items-center">
 
                     <span className="text-xs text-rose-500">veiws</span>
 
                     {post?.veiws?.length}
+
+                  </span>
+
+                  <span onClick={() => savePost()} className="cursor-pointer">
+
+                     <FaBookmark className={`${savedPostId?.includes(post?._id) ? "text-primaryLight dark:text-red-500 " : "text-zinc-500 dark:text-zinc-200"}`} size={32}/>
 
                   </span>
 

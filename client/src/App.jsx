@@ -25,6 +25,8 @@ import CheckOut from './pages/CheckOut'
 import Orders from './pages/orders'
 import ConfirmPayment from './pages/ConfirmPayment'
 import Film from './pages/Films'
+import Reels from './pages/Reels'
+import UserPage from './pages/UserPage'
 
 
 
@@ -82,6 +84,10 @@ export default function App() {
             <Route path="/orders" element={<Orders/>}/>
 
             <Route path="/films" element={<Film/>}/>
+
+            <Route path="/reels" element={<Reels/>}/>
+
+            <Route path="/user/:userId" element={<UserPage/>}/>
 
           </Routes>
 

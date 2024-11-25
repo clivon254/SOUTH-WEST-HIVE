@@ -240,7 +240,7 @@ export default function Header() {
                     )}
                     
 
-                    <Link to="/profile">
+                    <Link to={`/user/${currentUser._id}`}>
 
                       <Dropdown.Item>Profile</Dropdown.Item>
 
