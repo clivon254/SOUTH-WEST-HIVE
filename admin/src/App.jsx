@@ -43,16 +43,17 @@ import UpdateUser from "./pages/UpdateUser"
 import AddPodcast from "./pages/AddPodcast"
 import Podcast from "./pages/Podcast"
 import UpdatePodcast from "./pages/UpdatePodcast"
+import LandingPage from "./pages/LandingPage"
 
 
 
 function Layout(){
 
-  const {currentUser} = useSelector(state => state.user)
+  const {currentUser,token} = useSelector(state => state.user)
 
   return(
 
-    currentUser && currentUser.isAdmin ? 
+    currentUser?.isAdmin && !token ? 
 
     <div className="w-full h-screen flex flex-col">
 
@@ -78,7 +79,7 @@ function Layout(){
 
     </div>
       :
-    <Navigate to="sign-in"/>
+    <Navigate to="/landing-page"/>
   )
 
 }
@@ -175,6 +176,8 @@ export default function App() {
           <Route path="/reset-password/:token" element={<ResetPassword/>}/>
 
           <Route path="/sign-in" element={<SignIn/>}/>
+
+          <Route path="/landing-page" element={<LandingPage/>}/>
 
         </Routes>
 

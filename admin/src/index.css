@@ -152,13 +152,13 @@
 
 /* side */
 /* hide scrollbar for chrome,safari and operamini */
-.side::-webkit-scrollbar
+.sid::-webkit-scrollbar
 {
     display: none;
 }
 
 /* hide scrollbar for firefox,edge and operamini */
-.side
+.sid
 {
     -ms-overflow-style: none;
     scrollbar-width: none;

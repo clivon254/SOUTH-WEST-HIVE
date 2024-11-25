@@ -36,7 +36,7 @@ export default function Header() {
 
         dispatch(signOutUserSuccess())
 
-        navigate("/sign-in")
+        navigate("/landing-page")
     }
     catch(error)
     {

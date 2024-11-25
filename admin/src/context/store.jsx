@@ -14,7 +14,7 @@ export default function StoreContextProvider(props) {
 
     const [token ,setToken] = useState(localStorage.getItem("token"))
 
-    const url = "https://south-west-hive-server.onrender.com"
+    const url = "https://south-west-hive-admin.onrender.com"
 
     const [open,setOpen] = useState(false)
 
@@ -484,9 +484,11 @@ export default function StoreContextProvider(props) {
       if(localStorage.getItem("token"))
       {
         setToken(localStorage.getItem("token"))
+
+        fetchStats()
       }
 
-    },[])
+    },[token])
 
 
     useEffect(() => {

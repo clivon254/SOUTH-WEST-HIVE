@@ -43,7 +43,7 @@ export const SignIn = async (req,res,next) => {
 
     if(!email || !password || email === "" || password === "")
     {
-        return next(errorHandler(400,"Please fill all the feilds"))
+        return next(errorHandler(400,"please fill all the required fields"))
     }
 
     try
@@ -52,14 +52,14 @@ export const SignIn = async (req,res,next) => {
 
         if(!user)
         {
-            return next(errorHandler(404,"User not found"))
+           return next(errorHandler(404,"User not found. The email is not signed up"))
         }
 
         const isMatch = await bcryptjs.compare(password, user.password)
 
         if(!isMatch)
         {
-            return next(errorHandler(401,"Invalid Password"))
+            return next(errorHandler(400,"Invalid password"))
         }
 
         const token = jwt.sign(

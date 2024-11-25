@@ -10,6 +10,8 @@ import axios from "axios"
 import {toast} from "sonner"
 import {Alert} from "flowbite-react"
 import { StoreContext } from '../context/store'
+import Loading from '../components/Loading'
+import { useEffect } from 'react'
 
 
 export default function SignIn() {
@@ -60,17 +62,36 @@ export default function SignIn() {
 
           setFormData({})
 
+          fetchStats()
+
+      }
+      else
+      {
+        dispatch(signInFailure(res.data.message))
       }
        
     }
     catch(error)
     {
-      console.log(error.message)
-
-      dispatch(signInFailure(error.message))
+      // Check if error response exists
+      if (error.response) {
+        // If the server responded with a status code outside the 2xx range
+        const errorMessage = error.response.data.message || "An error occurred.";
+        dispatch(signInFailure(errorMessage));
+      } 
+      else {
+        // If there was an error setting up the request
+        dispatch(signInFailure("An unexpected error occurred."));
+      }
     }
 
   }
+
+  useEffect(() => {
+
+    fetchStats()
+    
+  },[token])
 
 
   return (
@@ -147,7 +168,9 @@ export default function SignIn() {
               disabled={loading}
             >
               {loading ? 
-               ('Loading .....')
+               (
+                <Loading />
+               )
                 :
                ("Sign in")
               }
@@ -161,7 +184,7 @@ export default function SignIn() {
 
             {error && (
                
-               <Alert color="failure">{error}</Alert>
+               <Alert color="failure" >{error}</Alert>
 
             )}
 
