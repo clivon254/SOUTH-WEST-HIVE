@@ -132,7 +132,6 @@ export default function PostPage() {
 
   },[slug])
 
-  console.log(user)
 
   return (
 

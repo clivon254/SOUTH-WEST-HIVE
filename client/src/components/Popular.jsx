@@ -3,12 +3,38 @@
 import React, { useContext, useState } from 'react'
 import { StoreContext } from '../context/store'
 import { Link } from 'react-router-dom'
+import {gsap} from "gsap"
+import { useGSAP } from '@gsap/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Popular() {
 
   const {popularArticles,popularWriters,popularLoading} = useContext(StoreContext)
 
   const [popular ,setPopular] = useState([{},{},{},{},{}])
+
+
+  useGSAP(() => {
+
+    gsap.from(".popular-card",{
+        opacity:0,
+        stagger:0.3,
+        duration:0.5,
+        ease:"power3.out",
+        delay:0.5,
+        x:50,
+        scrollTrigger:{
+          trigger:".popular-card",
+          start:"top 80%",
+          delay:0.5,
+          toggleActions:"play none none none"
+        }
+  
+      })
+
+  },[])
 
   return (
 
@@ -27,7 +53,7 @@ export default function Popular() {
 
                         {popularArticles?.map((post ,index) => (
 
-                                <div key={index} className="flex gap-2 item-center">
+                                <div key={index} className="popular-card flex gap-2 item-center">
 
                                     <img 
                                         src={post?.images[0]}
@@ -82,7 +108,7 @@ export default function Popular() {
                             <Link
                                 to={`/writer/${writer?._id}`}
                                 key={index}
-                                className="flex gap-2 items-center"
+                                className="popular-card flex gap-2 items-center "
                             >
 
                                 <img 

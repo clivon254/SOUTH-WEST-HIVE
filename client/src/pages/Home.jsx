@@ -11,6 +11,12 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate'
 import Banner1 from '../components/Banner1';
 import SlideProducts from '../components/SlideProducts';
+import { useGSAP } from '@gsap/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Banner2 from '../components/Banner2';
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
 
@@ -77,6 +83,38 @@ export default function Home() {
     },
   ]
 
+  useGSAP(() => {
+
+    // catergory card
+    gsap.from(".category-card",{
+      opacity:0,
+      y:50,
+      duration:0.5,
+      ease:"power3.out",
+      stagger:0.3,
+      scrollTrigger:{
+        trigger:".category-card",
+        start:"top 80%",
+        toggleActions:"play none none none"
+      }
+    })
+
+    // post card
+    gsap.from(".post-card", {
+      opacity: 0,
+      x: -50, // Start from x: -50
+      stagger: 0.3,
+      duration: 0.5,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: "#posts", // Trigger when the #posts section comes into view
+        start: "top 80%", // Start the animation when the top of the #posts section is at 80% of the viewport height
+        toggleActions: "play none none none"
+      }
+    });
+
+  },[])
+
   return (
 
     <section className="">
@@ -96,7 +134,7 @@ export default function Home() {
             <Link
               key={cat.label}
               to={`/category?category=${cat?.label}`}
-              className={`flex items-center justify-center gap-3 ${cat.color} rounded-md cursor-pointer px-4 py-2 `}
+              className={`category-card flex items-center justify-center gap-3 ${cat.color} rounded-md cursor-pointer px-4 py-2 `}
             >
               {cat.icon}
               <span className="lg:text-xl font-logo font-semibold text-white">{cat.label}</span>
@@ -119,7 +157,11 @@ export default function Home() {
 
               {posts?.map((post,index) => (
 
-                  <PostCard key={index} post={post}/>
+                  <div id="posts" className="post-card">
+
+                      <PostCard key={index} post={post}/>
+
+                  </div>
 
               ))}
               
@@ -147,7 +189,11 @@ export default function Home() {
       </div>
 
       {/* banner2 */}
-      <div className=""></div>
+      <div className="">
+
+        <Banner2 />
+        
+      </div>
 
       {/* La Elite */}
       <div className="">

@@ -17,6 +17,8 @@
     z-index: 50;
 }
 
+
+
 /* inputs */
 .input
 {
@@ -222,13 +224,16 @@
 
 
 
-/* SEARCH */
-.search-bar
-{
-    @apply w-4/5 sm:w-1/2 inline-flex items-center border border-zinc-600 rounded-full gap-x-2 px-3 
-}
+@layer components{
 
-.search-input
-{
-    @apply flex-1 rounded-full bg-transparent border-none focus:outline-none
+        .search-bar
+        {
+            @apply w-4/5 sm:w-1/2 inline-flex items-center border border-zinc-600 rounded-full gap-x-2 px-3 
+        }
+
+        .search-input
+        {
+            @apply flex-1 rounded-full bg-transparent border-none focus:outline-none
+        }
+
 }
