@@ -234,7 +234,7 @@ export default function CheckOut() {
     <section className="section">
 
 
-      <div className="flex flex-col lg:flex-row gap-y-10 gap-x-20">
+      <div className="flex flex-col lg:flex-row gap-y-10 gap-x-24">
 
         {/* Billing data */}
         <div className="w-full lg:w-[55%] space-y-10">
@@ -437,9 +437,9 @@ export default function CheckOut() {
           {/* cartTotal */}
           <div className="flex items-center justify-between">
 
-            <span className="text-xl ">Cart Total</span>
+            <span className="text-base font-bold">Cart Total</span>
 
-            <span className="text-xl font-semibold">
+            <span className="text-base font-semibold">
               {cartAmount?.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </span>
 
@@ -450,9 +450,9 @@ export default function CheckOut() {
           {/* delivery */}
           <div className="flex items-center justify-between">
 
-            <span className="text-xl">Delivery fees</span>
+            <span className="text-base font-bold">Delivery fees</span>
 
-            <span className="text-xl font-semibold">
+            <span className="text-base font-semibold">
               {(shippingMethod || 0).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </span>
 
@@ -463,9 +463,9 @@ export default function CheckOut() {
           {/* delivery */}
           <div className="flex items-center justify-between">
 
-            <span className="text-xl">Total</span>
+            <span className="text-base font-bold">Total</span>
 
-            <span className="text-xl font-semibold">
+            <span className="text-base font-semibold">
               {(TotalAmount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </span>
 
@@ -476,9 +476,9 @@ export default function CheckOut() {
           {/* method of payment */}
           <div className="">
 
-            <h2 className="title3">Select method of payment</h2>
+            <h2 className="text-xl  font-semibold">Select method of payment</h2>
 
-            <div className="space-y-2">
+            <div className="">
               {paying.map((pay,index) => (
 
                 <div key={index} className="flex items-center gap-x-5">
@@ -490,7 +490,7 @@ export default function CheckOut() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                   />
 
-                  <div className="h-24 w-36">
+                  <div className="h-20 w-40">
 
                       <img 
                         src={pay.img}

@@ -7,14 +7,105 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { Table } from 'flowbite-react';
 import SlideProducts from '../components/SlideProducts';
+import axios from "axios"
+import {toast} from "sonner"
+
 
 export default function Cart() {
 
-  const {cartCount,cartData,products,cartAmount} = useContext(StoreContext)
+  const {cartCount,cartData,products,cartAmount,url,token,fetchCart} = useContext(StoreContext)
 
   console.log(cartData)
 
   const navigate = useNavigate()
+
+  // handleIncrease
+  const handleIncreaseCart = async (product,item) => {
+
+    let data ;
+
+    if(product.sizes)
+    {
+       
+        data = {
+          itemId:product._id,
+          size:item.size
+        }
+    }
+    else
+    {
+      data = {
+        itemId:product._id
+      }
+    }
+
+   
+      try
+        {
+            const res = await axios.post(url + "/api/cart/add-cart",data,{headers:{token}})
+
+            if(res.data.success)
+            {
+
+                fetchCart()
+
+            }
+            else
+            {
+                console.log("check the api")
+            }
+        }
+        catch(error)
+        {
+            console.log(error.message)
+        }
+   
+
+  }
+
+  // handleDecrease
+  const handleDecreaseCart = async (product,item) => {
+
+    let data ;
+
+    if(product.sizes)
+    {
+       
+        data = {
+          itemId:product._id,
+          size:item.size
+        }
+    }
+    else
+    {
+      data = {
+        itemId:product._id
+      }
+    }
+
+   
+      try
+      {
+          const res = await axios.post(url + "/api/cart/remove-cart",data,{headers:{token}})
+
+          if(res.data.success)
+          {
+
+              fetchCart()
+
+          }
+          else
+          {
+              console.log("check the api")
+          }
+      }
+      catch(error)
+      {
+          console.log(error.message)
+      }
+   
+
+  }
 
 
 
@@ -86,7 +177,7 @@ export default function Cart() {
                                     <span className="block font-bold text-textSecondaryLight dark:text-secondaryDark text-wrap">{productData?.name}</span>
 
                                     <span className="block">
-                                      {productData.discountPrice > 0 ? 
+                                      {productData?.discountPrice > 0 ? 
                                         (productData?.discountPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' }))
                                         :
                                         (productData?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' }))
@@ -106,23 +197,24 @@ export default function Cart() {
                                 </div>
 
                               </Table.Cell>
-
+                              
+                              {/* quantity */}
                               <Table.Cell>
 
                                 <div className="flex items-center">
 
-                                    <span className="quantity ">-</span>
+                                    <span className="quantity " onClick={() => handleDecreaseCart(productData,item)}>-</span>
 
                                     <span className="quantity">{item.quantity}</span>
 
-                                    <span className="quantity">+</span>
+                                    <span className="quantity" onClick={() => handleIncreaseCart(productData,item)}>+</span>
 
                                 </div>
 
                               </Table.Cell>
 
                               <Table.Cell className="text-xl font-semibold">
-                                {(item.quantity * productData?.discountPrice > 0 ? productData.discountPrice : productData.regularPrice).toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
+                                {(item?.quantity * (productData?.discountPrice > 0 ? productData?.discountPrice : productData?.regularPrice)).toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
                               </Table.Cell>
 
                           </Table.Row>
@@ -146,9 +238,9 @@ export default function Cart() {
 
                         <div className="flex justify-between">
 
-                          <span className="text-xl font-semibold">Amount</span>
+                          <span className="text-base font-semibold">Amount</span>
 
-                          <span className="text-xl font-semibold">
+                          <span className="text-sm font-semibold">
                             {(cartAmount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
                           </span>
 
@@ -157,7 +249,7 @@ export default function Cart() {
                         {/* button */}
                         <div className="w-full">
 
-                          <button className="w-full bg-black h-16 text-white text-xl font-semibold">
+                          <button className="w-full bg-black h-16 text-white text-base font-semibold">
                             
                             <Link to="/checkout">
                                  PROCEED TO CHECK OUT
@@ -174,7 +266,7 @@ export default function Cart() {
               {/* featued products */}
               <div className="space-y-5">
 
-                <h1 className="title2">Related Products</h1>
+                <h1 className="title3">Related Products</h1>
 
                 <div className="">
 

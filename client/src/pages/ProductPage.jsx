@@ -75,12 +75,8 @@ export default function ProductPage() {
 
     }
 
-    console.log(product)
 
-    console.log(size)
-
-
-    // Add to cart for product with sizes
+    // Add to cart 
     const addToCart = async () => {
 
         setAlert(null)
@@ -122,7 +118,7 @@ export default function ProductPage() {
 
                 fetchCart()
 
-                setSizes(null)
+                setSize(null)
             }
             else
             {
@@ -136,6 +132,61 @@ export default function ProductPage() {
 
     }
 
+    // removeCart
+    const removeCart = async () => {
+
+        setAlert(null)
+
+        if(!currentUser)
+        {
+            navigate('/sign-in')
+        }
+
+        let data ;
+
+        if(product.sizes)
+        {
+            if(size === null)
+            {
+                return setAlert("Please choose a size")
+            }
+
+            data = {
+                itemId:productId,
+                size:size
+            }
+        }
+        else
+        {
+            data = {
+                itemId:productId
+            }
+        }
+        
+
+        try
+        {
+            const res = await axios.post(url + "/api/cart/remove-cart",data,{headers:{token}})
+
+            if(res.data.success)
+            {
+                toast.success(res.data.message)
+
+                fetchCart()
+
+                setSize(null)
+            }
+            else
+            {
+                console.log("check the api")
+            }
+        }
+        catch(error)
+        {
+            console.log(error.message)
+        }
+
+    }
 
 
     useEffect(() => {
@@ -171,8 +222,8 @@ export default function ProductPage() {
 
                             </div>
 
-                            {/* lg and ` */}
-                            <div className="w-full flex items-center gap-x-2">
+                            {/* lg thumbs */}
+                            <div className="hidden w-full lg:flex items-center gap-x-2 p-2">
 
                                 {product?.images?.map((url,index) => (
 
@@ -185,11 +236,17 @@ export default function ProductPage() {
                                     />
                                 ))}
 
-                                {/* <Swiper
+                                
+                            </div>
+
+                            {/* smallscreen thumb */}
+                            <div className="w-full lg:hidden p-2">
+
+                                <Swiper
                                     className="mySwiper"
                                     spaceBetween={10}
                                     slidesPerView={4}
-                                    loop={true}
+                                    // loop={true}
                                     autoPlay={
                                     {
                                         delay:2000,
@@ -220,30 +277,26 @@ export default function ProductPage() {
                                     nextEl:'.next'
                                     }}
                                 >
-                                        
+                                    
 
-                                    {product?.images?.map((url,index) => (
+                                {product?.images?.map((url,index) => (
+                                    
+                                    <SwiperSlide key={index}>
+                                    
+                                    <img 
+                                        key={index}
+                                        src={url}
+                                        alt="" 
+                                        className={`${url === image ? "thumb-active" : "thumb"}`}
+                                        onClick={() => setImage(url)}
+                                    />
 
-                                        <SwiperSlide key={index}>
-                                       
-                                            <img 
-                                                key={index}
-                                                src={url}
-                                                alt="" 
-                                                className={`${image === url ? "thumb-active":"thumb"}`}
-                                                onClick={() => setImage(url)}
-                                            />
+                                    </SwiperSlide>
+                                ))}
 
-                                        </SwiperSlide>
+                                </Swiper>
 
-                                    ))}
-
-                                </Swiper> */}
-                                
                             </div>
-
-                            {/* small */}
-                            <div className=""></div>
 
                             
                         </div>
@@ -255,15 +308,22 @@ export default function ProductPage() {
                             <h2 className="title2 font-bold">{product?.name}</h2>
 
                             {/* prices */}
-                            <div className="flex items-center gap-x-2">
+                            <div className="">
 
-                                {product?.discountPrice > 0 && (
+                                {product?.discountPrice > 0 ? (
+                                    
+                                <div className="flex items-center gap-x-2">
+                                   
+                                    <span className="font-semibold line-through">{product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
+                                   
+                                    <span className="font-semibold title3">{product?.discountPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
+                                
+                                </div>
+                                ):(
 
-                                <span className="font-semibold line-through">{product?.discountPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
-
+                                <span className="title3 ">{product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
+                               
                                )}
-
-                              <span className="title3 ">{product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
 
                                 
 
@@ -297,21 +357,21 @@ export default function ProductPage() {
                             )}
 
                             {/* quantity */}
-                            {!product?.sizes && (
+                             {!product?.sizes && (
 
                                 <div className="flex flex-col gap-y-2">
                                     
                                     <span className="text-sm font-semibold">
-                                        quantity ({cartItems[productId]} in cart)
+                                        quantity ({cartItems[productId] || 0} in cart)
                                     </span>
 
                                     <div className="flex items-center">
 
-                                        <span className="quantity ">-</span>
+                                        <span className="quantity " onClick={() => removeCart()}>-</span>
 
-                                        <span className="quantity"></span>
+                                        <span className="quantity">{cartItems[productId] || 0}</span>
 
-                                        <span className="quantity">+</span>
+                                        <span className="quantity" onClick={() => addToCart()}>+</span>
 
                                     </div>
 
@@ -355,7 +415,7 @@ export default function ProductPage() {
                     {/* bottom */}
                     <div className="space-y-5">
 
-                        <h2 className="title">Related products</h2>
+                        <h2 className="title3">Related products</h2>
                         
                         <SlideProducts products={Items}/>
 

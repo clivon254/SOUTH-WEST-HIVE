@@ -16,17 +16,21 @@ export default function FooterComp() {
         <div className="w-full ">
 
           {/* top */}
-          <div className="flex flex-col sm:flex-row sm:items-start gap-y-5 justify-around">
+          <div className="flex flex-col sm:flex-row sm:items-start md:items-center gap-y-5 justify-around">
 
-            <div className="">
+            <div className="w-full sm:w-[35%]">
 
               <Link to="/" className="flex flex-col items-start sm:items-center">
 
-                <img 
-                  src={LOGO} 
-                  alt="" 
-                  className="h-20" 
-                />
+                <div className="h-20 w-20">
+
+                  <img 
+                    src={LOGO} 
+                    alt="" 
+                    className="h-full w-full" 
+                  />
+
+                </div>
 
                 <Logo/>
 
@@ -34,12 +38,12 @@ export default function FooterComp() {
 
             </div>
 
-            <div className="w-full sm:w-[50%] flex items-start justify-between md:justify-around">
+            <div className="w-full sm:w-[60%] flex flex-col sm:flex-row gap-y-5 items-start justify-between ">
               
-              {/* about */}
-              <div className="space-y-5">
+              {/* socials */}
+              <div className="space-y-2">
 
-                <h2 className="text-base font-title font-semibold">About</h2>
+                <h2 className="text-base font-title font-semibold">Follow us</h2>
 
                 <div className="flex flex-col">
 
@@ -55,55 +59,31 @@ export default function FooterComp() {
 
               </div>
 
-              {/*  social media*/}
-              <div className="space-y-5">
+              {/*  important Link*/}
+              <div className="space-y-2">
 
-                <h1 className="text-base font-title font-semibold">Follow us</h1>
+                <h1 className="text-base font-title font-semibold">Useful Links</h1>
 
                 <div className="flex flex-col">
 
-                    <a 
-                      href="#" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=""
-                    >
-                      instagram
-                    </a>
+                    <Link to="/contact">
+                      Contact us
+                    </Link>
 
-                    <a 
-                      href="#" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=""
-                    >
-                      tiktok
-                    </a>
+                    <Link to="/about">
+                      About us
+                    </Link>
 
-                    <a 
-                      href="#" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=""
-                    >
-                      facebook
-                    </a>
-
-                    <a 
-                      href="#" 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className=""
-                    >
-                      what's app
-                    </a>
+                    <Link to="/faq">
+                      FAQs
+                    </Link>
 
                 </div>
 
               </div>
 
               {/* privacy */}
-              <div className="space-y-5">
+              <div className="space-y-2">
 
                 <h1 className="text-base font-title font-semibold">Legal</h1>
 

@@ -116,11 +116,15 @@ export default function Header() {
 
             <div className="flex items-center">
 
-                <img 
-                    src={LOGO} 
-                    alt="" 
-                    className="hidden md:block h-12 md:h-20  lg:h-24  2xl:h-32" 
-                />
+                <div className="hidden lg:block h-12 w-12 md:h-20 md:w-12 lg:h-24 lg:w-24  2xl:h-32 2xl:w-32">
+
+                  <img 
+                      src={LOGO} 
+                      alt="" 
+                      className="h-full w-full" 
+                  />
+
+                 </div>
 
                 <Logo/>
 

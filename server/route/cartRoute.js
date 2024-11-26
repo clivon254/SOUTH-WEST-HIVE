@@ -12,7 +12,7 @@ const cartRoute = express.Router()
 cartRoute.post('/add-cart', verifyToken, addToCart)
 
 
-cartRoute.delete("/remove-cart", verifyToken, removeCart)
+cartRoute.post("/remove-cart", verifyToken, removeCart)
 
 
 cartRoute.get("/get-cart", verifyToken, getCart)

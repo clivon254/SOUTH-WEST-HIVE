@@ -29,18 +29,22 @@ export default function ProductCard({product}) {
 
             <div className="flex flex-col gap-y-1">
 
-                {product?.discountPrice > 0 && (
+            {product?.discountPrice > 0 ? (
+                                    
+                <div className="flex flex-col">
+                    
+                    <span className="font-semibold line-through text-xs">{product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
+                    
+                    <span className="font-semibold text-base">{product?.discountPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
+                
+                </div>
+            )
+            :
+            (
 
-                    <span className="font-semibold line-through text-xs">
-                        {product?.discountPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
-                    </span>
-
-                )}
-
-                <span className="">
-                    {product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
-                </span>
-        
+                <span className="text-base">{product?.regularPrice?.toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}</span>
+            
+            )}
 
             </div>
            

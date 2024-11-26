@@ -238,7 +238,7 @@ export default function Home() {
       {/* brands */}
       <div className="section bg-zinc-200/50  dark:bg-zinc-400/50">
             
-          <div className="w-full  flex flex-row gap-x-5 overflow-y-auto brand">
+          <div className="w-full  flex items-center justify-around overflow-x-scroll brand">
 
             {brands.map((brand,index) => (
 
