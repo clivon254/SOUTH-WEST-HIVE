@@ -60,7 +60,7 @@ export const mpesa = async (req,res,next) => {
                 "PartyA":`254${phone}`,    
                 "PartyB":shortcode,    
                 "PhoneNumber":`254${phone}`,    
-                "CallBackURL":`https://c7b1-41-90-173-207.ngrok-free.app/api/order/callback?orderId=${order._id}&userId=${userId}`,
+                "CallBackURL":`https://south-west-hive-server.onrender.com/api/order/callback?orderId=${order._id}&userId=${userId}`,
                 "AccountReference":`SOUTHWEST HIVE`,
                 "TransactionDesc":"Test"
             },
