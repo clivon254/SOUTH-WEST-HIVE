@@ -6,7 +6,7 @@ import COD from "../assets/COD.png"
 import { Alert } from 'flowbite-react'
 import axios from 'axios'
 import {toast} from "sonner"
-import Loading from "../components/Loading"
+
 
 
 export default function CheckOut() {
@@ -414,7 +414,7 @@ export default function CheckOut() {
 
                       {item?.size && (
 
-                        <span className="">Size : {item.size}</span>
+                        <span className="">Size : {item?.size}</span>
 
                       )}
 
@@ -423,7 +423,7 @@ export default function CheckOut() {
                   </div>
 
                   <div className="text">
-                     {(item.quantity * product?.discountPrice > 0 ? product.discountPrice : product.regularPrice).toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
+                     {(item.quantity * product?.discountPrice > 0 ? product?.discountPrice : product?.regularPrice).toLocaleString('en-Kenya', { style: 'currency', currency: 'KES' })}
                   </div>
 
                 </div>
@@ -515,11 +515,14 @@ export default function CheckOut() {
             disabled={Loading}
           >
             {Loading ? 
-            (
-              <Loading />
-            ) 
-            : 
-            ("PLACE ORDER")}
+               (
+                <div className="flex justify-center items-center gap-x-3">
+                  <span className="loading"/> Loading ..
+                </div>
+               )
+                :
+               ("PLACE ORDER")
+              }
           </button>
 
           {error && (
