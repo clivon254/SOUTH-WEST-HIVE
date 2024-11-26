@@ -6,6 +6,7 @@ import COD from "../assets/COD.png"
 import { Alert } from 'flowbite-react'
 import axios from 'axios'
 import {toast} from "sonner"
+import Loading from "../components/Loading"
 
 
 export default function CheckOut() {
