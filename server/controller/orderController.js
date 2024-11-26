@@ -232,11 +232,7 @@ export const cornfirmPayment = async (req,res,next) => {
         {
             await Order.findByIdAndUpdate(orderId,{payment:true})
         
-            console.log("order updated confrim controller")
-    
             await User.findByIdAndUpdate(userId ,{cartData:{}})
-
-            console.log("cart updated confrim controller")
 
             res.status(200).json({success:true ,data:response.data , message:'Transaction was successfull'})
         }
