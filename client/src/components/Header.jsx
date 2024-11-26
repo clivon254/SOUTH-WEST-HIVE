@@ -18,7 +18,7 @@ import Sidebar from './Sidebar'
 
 export default function Header() {
 
-  const {open ,setOpen,NavLinks,cartCount} = useContext(StoreContext)
+  const {open ,setOpen,NavLinks,cartCount,token} = useContext(StoreContext)
 
   const {currentUser} = useSelector(state => state.user)
 
@@ -169,24 +169,27 @@ export default function Header() {
             </div>
 
             
-            {/* cart */}
-            <div className="relative">
+            {token && (
 
-              <Link to="/cart">
+              <div className="relative">
 
-                <MdShoppingBag size={32}/>
+                <Link to="/cart">
 
-                {currentUser && (
+                  <MdShoppingBag size={32}/>
 
-                    <span className="absolute dark:bg-secondaryDark bg-secondaryLight h-6 w-6 grid place-content-center rounded-full dark:text-zinc-100 text-zinc-600 -top-3 -right-2">
-                      {cartCount}
-                    </span>
+                  {currentUser && (
 
-                 )}
+                      <span className="absolute dark:bg-secondaryDark bg-secondaryLight h-6 w-6 grid place-content-center rounded-full dark:text-zinc-100 text-zinc-600 -top-3 -right-2">
+                        {cartCount}
+                      </span>
 
-              </Link>
+                  )}
 
-            </div>
+                </Link>
+
+              </div>
+
+            )}
 
             {/* dropdown */}
             <div className="">

@@ -64,106 +64,116 @@ export default function Orders() {
               
                <div className="">
 
-                {orders.map((order,index) => (
+                {orders.length > 0 ? (
 
-                    <div key={index} className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr] gap-3 items-start border-2  border-zinc-700 dark:border-zinc-300 text-xs p-5 rounded-md">
-                        
-                        <div className="">
-                            
-                            {/* order items */}
-                            <div className="">
-                                {order?.items.map((item,index) => {
+                    <div className="">
+                        {orders.map((order,index) => (
 
-                                    if(index === order.items.length -1)
-                                    {
-                                        return (
-
-                                            <div className="py-0.5 flex gap-x-3">
-
-                                                <img 
-                                                    src={item?.images[0]}
-                                                    alt="" 
-                                                    className="w-8 h-8" 
-                                                />
-
-                                                {item.name} X {item.quantity} {item.size && (<span className=""> size: {item.size} </span>)}
-                                            </div>
-
-                                        )
-                                    }
-                                    else
-                                    {
-                                        return (
-
-                                            <div className="py-0.5 flex gap-x-3">
-
-                                                <img 
-                                                    src={item?.images[0]}
-                                                    alt="" 
-                                                    className="w-8 h-8" 
-                                                />
-
-                                                {item.name} X {item.quantity} {item.size && (<span className=""> size:{item.size}</span>)} ,
-                                            </div>
-
-                                        )
-                                    }
-                                })}
-                            </div>
-                            
-                            {/* name */}
-                            <p className="mt-3 font-medium">
-                                {order.address.firstName + " " + order.address.lastName}
-                            </p>
-                            
-                            {/* address */}
-                            <div className="">
-
-                                <p className="">{order.address.address}</p>
-
-                                <p className="">{order.address.City}</p>
+                            <div key={index} className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr] gap-3 items-start border-2  border-zinc-700 dark:border-zinc-300 text-xs p-5 rounded-md">
                                 
+                                <div className="">
+                                    
+                                    {/* order items */}
+                                    <div className="">
+                                        {order?.items.map((item,index) => {
+
+                                            if(index === order.items.length -1)
+                                            {
+                                                return (
+
+                                                    <div className="py-0.5 flex gap-x-3">
+
+                                                        <img 
+                                                            src={item?.images[0]}
+                                                            alt="" 
+                                                            className="w-8 h-8" 
+                                                        />
+
+                                                        {item.name} X {item.quantity} {item.size && (<span className=""> size: {item.size} </span>)}
+                                                    </div>
+
+                                                )
+                                            }
+                                            else
+                                            {
+                                                return (
+
+                                                    <div className="py-0.5 flex gap-x-3">
+
+                                                        <img 
+                                                            src={item?.images[0]}
+                                                            alt="" 
+                                                            className="w-8 h-8" 
+                                                        />
+
+                                                        {item.name} X {item.quantity} {item.size && (<span className=""> size:{item.size}</span>)} ,
+                                                    </div>
+
+                                                )
+                                            }
+                                        })}
+                                    </div>
+                                    
+                                    {/* name */}
+                                    <p className="mt-3 font-medium">
+                                        {order.address.firstName + " " + order.address.lastName}
+                                    </p>
+                                    
+                                    {/* address */}
+                                    <div className="">
+
+                                        <p className="">{order.address.address}</p>
+
+                                        <p className="">{order.address.City}</p>
+                                        
+                                    </div>
+                                    
+                                    {/* phone */}
+                                    <p className="">
+                                        {order.address.phone}
+                                    </p>
+
+                                </div>
+
+                                <div className="">
+
+                                    <p className="text-sm">Items:{order.items.length}</p>
+
+                                    <p className="mt-3">Method : {order.paymentmethod}</p>
+
+                                    <p className="">Payment : {order.payment ? "Done" : "Pending"}</p>
+                                    
+                                    <p className="">Date : {new Date(order.createdAt).toLocaleString()}</p>
+                                </div>
+                                
+                                {/* amount */}
+                                <p className="">
+                                    {(order?.amount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
+                                </p>
+                                
+                                {/* status */}
+                                <div className="border border-zinc-700 dark:border-zinc-300 p-2 rounded-xl flex items-center gap-x-3">
+                    
+                                    <div className="w-4 h-4 bg-primaryLight/50 dark:bg-rose-700 rounded-full grid place-content-center ">
+
+                                        <span className="block w-2 h-2 bg-primaryLight dark:bg-rose-300 rounded-full animate-ping"/>
+
+                                    </div>
+
+                                    <span className="">{order.status}</span>
+
+                                </div>
+
                             </div>
-                            
-                            {/* phone */}
-                            <p className="">
-                                {order.address.phone}
-                            </p>
 
-                        </div>
-
-                        <div className="">
-
-                            <p className="text-sm">Items:{order.items.length}</p>
-
-                            <p className="mt-3">Method : {order.paymentmethod}</p>
-
-                            <p className="">Payment : {order.payment ? "Done" : "Pending"}</p>
-                            
-                            <p className="">Date : {new Date(order.createdAt).toLocaleString()}</p>
-                        </div>
-                        
-                        {/* amount */}
-                        <p className="">
-                            {(order?.amount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
-                        </p>
-                        
-                        {/* status */}
-                        <div className="border border-zinc-700 dark:border-zinc-300 p-2 rounded-xl flex items-center gap-x-3">
-              
-                            <div className="w-4 h-4 bg-primaryLight/50 dark:bg-rose-700 rounded-full grid place-content-center ">
-
-                                <span className="block w-2 h-2 bg-primaryLight dark:bg-rose-300 rounded-full animate-ping"/>
-
-                            </div>
-
-                             <span className="">{order.status}</span>
-
-                        </div>
-
+                        ))}
                     </div>
 
-                ))}
+               ) 
+               : 
+               (
+                <p className="">There are no order yet</p>
+               )}
 
                </div>
 

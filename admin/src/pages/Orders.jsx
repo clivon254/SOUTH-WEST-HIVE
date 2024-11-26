@@ -44,120 +44,135 @@ export default function Orders() {
               
                <div className="">
 
-                {orders.map((order,index) => (
+                    {
+                        orders.length > 0 ? (
 
-                    <div key={index} className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr] gap-3 items-start border-2  border-zinc-700 dark:border-zinc-300 text-xs p-5 rounded-md">
+                        <div className="space-y-3">
+
+                            {orders.map((order,index) => (
+
+                                <div key={index} className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr] gap-3 items-start border-2  border-zinc-700 dark:border-zinc-300 text-xs p-5 rounded-md">
+                                    
+                                    {/* address */}
+                                    <div className="">
+                                        
+                                        {/* order items */}
+                                        <div className="">
+                                            {order?.items.map((item,index) => {
+
+                                                if(index === order.items.length -1)
+                                                {
+                                                    return (
+
+                                                        <div className="py-0.5 flex gap-x-3">
+
+                                                            <img 
+                                                                src={item?.images[0]}
+                                                                alt="" 
+                                                                className="w-8 h-8" 
+                                                            />
+
+                                                            {item.name} X {item.quantity} {item.size && (<span className=""> size: {item.size} </span>)}
+                                                        </div>
+
+                                                    )
+                                                }
+                                                else
+                                                {
+                                                    return (
+
+                                                        <div className="py-0.5 flex gap-x-3">
+
+                                                            <img 
+                                                                src={item?.images[0]}
+                                                                alt="" 
+                                                                className="w-8 h-8" 
+                                                            />
+
+                                                            {item.name} X {item.quantity} {item.size && (<span className=""> size:{item.size}</span>)} ,
+                                                        </div>
+
+                                                    )
+                                                }
+                                            })}
+                                        </div>
+                                        
+                                        {/* name */}
+                                        <p className="mt-3 font-medium">
+                                            {order.address.firstName + " " + order.address.lastName}
+                                        </p>
+                                        
+                                        {/* address */}
+                                        <div className="">
+
+                                            <p className="">{order.address.address}</p>
+
+                                            <p className="">{order.address.City}</p>
+                                            
+                                        </div>
+                                        
+                                        {/* phone */}
+                                        <p className="">
+                                            {order.address.phone}
+                                        </p>
+
+                                    </div>
+
+                                    <div className="">
+
+                                        <p className="text-sm">Items:{order.items.length}</p>
+
+                                        <p className="mt-3">Method : {order.paymentmethod}</p>
+
+                                        <p className="">Payment : {order.payment ? "Done" : "Pending"}</p>
+                                        
+                                        <p className="">Date : {new Date(order.createdAt).toLocaleString()}</p>
+                                    </div>
+                                    
+                                    {/* amount */}
+                                    <p className="">
+                                        {(order?.amount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
+                                    </p>
+                                    
+                                    {/* status */}
+                                    <div className="flex items-center gap-x-3">
                         
-                        {/* address */}
-                        <div className="">
-                            
-                            {/* order items */}
-                            <div className="">
-                                {order?.items.map((item,index) => {
+                                        <div className="w-4 h-4 bg-primaryLight/50 dark:bg-rose-700 rounded-full grid place-content-center ">
 
-                                    if(index === order.items.length -1)
-                                    {
-                                        return (
+                                            <span className="block w-2 h-2 bg-primaryLight dark:bg-rose-300 rounded-full animate-ping"/>
 
-                                            <div className="py-0.5 flex gap-x-3">
+                                        </div>
 
-                                                <img 
-                                                    src={item?.images[0]}
-                                                    alt="" 
-                                                    className="w-8 h-8" 
-                                                />
+                                        <select 
+                                            value={order.status}
+                                            className="input dark:text-zinc-400"
+                                            onChange={(event) => statusHandler(event,order._id)}
+                                        >
+                                            <option value="Order Placed">Order Placed</option>
 
-                                                {item.name} X {item.quantity} {item.size && (<span className=""> size: {item.size} </span>)}
-                                            </div>
+                                            <option value="processing">processing</option>
 
-                                        )
-                                    }
-                                    else
-                                    {
-                                        return (
+                                            <option value="out for delivery">out for delivery</option>
 
-                                            <div className="py-0.5 flex gap-x-3">
+                                            <option value="Delivered">Delivered</option>
 
-                                                <img 
-                                                    src={item?.images[0]}
-                                                    alt="" 
-                                                    className="w-8 h-8" 
-                                                />
+                                        </select>
 
-                                                {item.name} X {item.quantity} {item.size && (<span className=""> size:{item.size}</span>)} ,
-                                            </div>
+                                    </div>
 
-                                        )
-                                    }
-                                })}
-                            </div>
-                            
-                            {/* name */}
-                            <p className="mt-3 font-medium">
-                                {order.address.firstName + " " + order.address.lastName}
-                            </p>
-                            
-                            {/* address */}
-                            <div className="">
+                                </div>
 
-                                <p className="">{order.address.address}</p>
-
-                                <p className="">{order.address.City}</p>
-                                
-                            </div>
-                            
-                            {/* phone */}
-                            <p className="">
-                                {order.address.phone}
-                            </p>
+                            ))}
 
                         </div>
 
-                        <div className="">
+                    ) 
+                    : 
+                    (
+                        <p className="">There are no order yet</p>
+                    )
 
-                            <p className="text-sm">Items:{order.items.length}</p>
-
-                            <p className="mt-3">Method : {order.paymentmethod}</p>
-
-                            <p className="">Payment : {order.payment ? "Done" : "Pending"}</p>
-                            
-                            <p className="">Date : {new Date(order.createdAt).toLocaleString()}</p>
-                        </div>
-                        
-                        {/* amount */}
-                        <p className="">
-                            {(order?.amount).toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
-                        </p>
-                        
-                        {/* status */}
-                        <div className="flex items-center gap-x-3">
-              
-                            <div className="w-4 h-4 bg-primaryLight/50 dark:bg-rose-700 rounded-full grid place-content-center ">
-
-                                <span className="block w-2 h-2 bg-primaryLight dark:bg-rose-300 rounded-full animate-ping"/>
-
-                            </div>
-
-                            <select 
-                                value={order.status}
-                                className="input dark:text-zinc-400"
-                                onChange={(event) => statusHandler(event,order._id)}
-                            >
-                                <option value="Order Placed">Order Placed</option>
-
-                                <option value="processing">processing</option>
-
-                                <option value="out for delivery">out for delivery</option>
-
-                                <option value="Delivered">Delivered</option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                ))}
+                    }
 
                </div>
 

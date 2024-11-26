@@ -67,9 +67,19 @@ export default function SignIn() {
     }
     catch(error)
     {
-      console.log(error.message)
+      // Check if error response exists
+      if (error.response) {
+        // If the server responded with a status code outside the 2xx range
+        const errorMessage = error.response.data.message || "An error occurred.";
+        
+        dispatch(signInFailure(errorMessage))
+      } 
+      else 
+      {
+        
+        dispatch(signInFailure(errorMessage))
 
-      dispatch(signInFailure(error.message))
+      }
     }
 
   }
