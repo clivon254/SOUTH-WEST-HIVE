@@ -283,7 +283,7 @@ export default function Header() {
       <Drawer
         open={open}
         onClose={() => setOpen(false)}
-        className="lg:hidden z-[100] bg-bgLight dark:bg-bgDark"
+        className="lg:hidden z-[100] bg-bgLight dark:bg-bgDark overflow-y-scroll"
        >
 
         <Drawer.Header titleIcon={() => <></>}/>

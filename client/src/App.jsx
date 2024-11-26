@@ -27,6 +27,9 @@ import ConfirmPayment from './pages/ConfirmPayment'
 import Film from './pages/Films'
 import Reels from './pages/Reels'
 import UserPage from './pages/UserPage'
+import Contact from './pages/Contact'
+import About from './pages/About'
+import FAQ from './pages/FAQ'
 
 
 
@@ -86,6 +89,12 @@ export default function App() {
             <Route path="/films" element={<Film/>}/>
 
             <Route path="/reels" element={<Reels/>}/>
+
+            <Route path="/contact" element={<Contact/>}/>
+
+            <Route path="/about" element={<About/>}/>
+
+            <Route path="/faq" element={<FAQ/>}/>
 
             <Route path="/user/:userId" element={<UserPage/>}/>
 

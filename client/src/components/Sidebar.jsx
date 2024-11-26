@@ -10,6 +10,7 @@ import { IoFilm } from 'react-icons/io5'
 import { FaFilm } from 'react-icons/fa'
 import { FcAbout } from 'react-icons/fc'
 import { SiAbbott } from 'react-icons/si'
+import { FcFaq } from "react-icons/fc";
 
 
 export default function Sidebar() {
@@ -71,6 +72,14 @@ export default function Sidebar() {
                 className={({isActive}) => isActive ? "active-link" : "active"}
               >
                 <span className=""><MdContactSupport/></span> About us
+              </NavLink>
+
+              <NavLink 
+                to={`/faq`}
+                onClick={() => setOpen(false)}
+                className={({isActive}) => isActive ? "active-link" : "active"}
+              >
+                <span className=""><FcFaq /></span> FAQs
               </NavLink>
 
             {/* themeSwitch */}
