@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from 'react'
 import campus2 from "../assets/campus2.jpeg"
 import { Link } from 'react-router-dom'
 import { MdArticle, MdHeadphones, MdRestartAlt, MdRestaurantMenu } from 'react-icons/md'
-import Laelite from "../assets/La elite.jpeg"
 import gsap from "gsap"
 import {useGSAP} from "@gsap/react"
 import { FaFilm } from "react-icons/fa";
