@@ -7,7 +7,7 @@ import { MdArticle, MdHeadphones, MdRestartAlt, MdRestaurantMenu } from 'react-i
 import Laelite from "../assets/La elite.jpeg"
 import gsap from "gsap"
 import {useGSAP} from "@gsap/react"
-
+import { FaFilm } from "react-icons/fa";
 
 
 export default function Banner1() {
@@ -30,7 +30,7 @@ export default function Banner1() {
         delay:0.8,
         stagger:0.15
       },
-    "-=0.4")
+     "-=0.4")
        .from('.banner-subtitle',{
           opacity:0,
           y:50,
@@ -76,6 +76,7 @@ export default function Banner1() {
             {/*podcast & articles  */}        
             <div className=" flex flex-col md:flex-row gap-y-5 gap-x-3 p-3">
               
+              {/* article */}
               <div  className=" p-3 rounded-md shadow-md bg-gradient-to-br  from-secondaryLight dark:from-primaryDark  to-buttonLight dark:to-bgDark  space-y-2">
 
                 <p id="title" className="banner-subtitle text-xl text-zinc-700 dark:text-zinc-100 font-semibold  font-title">
@@ -85,7 +86,7 @@ export default function Banner1() {
 
                 <button className="btn2 rounded-md ">
 
-                  <Link to="/posts" className="flex items-center gap-x-3">
+                  <Link to="/articles" className="flex items-center gap-x-3">
                       read articles 
                       <span className=""><MdArticle size={20}/></span>
                    </Link>
@@ -94,6 +95,7 @@ export default function Banner1() {
 
               </div>
 
+              {/* pod */}
               <div  className="border border-zinc-500 space-y-3 p-3 bg-gradient-to-r from-primaryLight dark:from-primaryDark via-secondaryLight to-bgLight dark:to-buttonDark rounded-md">
 
                 <p id="title" className="banner-subtitle text-xl text-zinc-100 font-semibold  flex items-center">
@@ -115,17 +117,18 @@ export default function Banner1() {
 
               </div>
 
+              {/* films */}
               <div  className=" space-y-3 p-3 bg-gradient-to-tr  from-secondaryLight  dark:from-secondaryDark  to-buttonLight dark:to-primaryDark rounded-md">
 
                 <p id="title" className="banner-subtitle text-xl text-zinc-700 dark:text-zinc-100 font-semibold  flex items-center">
-                   Deliciously satisfying ,fuel your day with flavors you love
+                  Lights. Camera. Magic in motion.Where imagination meets the big screen!"
                 </p>
 
                 <button className="btn2 rounded-md  items-center gap-x-2">
 
-                  <Link to="/la elite" className="flex ">
-                      Order now
-                      <MdRestaurantMenu size={24}/>
+                  <Link to="/films" className="flex items-center gap-2 ">
+                      Watch  Films
+                      <FaFilm size={24}/>
                    </Link>
 
                 </button>
