@@ -223,7 +223,7 @@ export default function ProductPage() {
                             </div>
 
                             {/* lg thumbs */}
-                            <div className="hidden w-full lg:flex items-center gap-x-2 p-2">
+                            <div className="hidden w-full md:flex items-center gap-x-2 p-2">
 
                                 {product?.images?.map((url,index) => (
 
@@ -240,7 +240,7 @@ export default function ProductPage() {
                             </div>
 
                             {/* smallscreen thumb */}
-                            <div className="w-full lg:hidden p-2">
+                            <div className="w-full md:hidden p-2">
 
                                 <Swiper
                                     className="mySwiper"
