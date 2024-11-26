@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { StoreContext } from '../context/store'
 import {toast} from "sonner"
-import Comments from './comments'
+import Comments from './Comments'
 import {HiExclamationCircle} from "react-icons/hi"
 
 
