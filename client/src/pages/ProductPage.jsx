@@ -206,7 +206,7 @@ export default function ProductPage() {
                 <div className="w-full space-y-10 lg:space-y-14">
 
                     {/* top */}
-                    <div className="w-full flex flex-col md:flex-row gap-10">
+                    <div className="w-full flex flex-col lg:flex-row gap-10">
 
                         {/* right */}
                         <div className="w-full lg:w-[55%] flex flex-col">
