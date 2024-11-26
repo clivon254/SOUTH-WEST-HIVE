@@ -66,7 +66,7 @@ export default function Orders() {
 
                 {orders.length > 0 ? (
 
-                    <div className="">
+                    <div className="space-y-3">
                         {orders.map((order,index) => (
 
                             <div key={index} className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_1fr] lg:grid-cols-[2fr_1fr_1fr_1fr] gap-3 items-start border-2  border-zinc-700 dark:border-zinc-300 text-xs p-5 rounded-md">
