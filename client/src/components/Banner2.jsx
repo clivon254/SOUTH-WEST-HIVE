@@ -1,7 +1,7 @@
 
 
 import React, { useRef ,useEffect} from 'react'
-import chef from "../assets/chefs At work.jpeg"
+import chef from "../assets/chefsAtwork.jpeg"
 import LOGO from "../assets/Logo LaElite.png"
 import { Link } from 'react-router-dom'
 import { MdRestaurantMenu } from 'react-icons/md'
