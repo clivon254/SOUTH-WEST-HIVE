@@ -24,10 +24,10 @@ export default function Banner1() {
 
       tl.from('.banner-title',{
         opacity:0,
-        y:50,
+        y:-50,
         scale:0.95,
-        duration:0.8,
-        delay:0.5,
+        duration:1,
+        delay:0.8,
         stagger:0.15
       },
     "-=0.4")
