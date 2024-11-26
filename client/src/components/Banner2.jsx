@@ -1,8 +1,8 @@
 
 
 import React, { useRef ,useEffect} from 'react'
-import chef from "../assets/chefsAtwork.jpeg"
-import LOGO from "../assets/LogoLaElite.png"
+import chef from "../assets/chefs.jpeg"
+import LOGO from "../assets/Loging.png"
 import { Link } from 'react-router-dom'
 import { MdRestaurantMenu } from 'react-icons/md'
 import { useGSAP } from '@gsap/react';
