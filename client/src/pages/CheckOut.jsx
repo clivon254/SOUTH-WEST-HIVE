@@ -509,10 +509,16 @@ export default function CheckOut() {
 
           {/* place order */}
           <button 
-            className="h-16 w-full bg-black text-white"
+            className="h-16 w-full bg-black text-white "
             onClick={placeOrder}
+            disabled={Loading}
           >
-            PLACE ORDER
+            {Loading ? 
+            (
+              <Loading />
+            ) 
+            : 
+            ("PLACE ORDER")}
           </button>
 
           {error && (
