@@ -44,6 +44,7 @@ import AddPodcast from "./pages/AddPodcast"
 import Podcast from "./pages/Podcast"
 import UpdatePodcast from "./pages/UpdatePodcast"
 import LandingPage from "./pages/LandingPage"
+import Orders from "./pages/Orders"
 
 
 
@@ -166,6 +167,8 @@ export default function App() {
               <Route path="/add-podcast" element={<AddPodcast/>}/>
 
               <Route path="/podcast" element={<Podcast/>}/>
+
+              <Route path="/orders" element={<Orders/>}/>
 
               <Route path="/update-podcast/:podcastId" element={<UpdatePodcast/>}/>
 

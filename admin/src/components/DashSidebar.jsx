@@ -16,7 +16,7 @@ import { SiMicrosoftaccess, SiPodcastindex } from "react-icons/si";
 import { BsCameraReelsFill } from "react-icons/bs";
 import { FcFilmReel } from "react-icons/fc";
 import { SiBrandfolder } from "react-icons/si";
-import { TbBrandBooking } from "react-icons/tb";
+import { TbBrandBooking ,TbTruckDelivery} from "react-icons/tb";
 
 
 export default function DashSidebar() {
@@ -31,7 +31,7 @@ export default function DashSidebar() {
 
     <>
 
-        <div className="pt-10 border-r border-zinc-700 px-3 overflow-y-scroll side">
+        <div className="pt-10 border-r border-zinc-700 px-3 ">
 
             <div className="flex flex-col gap-y-3">
 
@@ -41,6 +41,14 @@ export default function DashSidebar() {
                     onClick={() => setOpen(false)}
                 >
                      <span className=""> <MdDashboard /> </span> Dashboard
+                </NavLink>
+
+                <NavLink 
+                    to="/orders"
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                    onClick={() => setOpen(false)}
+                >
+                     <span className=""> <TbTruckDelivery /> </span> orders
                 </NavLink>
 
                 <NavLink 

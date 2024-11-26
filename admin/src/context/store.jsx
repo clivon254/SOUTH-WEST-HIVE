@@ -14,7 +14,9 @@ export default function StoreContextProvider(props) {
 
     const [token ,setToken] = useState(localStorage.getItem("token"))
 
-    const url = "https://south-west-hive-server.onrender.com"
+    // const url = "https://south-west-hive-server.onrender.com"
+
+    const url = "http://localhost:2500"
 
     const [open,setOpen] = useState(false)
 
@@ -99,6 +101,12 @@ export default function StoreContextProvider(props) {
     const [statsError , setStatsError] = useState(false)
 
     const [days ,setDays] = useState(28)
+
+    const [orders ,setOrders] = useState([])
+
+    const [ordersLoading ,setOrdersLoading] = useState(false)
+    
+    const [ordersError ,setOrdersError] = useState(false)
 
 
 
@@ -373,6 +381,36 @@ export default function StoreContextProvider(props) {
 
     }
 
+    // fetchOrders
+    const fetchOrders = async () => {
+
+      setOrdersLoading(true)
+
+      setOrdersError(false)
+
+      try
+      {
+        const res = await axios.get(url + "/api/order/get-adminOrders",{headers:{token}})
+
+        if(res.data.success)
+        {
+          setOrdersLoading(false)
+
+          setOrders(res.data.orders)
+        }
+
+      }
+      catch(error)
+      {
+        console.log(error.message)
+
+        setOrdersLoading(false)
+
+        setOrdersError(true)
+      }
+
+    }
+
 
     // play
     const play = () => {
@@ -412,6 +450,8 @@ export default function StoreContextProvider(props) {
       fetchPodcast()
 
       fetchStats()
+
+      fetchOrders()
 
     },[])
 
@@ -567,7 +607,11 @@ export default function StoreContextProvider(props) {
       playStatus,setPlayStatus,
       time,setTime,
       play,pause,playWithId,next,previous,seekSong,
-      setDays,days
+      setDays,days,
+      orders,setOrders,
+      ordersLoading, setOrdersLoading,
+      ordersError, setOrdersError,
+      fetchOrders
     }
 
 
