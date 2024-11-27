@@ -29,8 +29,12 @@ export default function ConfirmPayment() {
 
   useEffect(() => {
 
+   setProcessingPayment(true)
+
     // confirmPayment
     const confirmPayment = async () => {
+
+        setProcessingPayment(true)
 
         try
         {
@@ -47,6 +51,8 @@ export default function ConfirmPayment() {
                     setPaymentSuccess(true)
 
                     setMessage(res.data.message)
+
+                    setProcessingPayment(false)
                 }
                 else
                 {
@@ -77,16 +83,27 @@ export default function ConfirmPayment() {
                     
             setPaymentSuccess(false)
 
-            setProcessingPayment(false)
-
             setMessage(error.message)
+
+            
+        }
+        finally{
+
+            setProcessingPayment(false)
         }
 
     }
 
-    confirmPayment()
+    // Set a timeout to confirm payment after 60 seconds
+    const timeoutId = setTimeout(() => {
+        confirmPayment();
+    }, 60000); // 60 seconds
+  
+    // Cleanup function to clear the timeout
+    return () => clearTimeout(timeoutId);
 
-  },[CheckoutRequestID])
+
+  },[CheckoutRequestID, orderId])
 
   return (
 

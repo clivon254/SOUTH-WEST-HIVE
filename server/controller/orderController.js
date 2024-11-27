@@ -254,7 +254,6 @@ export const cornfirmPayment = async (req,res,next) => {
 }
 
 
-
 // CASH ON DELIVERY
 export const  COD = async (req,res,next) => {
 

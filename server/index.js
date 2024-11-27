@@ -20,12 +20,16 @@ import orderRoute from "./route/orderRoute.js"
 
 const app = express()
 
+
 const PORT = process.env.PORT
 
 const allowedOrigins = [
     'https://south-west-hive-server.onrender.com',
     'https://south-west-hive-client.onrender.com',
-    'https://south-west-hive-admin.onrender.com'
+    'https://south-west-hive-admin.onrender.com',
+    // 'http://localhost:2500',
+    // 'http://localhost:5173',
+    // 'https://bfc8-41-209-60-94.ngrok-free.app'
     ]
 
 app.use(cors({

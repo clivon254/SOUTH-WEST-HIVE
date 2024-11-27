@@ -15,6 +15,10 @@ export default function CheckOut() {
 
     const [data ,setData] = useState({})
 
+    const [processingPayment ,setProcessingPayment] = useState(false)
+
+    const [paymentTimeout ,setPaymentTimeout] = useState(false)
+
     const [paymentmethod , setPaymentMethod] = useState(null)
 
     const [shippingMethod, setShippingMethod] = useState(null)
@@ -167,8 +171,12 @@ export default function CheckOut() {
 
                 setLoading(false)
 
-                navigate(`/confirm-payment/${res.data.resData.CheckoutRequestID}/${res.data.order._id}`)
+                const orderId = res.data.order._id
 
+                const CheckoutRequestID = res.data.resData.CheckoutRequestID
+
+                navigate(`/confirm-payment/${CheckoutRequestID}/${orderId}`)
+                
                 setData({})
 
                 setShippingMethod(null)
