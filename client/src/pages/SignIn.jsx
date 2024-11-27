@@ -21,7 +21,7 @@ export default function SignIn() {
 
   const {loading,error} = useSelector(state => state.user)
 
-  const {url,setToken,token} = useContext(StoreContext)
+  const {url,setToken,token,fetchCart} = useContext(StoreContext)
 
   const dispatch = useDispatch()
 
@@ -55,6 +55,8 @@ export default function SignIn() {
           toast.success("You have signed successfully")
 
           navigate('/')
+
+          fetchCart()
 
           setToken(res.data.token)
 

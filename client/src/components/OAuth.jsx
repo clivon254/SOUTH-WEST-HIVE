@@ -14,7 +14,7 @@ import {toast} from "sonner"
 
 export default function OAuth() {
 
-    const {url ,token,setToken} = useContext(StoreContext)
+    const {url ,token,setToken,fetchCart} = useContext(StoreContext)
 
     const auth = getAuth(app)
 
@@ -52,6 +52,8 @@ export default function OAuth() {
                 navigate('/')
 
                 toast.success("You have signed in successfully")
+
+                fetchCart()
             }
 
         }
