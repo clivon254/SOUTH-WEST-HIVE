@@ -115,7 +115,8 @@ export const callback = async (req,res,next) => {
 
             res.json("ok")
         }
-
+        else
+        {
 
         const body = req.body.Body.stkCallback.CallbackMetadata;
 
@@ -166,6 +167,7 @@ export const callback = async (req,res,next) => {
         await payment.save()
 
         res.status(200).json({success:true , payment})
+    }
 
     }
     catch(error)
