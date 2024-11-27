@@ -23,16 +23,18 @@ const app = express()
 
 const PORT = process.env.PORT
 
-const allowedOrigins = [
-    'https://south-west-hive-server.onrender.com',
-    'https://south-west-hive-client.onrender.com',
-    'https://south-west-hive-admin.onrender.com',
-    ]
+// const allowedOrigins = [
+//     'https://south-west-hive-server.onrender.com',
+//     'https://south-west-hive-client.onrender.com',
+//     'https://south-west-hive-admin.onrender.com',
+//     ]
 
-app.use(cors({
-    origin:allowedOrigins,
-    credentials: true
-}))
+    // {
+    //     origin:allowedOrigins,
+    //     credentials: true
+    // }
+
+app.use(cors())
 
 app.use(express.json())
 
