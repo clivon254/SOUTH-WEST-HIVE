@@ -58,11 +58,28 @@ export default function ResetPassword() {
     {
       console.log(error.message)
 
-      setError(error.message)
+      // Check if error response exists
+      if (error.response) {
+        // If the server responded with a status code outside the 2xx range
+        const errorMessage = error.response.data.message || "An error occurred.";
+        
+        setError(errorMessage)
 
-      setLoading(false)
+        setLoading(false)
 
-      setSuccess(null)
+        setSuccess(null)
+       
+      } 
+      else 
+      {
+        
+        setError(error.message)
+
+        setLoading(false)
+
+        setSuccess(null)
+
+      }
     }
 
   }
