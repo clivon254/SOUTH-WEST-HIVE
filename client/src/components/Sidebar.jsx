@@ -59,7 +59,7 @@ export default function Sidebar() {
                 <span className=""><FaFilm/></span> Reels
               </NavLink>
 
-              {currentUser.accountType === "writer" && (
+              {currentUser?.accountType === "writer" && (
 
                 <>
                   <NavLink 

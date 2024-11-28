@@ -175,7 +175,7 @@ export default function Comments({comment,onLike,onEdit,onDelete}) {
        <div className="flex-shrink-0 mr-3">
 
         <img 
-          src={comment.userId.profilePicture}
+          src={comment?.userId?.profilePicture}
           alt={"comment"}
           className="w-10 h-10 rounded-full " 
         />
