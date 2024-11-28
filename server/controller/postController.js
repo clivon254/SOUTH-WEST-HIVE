@@ -15,7 +15,7 @@ import { errorHandler } from "../utils/error.js"
 
 export const createPost = async (req,res,next) => {
 
-    if(!req.user.isAdmin || req.user.accountType !== "writer")
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403 ,"you are not allowed to create post"))
     }
@@ -191,7 +191,7 @@ export const savePosts = async (req,res,next) => {
 
 export const updatePost = async (req,res,next) => {
 
-    if(!req.user.isAdmin || req.user.accountType !== "writer")
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403, "You are not allowed to update the post"))
     }
@@ -233,7 +233,7 @@ export const updatePost = async (req,res,next) => {
 
 export const deletePost = async (req,res,next) => {
 
-    if(!req.user.isAdmin || req.user.accountType !== "writer")
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403, "You are not allowed to delete the post"))
     }
@@ -699,3 +699,4 @@ export const getPopularContent = async (req,res,next) => {
         next(error)
     }
 }
+

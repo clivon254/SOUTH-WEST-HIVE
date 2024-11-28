@@ -291,11 +291,11 @@ export default function UpdateUser() {
 
                 {imageFileUploadError && (
 
-                <Alert color="failure">{imageFileUploadError}</Alert>
+                    <Alert color="failure">{imageFileUploadError}</Alert>
 
                 )}
 
-
+                {/* username */}
                 <input 
                     type="text" 
                     className="input" 
@@ -304,21 +304,23 @@ export default function UpdateUser() {
                     onChange={handleChange}
                     defaultValue={formData?.username}
                 />
-
+                
+                {/* email */}
                 <input 
-                type="email" 
-                className="input" 
-                name="email"
-                placeholder='email'
-                onChange={handleChange}
-                defaultValue={formData?.email}
+                    type="email" 
+                    className="input" 
+                    name="email"
+                    placeholder='email'
+                    onChange={handleChange}
+                    defaultValue={formData?.email}
                 />
 
+                {/* account type */}
                 <select 
-                    name="acountType"  
+                    name="accountType"  
                     className="input"
                     onChange={handleChange}
-                    defaultValue={formData.accountType}
+                    defaultValue={formData?.accountType}
                 >
 
                     <option value="user" >user</option>
@@ -329,10 +331,11 @@ export default function UpdateUser() {
 
                     <option value="caterer" >caterer</option>
 
-                    <option value="videographer" >videographer</option>
+                    <option value="media" >media</option>
 
                 </select>
-
+                
+                {/* admin */}
                 <div className="flex items-center  gap-x-3">
 
 
@@ -347,11 +350,11 @@ export default function UpdateUser() {
 
                 </div>
 
-
+                {/* button */}
                 <button 
-                type="submit"
-                className="btn rounded-md"
-                disabled={loading || imageFileUploading}
+                    type="submit"
+                    className="btn rounded-md"
+                    disabled={loading || imageFileUploading}
                 >
                 {loading ? ("Loading.....") : ("update")}
                 </button>

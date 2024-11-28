@@ -6,12 +6,12 @@ import {Navigate ,Outlet} from "react-router-dom"
 
 
 
-export default function OnlyWriters() {
+export default function OnlySalesperson() {
 
     const {currentUser} = useSelector((state) => state.user)
 
 
-  return currentUser && currentUser.accountType === "Salesperson" ?
+  return currentUser && currentUser.accountType === "salesperson" ?
     (
         <Outlet/>
     )

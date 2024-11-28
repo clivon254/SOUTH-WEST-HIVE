@@ -97,7 +97,7 @@ export default function Users() {
 
                             </Table.Cell>
 
-                            <Table.Cell>
+                            <Table.Cell className={`${user.isAdmin ? "font-semibold text-rose-500" :""}`}>
                               {user.username}
                             </Table.Cell>
 

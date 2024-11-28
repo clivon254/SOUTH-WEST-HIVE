@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { StoreContext } from '../context/store'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {MdLightMode ,MdDarkMode, MdContactSupport} from "react-icons/md"
+import {MdLightMode ,MdDarkMode, MdContactSupport, MdArticle, MdAddCard} from "react-icons/md"
 import { toggleTheme } from '../redux/theme/themeSlice'
 import { IoFilm } from 'react-icons/io5'
 import { FaFilm } from 'react-icons/fa'
@@ -16,6 +16,8 @@ import { FcFaq } from "react-icons/fc";
 export default function Sidebar() {
 
   const {NavLinks,setOpen} = useContext(StoreContext)
+
+  const {currentUser} = useSelector(state => state.user)
 
   const dispatch = useDispatch()
 
@@ -56,6 +58,29 @@ export default function Sidebar() {
               >
                 <span className=""><FaFilm/></span> Reels
               </NavLink>
+
+              {currentUser.accountType === "writer" && (
+
+                <>
+                  <NavLink 
+                    to={`/posts`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdArticle/></span> My Articles
+                  </NavLink>
+
+                  <NavLink 
+                    to={`/add-post`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdAddCard/></span> Add Articles
+                  </NavLink>
+
+                </>
+
+              )}
 
 
               <NavLink 

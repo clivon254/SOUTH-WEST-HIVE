@@ -6,7 +6,7 @@ import {Navigate ,Outlet} from "react-router-dom"
 
 
 
-export default function OnlyWriters() {
+export default function OnlyWriter() {
 
     const {currentUser} = useSelector((state) => state.user)
 

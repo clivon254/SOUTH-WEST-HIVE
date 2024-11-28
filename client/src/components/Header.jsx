@@ -221,31 +221,31 @@ export default function Header() {
 
                     </Dropdown.Header>
 
-                    {currentUser?.isAdmin && currentUser?.accountType === "writer" || currentUser?.accountType === "salesperson" || currentUser?.accountType === "media" || currentUser?.accountType === "caterer" && (
+                    <Link to="/dashboard">
+
+                        <Dropdown.Item>Dashboard</Dropdown.Item>
+
+                    </Link>
+
+                    {currentUser?.accountType === "writer" &&(
 
                       <>
-                          <Link to="/dashboard">
 
-                              <Dropdown.Item>Dashboard</Dropdown.Item>
+                        <Link to="/posts">
 
-                          </Link>
+                            <Dropdown.Item>My Articles</Dropdown.Item>
 
-                          {currentUser?.isAdmin && currentUser.accountType === "writer" &&(
+                        </Link>
 
-                            <>
+                        <Link to="/add-post">
 
-                              <Link>
+                            <Dropdown.Item>Add Articles</Dropdown.Item>
 
-                                  <Dropdown.Item>My Articles</Dropdown.Item>
+                        </Link>
 
-                              </Link>
-
-                            </>
-                          )}
                       </>
 
                     )}
-                    
 
                     <Link to={`/user/${currentUser._id}`}>
 

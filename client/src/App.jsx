@@ -30,6 +30,13 @@ import UserPage from './pages/UserPage'
 import Contact from './pages/Contact'
 import About from './pages/About'
 import FAQ from './pages/FAQ'
+import OnlyCaterer from './components/OnlyCaterer'
+import OnlyMedia from './components/OnlyMedia'
+import OnlyWriter from './components/OnlyWriters'
+import OnlySalesperson from './components/OnlySales'
+import Posts from './pages/Posts'
+import UpdatePost from './pages/UpdatePost'
+import AddPost from './pages/AddPost'
 
 
 
@@ -97,6 +104,32 @@ export default function App() {
             <Route path="/faq" element={<FAQ/>}/>
 
             <Route path="/user/:userId" element={<UserPage/>}/>
+
+            <Route  element={<OnlyCaterer/>}>
+
+            
+
+            </Route>
+
+            <Route  element={<OnlySalesperson/>}>
+
+
+            </Route>
+
+            <Route  element={<OnlyWriter/>}>
+
+                <Route path="/posts" element={<Posts/>}/>
+
+                <Route path="/update-post/:slug" element={<UpdatePost/>}/>
+
+                <Route path="/add-post" element={<AddPost/>}/>
+
+            </Route>
+
+            <Route  element={<OnlyMedia/>}>
+
+
+            </Route>
 
           </Routes>
 
