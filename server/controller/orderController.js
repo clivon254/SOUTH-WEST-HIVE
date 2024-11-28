@@ -298,7 +298,7 @@ export const adminorders = async (req,res,next) => {
 
     try
     {
-        const orders = await Order.find({userId:req.user.id}).sort({_id:-1})
+        const orders = await Order.find({}).sort({_id:-1})
 
         res.status(200).json({success:true, orders})
     }
