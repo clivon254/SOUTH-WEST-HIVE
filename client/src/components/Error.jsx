@@ -1,9 +1,20 @@
 
 
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { StoreContext } from '../context/store'
 
 export default function Error({retry}) {
     
+  const {fetchAll} = useContext(StoreContext)
+
+ const fetch = () => {
+
+  retry()
+
+  fetchAll()
+
+ }
+
   return (
 
     <div className="mx-auto max-w-xs space-y-3 mt-10">
@@ -15,7 +26,7 @@ export default function Error({retry}) {
           <div className=" text-center">
 
             <span 
-              onClick={() => retry()} 
+              onClick={fetch} 
               className="border border-textSecondaryLight dark:border-textSecondaryDark px-5 py-1 rounded-full font-semibold cursor-pointer"
             >
                 Retry

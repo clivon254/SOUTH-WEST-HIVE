@@ -5,6 +5,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import LOGO from "../assets/LOGO.png"
 import Logo from './Logo'
+import { FaSpotify, FaTiktok } from "react-icons/fa";
+import { FiInstagram } from "react-icons/fi";
+
 
 
 export default function FooterComp() {
@@ -41,19 +44,36 @@ export default function FooterComp() {
             <div className="w-full sm:w-[60%] flex flex-col sm:flex-row gap-y-5 items-start justify-between ">
               
               {/* socials */}
-              <div className="space-y-2">
+              <div className="space-y-4">
 
                 <h2 className="text-base font-title font-semibold">Follow us</h2>
 
-                <div className="flex flex-col">
+                <div className="flex items-center gap-x-3">
 
                   <a 
-                    href="#" 
+                    href="https://www.tiktok.com/@_prideofkaren?_t=8riyiYQpS00&_r=1" 
                     tartget="_blank" 
                     rel="noopener noreferrer"
                   >
-                    Get to know us
+                    <FaTiktok size={32} />
                   </a>
+
+                  <a 
+                    href="https://www.instagram.com/_prideofkaren/profilecard/?igsh=NTZiZXNma2V4OWpp" 
+                    tartget="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <FiInstagram size={32}/>
+                  </a>
+
+                  <a 
+                    href="https://open.spotify.com/playlist/12kggIDclv97pFf7RuzK0u?si=Bg2WNbrBR1-1IiFWZOErxQ&pi=vayS2sffRXqnm" 
+                    tartget="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <FaSpotify size={32}/>
+                  </a>
+
 
                 </div>
 

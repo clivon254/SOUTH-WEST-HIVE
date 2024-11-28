@@ -564,6 +564,26 @@ export default function StoreContextProvider(props) {
 
     }
 
+    // fetchAll
+    const fetchAll = async () => {
+
+      await fetchBrand()
+
+      await fetchCart()
+
+      await fetchFilms()
+
+      await fetchPodcast()
+
+      await fetchPopularContent()
+
+      await fetchPost()
+
+      await fetchProducts()
+
+      await fetchStats()
+
+    }
 
 
     useEffect(() => {
@@ -706,7 +726,8 @@ export default function StoreContextProvider(props) {
       processingPayment,setProcessingPayment,
       paymentSuccess,setPaymentSuccess,
       paymentError,setPaymentError,
-      OrderId,setOrderId
+      OrderId,setOrderId,
+      fetchAll
     }
 
 
