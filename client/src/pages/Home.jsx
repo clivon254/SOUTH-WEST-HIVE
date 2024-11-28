@@ -22,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Home() {
 
-  const {posts,merch,access,food,brands} = useContext(StoreContext)
+  const {posts,merch,access,food,brands,postLoading,postError} = useContext(StoreContext)
 
   const randomIndex = Math.floor(Math.random() * posts.length)
 
@@ -33,6 +33,8 @@ export default function Home() {
   const [pageCount ,setPageCount] = useState(0)
 
   const postPerPage = 3
+
+  const [loader ,setLoader] = useState([{},{}])
 
 
 
@@ -168,15 +170,60 @@ export default function Home() {
 
             <div className="flex flex-col gap-y-20 md:gap-y-14">
 
-              {posts?.map((post,index) => (
+              {!postLoading && posts && (
 
-                  <div id="posts" className="post-card">
+                <>
 
-                      <PostCard key={index} post={post}/>
+                  {posts?.map((post,index) => (
 
-                  </div>
+                      <div id="posts" className="post-card">
 
-              ))}
+                          <PostCard key={index} post={post}/>
+
+                      </div>
+
+                  ))}
+
+                </>
+            
+              )}
+
+              {postLoading && !postError && (
+
+                  <>
+                    {loader.map((loader,index) => (
+
+                            <div className="w-full flex flex-col gap-8 item-center md:flex-row">
+
+                                <div className="w-full h-auto md:h-64 md:w-1/2">
+
+                                    <div className="object-cover w-full h-[300px] md:h-full rounded-md pulse"/>
+
+                                </div>
+
+                                <div className="w-full md:w-1/2 flex flex-col gap-y-3">
+
+                                    <div className="flex items-center gap-2 text-center">
+
+                                        <span className="pulse h-4 w-24 rounded-full"/>
+                                            
+                                        <span className="pulse h-3 w-16 rounded-full"/>
+                                        
+                                    </div>
+
+                                    <span className="h-5 w-full pulse rounded-full"/>
+                                    
+                                    <div  className="flex-1  pulse rounded-md"/>
+                                    
+                                    <span className="pulse h-3 w-[60%] rounded-full "/>
+
+                                </div>
+
+                            </div>
+
+                    ))}
+                  </>
+              )}
               
 
             </div>

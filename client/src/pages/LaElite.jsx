@@ -5,12 +5,13 @@ import laelite from "../assets/la elite.jpeg"
 import { MdSearch } from 'react-icons/md'
 import { StoreContext } from '../context/store'
 import ProductCard from '../components/ProductCard'
+import Error from '../components/Error'
 
 
 
 export default function LaElite() {
 
-  const {products} = useContext(StoreContext)
+  const {products,productsLoading,productsError,fetchProducts} = useContext(StoreContext)
 
   const Products = products.filter((product) => product.Item === "Catering")
 
@@ -23,6 +24,9 @@ export default function LaElite() {
   const [category ,setCategory] = useState([])
 
   const [sortType ,setSortType] = useState('relevant')
+
+
+  const [loader ,setLoader] = useState([{},{},{},{}])
 
   // toggleCategory
   const toggleCategory = (e) => {
@@ -107,172 +111,222 @@ export default function LaElite() {
 
   return (
 
-    <section className="section space-y-5">
-      
-      {/* search bar */}
-      <div className="text-center">
+    <>
 
-        <div className="search-bar">
+        {!productsError && (
 
-          <input 
-              type="text"
-              className="search-input" 
-              placeholder='Search food ....'
-              value={searchProduct}
-              onChange={(e) => setSearchProduct(e.target.value)}
-          />
+          <section className="section space-y-5">
+            
+            {/* search bar */}
+            <div className="text-center">
 
-          <MdSearch size={32}/>
+              <div className="search-bar">
 
-        </div>
+                <input 
+                    type="text"
+                    className="search-input" 
+                    placeholder='Search food ....'
+                    value={searchProduct}
+                    onChange={(e) => setSearchProduct(e.target.value)}
+                />
 
-      </div>
-
-      <div className="flex flex-col lg:flex-row gap-5 gap-x-10">
-
-        {/* fiter Products */}
-        <div className="space-y-3">
-
-          <h2 
-              className="cursor-pointer title2"
-              onClick={() => setShowFilter(!showFilter)}
-          >
-            Filters
-          </h2>
-
-
-          {/* category */}
-          <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden lg:block"}`}>
-
-            <h3 className="title3">Categories</h3>
-
-            <div className="flex flex-col gap-y-3">
-              
-              {/* Breakfast */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Breakfast`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Breakfast
-                  </label>
+                <MdSearch size={32}/>
 
               </div>
-
-              {/* Lunch*/}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Lunch`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Lunch
-                  </label>
-
-              </div>
-
-
-              {/* Supper */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Supper`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Supper
-                  </label>
-
-              </div>
-
-              {/* Snack */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Snack`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Snack
-                  </label>
-
-              </div>
-
-              
 
             </div>
 
-          </div>
+            <div className="flex flex-col lg:flex-row gap-5 gap-x-10">
 
-        </div>
+              {/* fiter Products */}
+              <div className="space-y-3">
 
-        {/* products */}
-        <div className="flex-1 space-y-5">
+                <h2 
+                    className="cursor-pointer title2"
+                    onClick={() => setShowFilter(!showFilter)}
+                >
+                  Filters
+                </h2>
 
-          {/* header */}
-          <div className="flex items-center justify-between">
 
-            <h2 className="title3">All foods</h2>
+                {/* category */}
+                <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden lg:block"}`}>
 
-            <select 
-              onChnage={(e) => setSortType(e.target.value)} 
-              className="input"
-            >
-              
-              <option value="relevant">Sort by:Relevant</option>
+                  <h3 className="title3">Categories</h3>
 
-              <option value="low-high">Sort by: Low price</option>
+                  <div className="flex flex-col gap-y-3">
+                    
+                    {/* Breakfast */}
+                    <div className="flex items-center gap-x-2">
 
-              <option value="high-low">Sort by: High price</option>
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Breakfast`}
+                          onChange={toggleCategory}
+                        />
 
-            </select>
+                        <label htmlFor="" className="label">
+                          Breakfast
+                        </label>
 
-          </div>
+                    </div>
 
-          {/* products map */}
-          <div className="">
+                    {/* Lunch*/}
+                    <div className="flex items-center gap-x-2">
 
-            {filteredProducts.length > 0 ? 
-            (
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Lunch`}
+                          onChange={toggleCategory}
+                        />
 
-              <div className="grid grid-cols-2 gap-y-10 gap-x-5 md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5">
+                        <label htmlFor="" className="label">
+                          Lunch
+                        </label>
 
-                {filteredProducts?.map((product,index) => (
+                    </div>
 
-                  <ProductCard key={index} product={product}/>
 
-                ))}
+                    {/* Supper */}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Supper`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          Supper
+                        </label>
+
+                    </div>
+
+                    {/* Snack */}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Snack`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          Snack
+                        </label>
+
+                    </div>
+
+                    
+
+                  </div>
+
+                </div>
 
               </div>
 
-           ) 
-           :
-           (
-              <p className="text-2xl mt-10">Sorry ,no food found . . . .</p>
-           )}
+              {/* products */}
+              <div className="flex-1 space-y-5">
 
-          </div>
+                {/* header */}
+                <div className="flex items-center justify-between">
 
-        </div>
+                  <h2 className="title3">All foods</h2>
 
-      </div>
+                  <select 
+                    onChnage={(e) => setSortType(e.target.value)} 
+                    className="input"
+                  >
+                    
+                    <option value="relevant">Sort by:Relevant</option>
 
-    </section>
+                    <option value="low-high">Sort by: Low price</option>
+
+                    <option value="high-low">Sort by: High price</option>
+
+                  </select>
+
+                </div>
+
+                {/* products map */}
+                <div className="">
+
+                        {products && !productsLoading && (
+
+                          <>
+
+                            {filteredProducts.length > 0 ? 
+                            (
+
+                              <div className="grid grid-cols-2 gap-y-10 gap-x-5 md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5">
+
+                                {filteredProducts?.map((product,index) => (
+
+                                  <ProductCard key={index} product={product}/>
+
+                                ))}
+
+                              </div>
+
+                            ) 
+                            :
+                            (
+                                <p className="text-2xl mt-10">Sorry ,no product found . . . .</p>
+                            )}
+
+                          </>
+
+                      )}
+
+                      {productsLoading && (
+
+                        <div className="grid grid-cols-2 gap-y-10 gap-x-5 md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5">
+                        
+                          {loader.map((load,index) => (
+
+                            <div className="w-full  space-y-2">
+
+                                <div className="w-full h-[250px] pulse rounded-md"/>
+
+                                <div className="space-y-1">
+
+                                    <span className="h-3 w-[80%] rounded-md pulse"/>
+
+                                    <span className="h-3 w-full rounded-md pulse pulse"/>
+
+                                    <span className="h-3 w-full rounded-md pulse pulse"/>
+
+                                </div>
+
+                            </div>
+
+                          ))}
+
+                        </div>
+
+                      )}
+
+                      </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+        )}
+
+        {productsError && (
+
+          <Error retry={fetchProducts}/>
+          
+        )}
+
+    </>
 
 
   )

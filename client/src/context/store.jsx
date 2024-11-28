@@ -222,7 +222,9 @@ export default function StoreContextProvider(props) {
       {
         console.log(error.message)
 
-        setPostError(true)
+        setProductsLoading(false)
+
+        setProductsError(true)
       }
 
     }

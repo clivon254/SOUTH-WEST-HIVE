@@ -23,7 +23,7 @@ export default function Error({retry}) {
 
           </div>
 
-        </div>
+    </div>
 
   )
 }

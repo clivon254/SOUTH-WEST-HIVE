@@ -3,10 +3,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MdSearch } from 'react-icons/md'
 import { StoreContext } from '../context/store'
 import ProductCard from '../components/ProductCard'
+import Error from '../components/Error'
 
 export default function Shop() {
 
-  const {products} = useContext(StoreContext)
+  const {products,productsLoading,productsError,fetchProducts} = useContext(StoreContext)
 
   const Products = products.filter((product) => product.Item !== "Catering")
 
@@ -22,7 +23,8 @@ export default function Shop() {
 
   const [sortType ,setSortType] = useState('relevant')
 
-  console.log(Products)
+  const [loader ,setLoader] = useState([{},{},{},{}])
+
 
 
   // toggleCategory
@@ -103,6 +105,7 @@ export default function Shop() {
   }
 
 
+
   useEffect(() => {
 
     setFilteredProducts(Products)
@@ -125,231 +128,281 @@ export default function Shop() {
 
 
   return (
+    
+    <>
 
-    <section className="section">
+      {!productsError && (
 
-      {/* searchbar */}
-      <div className="text-center mb-4">
+          <section className="section">
 
-        <div className="search-bar">
+            {/* searchbar */}
+            <div className="text-center mb-4">
 
-          <input 
-              type="text" 
-              className="search-input" 
-              value={searchProduct}
-              onChange={(e) => setSearchProduct(e.target.value)}
-              style={{
-                outline:'none'
-              }}
-          />
+              <div className="search-bar">
 
-          <MdSearch size={32}/>
+                <input 
+                    type="text" 
+                    className="search-input" 
+                    value={searchProduct}
+                    onChange={(e) => setSearchProduct(e.target.value)}
+                    style={{
+                      outline:'none'
+                    }}
+                />
 
-        </div>
-
-      </div>
-
-      <div className="flex flex-col lg:flex-row gap-5">
-
-        {/* fiter Products */}
-        <div className="space-y-3">
-
-          <h2 
-              className="cursor-pointer title2"
-              onClick={() => setShowFilter(!showFilter)}
-          >
-            Filters
-          </h2>
-
-          {/* Item */}
-          <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden lg:block"}`}>
-
-            <h3 className="title3">Item</h3>
-
-            <div className="flex flex-col gap-y-3">
-
-                {/* merchendise */}
-                <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Merchendise`}
-                    onChange={toggleItem}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Merchendise
-                  </label>
-
-                </div>
-
-                {/* accessories */}
-                <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Accessories`}
-                    onChange={toggleItem}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Accessories
-                  </label>
-
-                </div>
-
-            </div>
-
-          </div>
-
-          {/* category */}
-          <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden lg:block"}`}>
-
-            <h3 className="title3">Categories</h3>
-
-            <div className="flex flex-col gap-y-3">
-              
-              {/* Hoody */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Hoody`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Hoody
-                  </label>
-
-              </div>
-
-              {/* Polo */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Polo`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Polo
-                  </label>
-
-              </div>
-
-
-              {/* magazine */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Magazine`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Magazine
-                  </label>
-
-              </div>
-
-              {/* T-shirt */}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`T-shirt`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    T-shirt
-                  </label>
-
-              </div>
-
-              {/* Wrist Band*/}
-              <div className="flex items-center gap-x-2">
-
-                  <input 
-                    type="checkbox" 
-                    className="w-5 h-5 rounded-md" 
-                    value={`Wrist Band`}
-                    onChange={toggleCategory}
-                  />
-
-                  <label htmlFor="" className="label">
-                    Wrist Band
-                  </label>
+                <MdSearch size={32}/>
 
               </div>
 
             </div>
 
-          </div>
+            <div className="flex flex-col lg:flex-row gap-5">
 
-        </div>
+              {/* fiter Products */}
+              <div className="space-y-3">
 
-        {/* products */}
-        <div className="flex-1 space-y-5">
+                <h2 
+                    className="cursor-pointer title2"
+                    onClick={() => setShowFilter(!showFilter)}
+                >
+                  Filters
+                </h2>
 
-          {/* header */}
-          <div className="flex items-center justify-between">
+                {/* Item */}
+                <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden lg:block"}`}>
 
-            <h2 className="title3">All products</h2>
+                  <h3 className="title3">Item</h3>
 
-            <select 
-              onChnage={(e) => setSortType(e.target.value)} 
-              className="input"
-            >
-              
-              <option value="relevant">Sort by:Relevant</option>
+                  <div className="flex flex-col gap-y-3">
 
-              <option value="low-high">Sort by: Low price</option>
+                      {/* merchendise */}
+                      <div className="flex items-center gap-x-2">
 
-              <option value="high-low">Sort by: High price</option>
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Merchendise`}
+                          onChange={toggleItem}
+                        />
 
-            </select>
+                        <label htmlFor="" className="label">
+                          Merchendise
+                        </label>
 
-          </div>
+                      </div>
 
-          {/* products map */}
-          <div className="">
+                      {/* accessories */}
+                      <div className="flex items-center gap-x-2">
 
-            {filteredProducts.length > 0 ? 
-            (
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Accessories`}
+                          onChange={toggleItem}
+                        />
 
-              <div className="grid grid-cols-2 gap-y-10 gap-x-5 md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5">
+                        <label htmlFor="" className="label">
+                          Accessories
+                        </label>
 
-                {filteredProducts?.map((product,index) => (
+                      </div>
 
-                  <ProductCard key={index} product={product}/>
+                  </div>
 
-                ))}
+                </div>
+
+                {/* category */}
+                <div className={`space-y-4 border border-zinc-500 dark:border-zinc-300 rounded-md p-3 ${showFilter ? "": "hidden lg:block"}`}>
+
+                  <h3 className="title3">Categories</h3>
+
+                  <div className="flex flex-col gap-y-3">
+                    
+                    {/* Hoody */}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Hoody`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          Hoody
+                        </label>
+
+                    </div>
+
+                    {/* Polo */}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Polo`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          Polo
+                        </label>
+
+                    </div>
+
+
+                    {/* magazine */}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Magazine`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          Magazine
+                        </label>
+
+                    </div>
+
+                    {/* T-shirt */}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`T-shirt`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          T-shirt
+                        </label>
+
+                    </div>
+
+                    {/* Wrist Band*/}
+                    <div className="flex items-center gap-x-2">
+
+                        <input 
+                          type="checkbox" 
+                          className="w-5 h-5 rounded-md" 
+                          value={`Wrist Band`}
+                          onChange={toggleCategory}
+                        />
+
+                        <label htmlFor="" className="label">
+                          Wrist Band
+                        </label>
+
+                    </div>
+
+                  </div>
+
+                </div>
 
               </div>
 
-           ) 
-           :
-           (
-              <p className="text-2xl mt-10">Sorry ,no product found . . . .</p>
-           )}
+              {/* products */}
+              <div className="flex-1 space-y-5">
 
-          </div>
+                {/* header */}
+                <div className="flex items-center justify-between">
 
-        </div>
+                  <h2 className="title3">All products</h2>
 
-      </div>
-      
-    </section>
+                  <select 
+                    onChnage={(e) => setSortType(e.target.value)} 
+                    className="input"
+                  >
+                    
+                    <option value="relevant">Sort by:Relevant</option>
+
+                    <option value="low-high">Sort by: Low price</option>
+
+                    <option value="high-low">Sort by: High price</option>
+
+                  </select>
+
+                </div>
+
+                {/* products map */}
+                <div className="">
+
+                  {products && !productsLoading && (
+
+                    <>
+
+                      {filteredProducts.length > 0 ? 
+                      (
+
+                        <div className="grid grid-cols-2 gap-y-10 gap-x-5 md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5">
+
+                          {filteredProducts?.map((product,index) => (
+
+                            <ProductCard key={index} product={product}/>
+
+                          ))}
+
+                        </div>
+
+                      ) 
+                      :
+                      (
+                          <p className="text-2xl mt-10">Sorry ,no product found . . . .</p>
+                      )}
+
+                    </>
+
+                )}
+
+                {productsLoading && (
+
+                  <div className="grid grid-cols-2 gap-y-10 gap-x-5 md:grid-cols-3  lg:grid-cols-4  xl:grid-cols-5">
+                   
+                    {loader.map((load,index) => (
+
+                      <div className="w-full  space-y-2">
+
+                          <div className="w-full h-[250px] pulse rounded-md"/>
+
+                          <div className="space-y-1">
+
+                              <span className="h-3 w-[80%] rounded-md pulse"/>
+
+                              <span className="h-3 w-full rounded-md pulse pulse"/>
+
+                              <span className="h-3 w-full rounded-md pulse pulse"/>
+
+                          </div>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                )}
+
+                </div>
+
+              </div>
+
+            </div>
+            
+          </section>
+
+      )}
+
+      {productsError && (
+
+        <Error retry={fetchProducts}/>
+
+      )}
+
+    </>
     
   )
 

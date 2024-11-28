@@ -144,6 +144,7 @@ export default function PostPage() {
           {/* top */}
           <div className="w-full flex flex-col-reverse md:flex-row gap-x-10 gap-y-5 items-center">
 
+              {/* words */}
               <div className="w-full md:w-1/2 flex flex-col gap-y-8">
 
                 <h1 className="title">{post?.title}</h1>
@@ -197,24 +198,24 @@ export default function PostPage() {
               </div>
 
               {/* img */}
-              <div className="w-full md:w-1/2 relative">
+              <div className="w-full md:w-1/2 relative text-black dark:text-white ">
 
                 <Swiper
                   className="mySwiper"
-                  navigation={true} 
-                  loop={true}
+                  // navigation={true} 
+                  // loop={true}
                   pagination={{
-                    clickable: true,
+                    type: 'fraction',
                   }}
                   autoplay={{
                     delay: 2500,
                     disableOnInteraction: true,
                   }}
                   modules={[Navigation,Pagination,Autoplay]} 
-                  // navigation={{
-                  //   prevEl:'.prev',
-                  //   nextEl:'.next'
-                  // }}
+                  navigation={{
+                    prevEl:'.prev',
+                    nextEl:'.next'
+                  }}
                 >
 
                   {post?.images.map((img,index) => (
@@ -232,15 +233,16 @@ export default function PostPage() {
                     </SwiperSlide>
 
                   ))}
+
                 </Swiper>
 
-                {/* <div className=".prev">
-                  <MdChevronLeft size={32}/>
+                <div className="prev absolute top-1/2 -left-3 z-40 h-10 w-10 bg-secondaryLight dark:bg-secondaryDark rounded-full flex justify-center items-center cursor-pointer">
+                  <MdChevronLeft size={32} className="text-white"/>
                 </div>
 
-                <div className=".next">
-                  <MdChevronRight size={32}/>
-                </div> */}
+                <div className="next absolute top-1/2 -right-3 z-40 h-10 w-10 bg-secondaryLight dark:bg-secondaryDark rounded-full flex justify-center items-center cursor-pointer">
+                  <MdChevronRight size={32} className="text-white"/>
+                </div>
 
               </div>
 

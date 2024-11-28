@@ -267,15 +267,16 @@ export default function Comments({comment,onLike,onEdit,onDelete}) {
                                         Delete
                                     </button>
 
-                                    <button 
-                                        type="button"
-                                        className="font-semibold hover:underline"
-                                        onClick={() => setReply(true)}
-                                    >
-                                        reply
-                                    </button>
                                 </>
                             )}
+
+                             <button 
+                                type="button"
+                                className="font-semibold hover:underline"
+                                onClick={() => setReply(true)}
+                            >
+                                reply
+                            </button>
 
                       </div>
                        
