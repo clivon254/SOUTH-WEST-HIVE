@@ -12,11 +12,13 @@ export default function Dashboard() {
 
   const {stats,statsError,fetchStats,token} = useContext(StoreContext)
 
+
   useEffect(() => {
 
     fetchStats()
 
   },[token])
+
 
   return (
 
@@ -33,7 +35,7 @@ export default function Dashboard() {
             <Stats/>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-12 gap-x-8">
-
+              
               {/* last 5 users */}
               <div className="">
 

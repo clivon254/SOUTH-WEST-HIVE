@@ -14,7 +14,7 @@ export default function FooterComp() {
     
   return (
 
-    <footer className="z-50 bg-secondaryLight dark:bg-secondaryDark p-4 w-full dark:text-textSecondaryDark ">
+    <footer className="z-40 bg-secondaryLight dark:bg-secondaryDark p-4 w-full dark:text-textSecondaryDark ">
 
         <div className="w-full ">
 

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function AddBrand() {
 
-    const {url ,token} = useContext(StoreContext)
+    const {url ,token,fetchBrand} = useContext(StoreContext)
 
     const [formData ,setFormData] = useState({})
 
@@ -133,7 +133,7 @@ export default function AddBrand() {
 
                 toast.success("The brand has been created successfully")
 
-                fetchBrands()
+                fetchBrand()
 
                 navigate('/brand')
                 

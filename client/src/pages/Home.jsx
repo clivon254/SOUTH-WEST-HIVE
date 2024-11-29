@@ -301,7 +301,7 @@ export default function Home() {
 
                 </div>
           
-                <span className="block uppercase txt-base md:text-xl font-title font-semibold">
+                <span className="block uppercase text-xs  md:text-base lg:text-xl font-title font-semibold text-center">
                   {brand?.name}
                 </span>
 

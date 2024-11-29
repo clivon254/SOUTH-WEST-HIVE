@@ -34,7 +34,7 @@ export default function StoreContextProvider(props) {
       },
       {
         path: "/podcasts",
-        name:"Podcasts",
+        name:"Buzz Hub",
         icons:<MdOutlinePodcasts size={24}/>
       },
       {

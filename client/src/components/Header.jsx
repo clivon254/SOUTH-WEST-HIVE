@@ -203,7 +203,7 @@ export default function Header() {
                   <Dropdown
                     inline
                     arrowIcon={false}
-                    className=""
+                    className="z-[50]"
                     label={
                       <Avatar
                         alt="user"
@@ -251,12 +251,6 @@ export default function Header() {
                       {currentUser?.accountType === "caterer" &&(
 
                         <>
-
-                          <Link to="/dashboard">
-
-                             <Dropdown.Item>Dashboard</Dropdown.Item>
-
-                          </Link>
 
                            <Link to="/dashboard">
 

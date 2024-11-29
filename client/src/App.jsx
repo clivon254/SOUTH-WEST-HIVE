@@ -58,6 +58,7 @@ import AddReels from './pages/AddReels'
 import AddFilm from './pages/AddFilm'
 import UpdateFilm from './pages/UpdateFilm'
 import Films from './pages/Film'
+import Dashboard from './pages/Dashboard'
 
 
 
@@ -125,9 +126,11 @@ export default function App() {
             <Route path="/faq" element={<FAQ/>}/>
 
             <Route path="/user/:userId" element={<UserPage/>}/>
+            
+            <Route path="/dashboard" element={<Dashboard/>}/>
 
             <Route  element={<OnlyCaterer/>}>
-
+              
               <Route path="/add-food" element={<AddFood/>}/>
 
               <Route path="/update-food/:foodId" element={<UpdateFood/>}/>

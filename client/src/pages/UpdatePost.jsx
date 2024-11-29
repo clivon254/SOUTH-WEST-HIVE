@@ -15,6 +15,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import { Alert } from 'flowbite-react'
 import axios from "axios"
 import {toast} from "sonner"
+import { useSelector } from 'react-redux'
 
 
 
@@ -47,6 +48,9 @@ export default function UpdatePost() {
   })
 
   const navigate = useNavigate()
+
+
+  const {currentUser} = useSelector(state => state.user)
 
 
 
@@ -278,24 +282,28 @@ export default function UpdatePost() {
 
               </div>
 
-              <div className="flex items-center gap-x-3 ">
+              {currentUser?.isAdmin && ( 
 
-                  <label htmlFor="" className="font-bold">Status :</label>
+                <div className="flex items-center gap-x-3 ">
 
-                  <select  
-                    className="input"
-                    value={formData.status}
-                    required
-                    onChange={(e) => setFormData({...formData ,status:e.target.value})}
-                  >
+                    <label htmlFor="" className="font-bold">Status :</label>
 
-                    <option value="false" >false</option>
+                    <select  
+                      className="input"
+                      value={formData.status}
+                      required
+                      onChange={(e) => setFormData({...formData ,status:e.target.value})}
+                    >
 
-                    <option value="true" >true</option>
+                      <option value="false" >false</option>
 
-                  </select>
+                      <option value="true" >true</option>
 
-              </div>
+                    </select>
+
+                </div>
+
+              )}
 
               <ReactQuill 
                 theme="snow"

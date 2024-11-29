@@ -7,7 +7,7 @@ import { errorHandler } from "../utils/error.js"
 
 export const createBrand = async (req,res,next) => {
     
-    if(!req.user.isAdmin)
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403,"You are not allowed to create a brand"))
     }
@@ -76,7 +76,7 @@ export const getBrands = async (req,res,next) => {
 
 export const updateBrand = async (req,res,next) => {
 
-    if(!req.user.isAdmin)
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403,"You are not allowed to update this film"))
     }
@@ -115,7 +115,7 @@ export const updateBrand = async (req,res,next) => {
 
 export const deleteBrand = async (req,res,next) => {
 
-    if(!req.user.isAdmin)
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403,"You are not allowed to update this film"))
     }
