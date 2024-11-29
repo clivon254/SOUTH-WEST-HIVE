@@ -17,9 +17,9 @@ export default function StoreContextProvider(props) {
 
     const [token ,setToken] = useState(localStorage.getItem("token"))
 
-    // const url = "https://south-west-hive-server.onrender.com"
+    const url = "https://south-west-hive-server.onrender.com"
 
-    const url = "http://localhost:2500"
+    // const url = "http://localhost:2500"
 
     const [NavLinks , setNavLinks] = useState([
       {
