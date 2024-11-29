@@ -97,7 +97,7 @@ export default function ConfirmPayment() {
     // Set a timeout to confirm payment after 60 seconds
     const timeoutId = setTimeout(() => {
         confirmPayment();
-    }, 60000); // 60 seconds
+    }, 50000); // 60 seconds
   
     // Cleanup function to clear the timeout
     return () => clearTimeout(timeoutId);
@@ -111,7 +111,7 @@ export default function ConfirmPayment() {
 
         {paymentSuccess && !paymentError && !processingPayment &&(
 
-            <div className="w-full h-[50vh] flex flex-col gap-y-3 items-center justify-center">
+            <div className="w-full h-[70vh] flex flex-col gap-y-3 items-center justify-center">
 
                 <div className="w-[90%] md:w-[70%] lg:w-[50%] 2xl:w-[40%] bg-secondaryLight dark:bg-secondaryDark shadow-xl rounded-md flex flex-col items-center gap-y-3 p-3">
                     
@@ -123,15 +123,17 @@ export default function ConfirmPayment() {
 
                     <p className="text-center text-xl font-title xl:text-3xl font-semibold">{message}</p>
 
+                    <button className="btn2 rounded-md">
+
+                        <Link to="/orders">
+                            proceed to orders
+                        </Link>
+
+                    </button>
+
                 </div>
 
-                <button className="btn2 rounded-md">
-
-                    <Link to="/orders">
-                        proceed to orders
-                    </Link>
-
-                </button>
+                
 
             </div>
 
@@ -139,11 +141,14 @@ export default function ConfirmPayment() {
 
         {!paymentSuccess && !paymentError && processingPayment &&(
 
-            <div className="grid place-content-center">
+            <div className="w-full h-[50vh] flex flex-col gap-y-3 items-center justify-center">
 
-                    <Loading />
-
-                    <p className="text-center">{message}</p>
+                <div className="w-[90%] md:w-[70%] lg:w-[50%] 2xl:w-[40%] bg-secondaryLight dark:bg-secondaryDark shadow-xl rounded-md flex flex-col items-center gap-y-3 p-5">
+                    
+                   <Loading/>  processingPayment .This might take a minute
+                    
+                </div>
+  
 
             </div>
 
@@ -162,16 +167,16 @@ export default function ConfirmPayment() {
                     </span>
 
                     <p className="text-center text-xl font-title xl:text-3xl font-semibold">{message}</p>
-
+                    
+                    <button className="btn2 rounded-md">
+                        <Link to="/checkout">
+                            back to cart
+                        </Link>
+                    </button>
                     
 
                 </div>
-
-                <button className="btn2 rounded-md">
-                        <Link to="/checkout">
-                            cancel
-                        </Link>
-                </button>
+  
 
             </div>
 
