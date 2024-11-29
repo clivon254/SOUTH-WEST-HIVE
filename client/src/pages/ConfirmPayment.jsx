@@ -145,7 +145,14 @@ export default function ConfirmPayment() {
 
                 <div className="w-[90%] md:w-[70%] lg:w-[50%] 2xl:w-[40%] bg-secondaryLight dark:bg-secondaryDark shadow-xl rounded-md flex flex-col items-center gap-y-3 p-5">
                     
-                   <Loading/>  processingPayment .This might take a minute
+                   <div className="">
+
+                     <span className=""/> processing ayment
+
+                   </div>
+
+                   <p className="text-center">This might take a minute</p>  
+                  
                     
                 </div>
   
