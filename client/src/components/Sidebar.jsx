@@ -4,13 +4,14 @@ import React, { useContext } from 'react'
 import { StoreContext } from '../context/store'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {MdLightMode ,MdDarkMode, MdContactSupport, MdArticle, MdAddCard, MdRestaurantMenu, MdRestaurant, MdFoodBank} from "react-icons/md"
+import {MdLightMode ,MdDarkMode, MdContactSupport, MdArticle, MdAddCard, MdRestaurantMenu, MdRestaurant, MdFoodBank, MdBrandingWatermark, MdPodcasts, MdViewArray, MdFileOpen, MdPictureInPicture, MdPictureAsPdf} from "react-icons/md"
 import { toggleTheme } from '../redux/theme/themeSlice'
 import { IoFilm } from 'react-icons/io5'
-import { FaFilm } from 'react-icons/fa'
+import { FaAcquisitionsIncorporated, FaAddressCard, FaFilm } from 'react-icons/fa'
 import { FcAbout } from 'react-icons/fc'
 import { SiAbbott } from 'react-icons/si'
 import { FcFaq } from "react-icons/fc";
+import { GiClothes } from 'react-icons/gi'
 
 
 export default function Sidebar() {
@@ -106,6 +107,126 @@ export default function Sidebar() {
 
               )}
 
+              {currentUser?.accountType === "salesperson" && (
+
+                <>
+
+                  {/* brand */}
+                  <NavLink 
+                    to={`/brand`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdBrandingWatermark size={24}/></span> Brands
+                  </NavLink>
+
+                  {/* add brand */}
+                  <NavLink 
+                    to={`/add-brand`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdFoodBank/></span> Add Brands
+                  </NavLink>
+
+                  {/* merch */}
+                  <NavLink 
+                    to={`/merch`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><GiClothes size={24}/></span> Merchendise
+                  </NavLink>
+                  
+                  {/* add-merch */}
+                  <NavLink 
+                    to={`/add-merch`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdFoodBank/></span> Add Merchendise
+                  </NavLink>
+
+                  {/* access */}
+                  <NavLink 
+                    to={`/access`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><FaAcquisitionsIncorporated size={24}/></span> Accessories
+                  </NavLink>
+
+                  {/* add-access */}
+                  <NavLink 
+                    to={`/add-access`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><FaAddressCard/></span> Add Accessories
+                  </NavLink>
+
+
+                </>
+
+              )}
+
+              {currentUser?.accountType === "media" && (
+
+                <>
+
+                  <NavLink 
+                    to={`/podcast`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdPodcasts size={24}/></span> Podcast-media
+                  </NavLink>
+
+                  <NavLink 
+                    to={`/add-podcast`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdFoodBank size={24}/></span> Add Podcast
+                  </NavLink>
+
+
+                  <NavLink 
+                    to={`/film`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdFileOpen size={24}/></span> My Films
+                  </NavLink>
+
+                  <NavLink 
+                    to={`/add-film`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdViewArray/></span> Add Films
+                  </NavLink>
+
+
+                  <NavLink 
+                    to={`/reel`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdPictureInPicture size={24}/></span> My Reels 
+                  </NavLink>
+
+                  <NavLink 
+                    to={`/add-reel`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdPictureAsPdf/></span> Add Reels
+                  </NavLink>
+
+                </>
+
+              )}
 
               <NavLink 
                 to={`/contact`}

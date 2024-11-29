@@ -221,51 +221,171 @@ export default function Header() {
 
                     </Dropdown.Header>
 
-                    <Link to="/dashboard">
 
-                        <Dropdown.Item>Dashboard</Dropdown.Item>
+                      {currentUser?.accountType === "writer" &&(
 
-                    </Link>
+                        <>
 
-                    {currentUser?.accountType === "writer" &&(
+                          <Link to="/dashboard">
 
-                      <>
+                             <Dropdown.Item>Dashboard</Dropdown.Item>
 
-                        <Link to="/posts">
+                          </Link>
 
-                            <Dropdown.Item>My Articles</Dropdown.Item>
+                          <Link to="/posts">
 
-                        </Link>
+                              <Dropdown.Item>My Articles</Dropdown.Item>
 
-                        <Link to="/add-post">
+                          </Link>
 
-                            <Dropdown.Item>Add Articles</Dropdown.Item>
+                          <Link to="/add-post">
 
-                        </Link>
+                              <Dropdown.Item>Add Articles</Dropdown.Item>
 
-                      </>
+                          </Link>
 
-                    )}
+                        </>
 
-                    {currentUser?.accountType === "caterer" &&(
+                      )}
 
-                      <>
+                      {currentUser?.accountType === "caterer" &&(
 
-                        <Link to="/food">
+                        <>
 
-                            <Dropdown.Item>Food items</Dropdown.Item>
+                          <Link to="/dashboard">
 
-                        </Link>
+                             <Dropdown.Item>Dashboard</Dropdown.Item>
 
-                        <Link to="/add-food">
+                          </Link>
 
-                            <Dropdown.Item>Add Food Item</Dropdown.Item>
+                           <Link to="/dashboard">
 
-                        </Link>
+                               <Dropdown.Item>Dashboard</Dropdown.Item>
 
-                      </>
+                          </Link>
 
-                    )}
+                          <Link to="/food">
+
+                              <Dropdown.Item>Food items</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-food">
+
+                              <Dropdown.Item>Add Food Item</Dropdown.Item>
+
+                          </Link>
+
+                        </>
+
+                      )}
+
+                      {currentUser?.accountType === "salesperson" &&(
+
+                        <>
+
+                          <Link to="/dashboard">
+
+                             <Dropdown.Item>Dashboard</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/brand">
+
+                              <Dropdown.Item>Brands</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-brand">
+
+                              <Dropdown.Item>Add Brand</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/merch">
+
+                              <Dropdown.Item>Merchendise</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-merch">
+
+                              <Dropdown.Item>Add Merchendise</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/access">
+
+                              <Dropdown.Item>Accessories</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-access">
+
+                              <Dropdown.Item>Add Accessories</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/purchase-orders">
+
+                              <Dropdown.Item>Purchase orders</Dropdown.Item>
+
+                          </Link>
+
+
+                        </>
+
+                      )}
+
+                      {currentUser?.accountType === "media" &&(
+
+                        <>
+
+                         <Link to="/dashboard">
+
+                           <Dropdown.Item>Dashboard</Dropdown.Item>
+
+                         </Link>
+
+                          <Link to="/podcast">
+
+                              <Dropdown.Item>Podcast-media</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-podcast">
+
+                              <Dropdown.Item>Add Podcast</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/film">
+
+                              <Dropdown.Item>My Films</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-film">
+
+                              <Dropdown.Item>Add Film</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/reel">
+
+                              <Dropdown.Item>My Reels</Dropdown.Item>
+
+                          </Link>
+
+                          <Link to="/add-reel">
+
+                              <Dropdown.Item>Add Reel</Dropdown.Item>
+
+                          </Link>
+
+                        </>
+
+                      )}
 
                     <Link to={`/user/${currentUser._id}`}>
 

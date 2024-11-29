@@ -40,6 +40,24 @@ import AddPost from './pages/AddPost'
 import Food from './pages/Food'
 import UpdateFood from './pages/UpdateFood'
 import AddFood from './pages/AddFood'
+import Brand from './pages/Brands'
+import AddBrand from './pages/AddBrand'
+import UpdateBrand from './pages/UpdateBrand'
+import AddMerch from './pages/AddMerch'
+import UpdateMerch from './pages/UpdateMerch'
+import Merch from './pages/Merch'
+import AddAccess from './pages/AddAccess'
+import UpdateAccess from './pages/UpdateAccess'
+import Access from './pages/Access'
+import Podcast from './pages/Podcast'
+import UpdatePodcast from './pages/UpdatePodcast'
+import AddPodcast from './pages/AddPodcast'
+import Reel from './pages/Reel'
+import UpdateReel from './pages/UpdateReel'
+import AddReels from './pages/AddReels'
+import AddFilm from './pages/AddFilm'
+import UpdateFilm from './pages/UpdateFilm'
+import Films from './pages/Film'
 
 
 
@@ -119,22 +137,57 @@ export default function App() {
             </Route>
 
             <Route  element={<OnlySalesperson/>}>
+              
+              <Route path="/brand" element={<Brand/>}/>
 
+              <Route path="/update-brand/:brandId" element={<UpdateBrand/>}/>
 
+              <Route path="/add-brand" element={<AddBrand/>}/>
+
+              <Route path="/merch" element={<Merch/>}/>
+
+              <Route path="/update-merch/:merchId" element={<UpdateMerch/>}/>
+
+              <Route path="/add-merch" element={<AddMerch/>}/>
+
+              <Route path="/access" element={<Access/>}/>
+
+              <Route path="/update-access/:accessId" element={<UpdateAccess/>}/>
+
+              <Route path="/add-access" element={<AddAccess/>}/>
+
+                
             </Route>
 
             <Route  element={<OnlyWriter/>}>
 
-                <Route path="/posts" element={<Posts/>}/>
+              <Route path="/posts" element={<Posts/>}/>
 
-                <Route path="/update-post/:slug" element={<UpdatePost/>}/>
+              <Route path="/update-post/:slug" element={<UpdatePost/>}/>
 
-                <Route path="/add-post" element={<AddPost/>}/>
+              <Route path="/add-post" element={<AddPost/>}/>
 
             </Route>
 
             <Route  element={<OnlyMedia/>}>
 
+                <Route path="/podcast" element={<Podcast/>}/>
+
+                <Route path="/update-podcast/:podcastId" element={<UpdatePodcast/>}/>
+
+                <Route path="/add-podcast" element={<AddPodcast/>}/>
+
+                <Route path="/reel" element={<Reel/>}/>
+
+                <Route path="/update-reel/:reelId" element={<UpdateReel/>}/>
+
+                <Route path="/add-reel" element={<AddReels/>}/>
+
+                <Route path="/film" element={<Films/>}/>
+
+                <Route path="/update-film/:filmId" element={<UpdateFilm/>}/>
+
+                <Route path="/add-film" element={<AddFilm/>}/>
 
             </Route>
 

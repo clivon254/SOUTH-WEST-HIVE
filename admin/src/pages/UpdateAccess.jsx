@@ -10,6 +10,7 @@ import { toast } from 'sonner'
 import { Alert } from 'flowbite-react'
 import Error from '../components/Error'
 
+
 export default function UpdateAccess() {
 
   const {url,token} = useContext(StoreContext)

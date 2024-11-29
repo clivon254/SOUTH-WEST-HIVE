@@ -23,17 +23,15 @@ export default function FilmCard({film}) {
                 allowFullScreen
             />
 
-            
-
         </div>
 
-        <h1 className="text-2xl font-semibold">{film.title}</h1>
+        <h1 className="text-2xl font-semibold">{film?.title}</h1>
 
-        <p className="text-base">{film.description.slice(0,250)}</p>
+        <p className="text-base">{film?.description?.slice(0,250)}</p>
 
-        <p className="text-sm">by :{film.UserId.username}</p>
+        <p className="text-sm">by :{film?.UserId?.username}</p>
 
-        <p className="text-sm">{new Date(film.createdAt).toDateString()}</p>
+        <p className="text-sm">{new Date(film.createdAt)?.toDateString()}</p>
 
     </div>
 

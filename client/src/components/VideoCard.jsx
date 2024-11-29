@@ -64,7 +64,7 @@ export default function VideoCard({reel}) {
             <div className=" text-white flex items-center gap-x-2 ">
 
                 <Avatar 
-                    img={reel.userId.profilePicture}
+                    img={reel?.userId?.profilePicture}
                     rounded
                 />
 
