@@ -34,7 +34,7 @@ export const createMerchendise = async (req,res,next) => {
 
 export const createAccessories = async (req,res,next) => {
     
-    if(!req.user.isAdmin || !req.user.id)
+    if(!req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403,"You are not allowed to create an accesories"))
     }
@@ -61,7 +61,7 @@ export const createAccessories = async (req,res,next) => {
 
 export const createFood = async (req,res,next) => {
     
-    if( !req.user.isAdmin || !req.user.id)
+    if( !req.user.isAdmin && !req.user.id)
     {
         return next(errorHandler(403,"You are not allowed to create a merchendise"))
     }

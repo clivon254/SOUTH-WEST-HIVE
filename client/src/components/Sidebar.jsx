@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { StoreContext } from '../context/store'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {MdLightMode ,MdDarkMode, MdContactSupport, MdArticle, MdAddCard} from "react-icons/md"
+import {MdLightMode ,MdDarkMode, MdContactSupport, MdArticle, MdAddCard, MdRestaurantMenu, MdRestaurant, MdFoodBank} from "react-icons/md"
 import { toggleTheme } from '../redux/theme/themeSlice'
 import { IoFilm } from 'react-icons/io5'
 import { FaFilm } from 'react-icons/fa'
@@ -76,6 +76,30 @@ export default function Sidebar() {
                     className={({isActive}) => isActive ? "active-link" : "active"}
                   >
                      <span className=""><MdAddCard/></span> Add Articles
+                  </NavLink>
+
+                </>
+
+              )}
+
+              {currentUser?.accountType === "caterer" && (
+
+                <>
+
+                  <NavLink 
+                    to={`/food`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdRestaurant size={24}/></span> Food Items
+                  </NavLink>
+
+                  <NavLink 
+                    to={`/add-food`}
+                    onClick={() => setOpen(false)}
+                    className={({isActive}) => isActive ? "active-link" : "active"}
+                  >
+                     <span className=""><MdFoodBank/></span> Add Food Items
                   </NavLink>
 
                 </>

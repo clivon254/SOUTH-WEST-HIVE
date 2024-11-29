@@ -247,6 +247,26 @@ export default function Header() {
 
                     )}
 
+                    {currentUser?.accountType === "caterer" &&(
+
+                      <>
+
+                        <Link to="/food">
+
+                            <Dropdown.Item>Food items</Dropdown.Item>
+
+                        </Link>
+
+                        <Link to="/add-food">
+
+                            <Dropdown.Item>Add Food Item</Dropdown.Item>
+
+                        </Link>
+
+                      </>
+
+                    )}
+
                     <Link to={`/user/${currentUser._id}`}>
 
                       <Dropdown.Item>Profile</Dropdown.Item>

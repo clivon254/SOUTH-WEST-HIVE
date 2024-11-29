@@ -37,6 +37,9 @@ import OnlySalesperson from './components/OnlySales'
 import Posts from './pages/Posts'
 import UpdatePost from './pages/UpdatePost'
 import AddPost from './pages/AddPost'
+import Food from './pages/Food'
+import UpdateFood from './pages/UpdateFood'
+import AddFood from './pages/AddFood'
 
 
 
@@ -107,7 +110,11 @@ export default function App() {
 
             <Route  element={<OnlyCaterer/>}>
 
-            
+              <Route path="/add-food" element={<AddFood/>}/>
+
+              <Route path="/update-food/:foodId" element={<UpdateFood/>}/>
+
+              <Route path="/food" element={<Food/>}/>
 
             </Route>
 
