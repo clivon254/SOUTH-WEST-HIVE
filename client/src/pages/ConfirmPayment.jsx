@@ -145,9 +145,9 @@ export default function ConfirmPayment() {
 
                 <div className="w-[90%] md:w-[70%] lg:w-[50%] 2xl:w-[40%] bg-secondaryLight dark:bg-secondaryDark shadow-xl rounded-md flex flex-col items-center gap-y-3 p-5">
                     
-                   <div className="">
+                   <div className="flex items-center justify-center">
 
-                     <span className=""/> processing ayment
+                     <span className="loading"/> processing ayment
 
                    </div>
 
