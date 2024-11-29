@@ -97,7 +97,7 @@ export default function ConfirmPayment() {
     // Set a timeout to confirm payment after 60 seconds
     const timeoutId = setTimeout(() => {
         confirmPayment();
-    }, 50000); // 60 seconds
+    }, 45000); // 60 seconds
   
     // Cleanup function to clear the timeout
     return () => clearTimeout(timeoutId);
@@ -145,13 +145,13 @@ export default function ConfirmPayment() {
 
                 <div className="w-[90%] md:w-[70%] lg:w-[50%] 2xl:w-[40%] bg-secondaryLight dark:bg-secondaryDark shadow-xl rounded-md flex flex-col items-center gap-y-3 p-5">
                     
-                   <div className="flex items-center justify-center">
+                   <div className="flex items-center justify-center gap-x-3 text-xs font-semibold xl:text-base font-title">
 
                      <span className="loading"/> processing ayment
 
                    </div>
 
-                   <p className="text-center">This might take a minute</p>  
+                   <p className="text-center text-base font-title lg:text-xl font-semibold">This might take a minute</p>  
                   
                     
                 </div>
@@ -173,7 +173,7 @@ export default function ConfirmPayment() {
                          
                     </span>
 
-                    <p className="text-center text-xl font-title xl:text-3xl font-semibold">{message}</p>
+                    <p className="text-center text-base font-title lg:text-xl font-semibold">{message}</p>
                     
                     <button className="btn2 rounded-md">
                         <Link to="/checkout">
