@@ -16,7 +16,7 @@ export default function ConfirmPayment() {
   const {
         processingPayment,setProcessingPayment,
         paymentSuccess,setPaymentSuccess,
-        paymentError,setPaymentError,
+        paymentError,setPaymentError,fetchCart
         url,token
      } 
         = useContext(StoreContext)
@@ -64,6 +64,8 @@ export default function ConfirmPayment() {
 
                     setMessage(res.data.message)
                 }
+
+                fetchCart()
             }
             else
             {
@@ -147,15 +149,14 @@ export default function ConfirmPayment() {
                     
                    <div className="flex items-center justify-center gap-x-3 text-xs font-semibold xl:text-base font-title">
 
-                     <span className="loading"/> processing ayment
+                     <span className="loading"/> processing payment
 
                    </div>
 
-                   <p className="text-center text-base font-title lg:text-xl font-semibold">This might take a minute</p>  
+                   <p className="text-center text-base font-title  font-semibold">This might take a minute</p>  
                   
                     
                 </div>
-  
 
             </div>
 
@@ -173,7 +174,7 @@ export default function ConfirmPayment() {
                          
                     </span>
 
-                    <p className="text-center text-base font-title lg:text-xl font-semibold">{message}</p>
+                    <p className="text-center text-base font-title  font-semibold">{message}</p>
                     
                     <button className="btn2 rounded-md">
                         <Link to="/checkout">
