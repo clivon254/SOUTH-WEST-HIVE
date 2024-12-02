@@ -86,8 +86,6 @@ export default function ConfirmPayment() {
             setPaymentSuccess(false)
 
             setMessage(error.message)
-
-            
         }
         finally{
 
@@ -96,10 +94,12 @@ export default function ConfirmPayment() {
 
     }
 
-    // Set a timeout to confirm payment after 60 seconds
+    // Set a timeout to confirm payment after 45 seconds
     const timeoutId = setTimeout(() => {
+
         confirmPayment();
-    }, 45000); // 60 seconds
+
+    }, 45000); // 45 seconds
   
     // Cleanup function to clear the timeout
     return () => clearTimeout(timeoutId);
