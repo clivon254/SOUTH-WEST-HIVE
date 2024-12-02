@@ -1,17 +1,19 @@
 
 
 import { Avatar } from 'flowbite-react'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { MdCameraAlt, MdChevronLeft, MdMusicNote } from 'react-icons/md'
 
 
 
 
-export default function VideoCard({reel}) {
+export default function VideoCard({reel,isActive,onSwipe}) {
 
     const [isVideoPlaying ,setIsVideoPlaying] = useState(false)
 
     const videoRef = useRef(null)
+
+    const touchStartRef = useRef(0);
 
     const onVideoPress = () => {
 
@@ -31,9 +33,44 @@ export default function VideoCard({reel}) {
         }
     }
 
+    useEffect(() => {
+
+        if(isActive)
+        {
+            videoRef.current.play()
+        }
+        else
+        {
+            videoRef.current.pause()
+        }
+
+    },[isActive])
+
+    const onTouchStart = (e) => {
+        touchStartRef.current = e.touches[0].clientY; // Capture the starting touch position
+    };
+
+    const onTouchEnd = (e) => {
+        const touchEnd = e.changedTouches[0].clientY; // Get the ending touch position
+
+        if (touchStartRef.current - touchEnd > 50) {
+            // Swipe up detected
+            onSwipe('up');
+        } else if (touchEnd - touchStartRef.current > 50) {
+            // Swipe down detected
+            onSwipe('down');
+        }
+    };
+
+   
+
   return (
 
-    <div className="h-full w-full snap-start relative">
+    <div 
+        className="h-full w-full snap-start relative rounded-xl"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+    >
 
         {/* video header */}
         <div className="flex items-center justify-between absolute w-full p-2">
@@ -48,10 +85,10 @@ export default function VideoCard({reel}) {
 
         {/* VIDEO */}
         <video 
-          className="h-full w-full object-fill"
+          className="h-full w-full object-fill rounded-xl"
           ref={videoRef}
           onClick={onVideoPress}
-        //   controls
+          //   controls
           src={reel.video}
           alt='alt'
           loop
