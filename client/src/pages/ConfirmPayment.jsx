@@ -123,7 +123,7 @@ export default function ConfirmPayment() {
                          
                     </span>
 
-                    <p className="text-center text-xl font-title xl:text-3xl font-semibold">{message}</p>
+                    <p className="text-center  font-title  font-semibold">{message}</p>
 
                     <button className="btn2 rounded-md">
 
@@ -134,8 +134,6 @@ export default function ConfirmPayment() {
                     </button>
 
                 </div>
-
-                
 
             </div>
 
@@ -153,8 +151,7 @@ export default function ConfirmPayment() {
 
                    </div>
 
-                   <p className="text-center text-base font-title  font-semibold">This might take a minute</p>  
-                  
+                   <p className="text-center text-base font-title  font-semibold">This might take a minute</p>     
                     
                 </div>
 
