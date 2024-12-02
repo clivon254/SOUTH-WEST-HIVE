@@ -15,6 +15,8 @@ export default function VideoCard({reel,isActive,onSwipe}) {
 
     const touchStartRef = useRef(0);
 
+    const observerRef = useRef(null);
+
     const onVideoPress = () => {
 
         if(isVideoPlaying)
@@ -46,6 +48,31 @@ export default function VideoCard({reel,isActive,onSwipe}) {
 
     },[isActive])
 
+    useEffect(() => {
+
+        const handleIntersection = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Video is in view, do nothing
+                } 
+            });
+        };
+
+        observerRef.current = new IntersectionObserver(handleIntersection, {
+            threshold: 0.35 // Trigger when 35% of the video is visible
+        });
+
+        if (videoRef.current) {
+            observerRef.current.observe(videoRef.current);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                observerRef.current.unobserve(videoRef.current);
+            }
+        };
+    }, []);
+
     const onTouchStart = (e) => {
         touchStartRef.current = e.touches[0].clientY; // Capture the starting touch position
     };
@@ -53,10 +80,10 @@ export default function VideoCard({reel,isActive,onSwipe}) {
     const onTouchEnd = (e) => {
         const touchEnd = e.changedTouches[0].clientY; // Get the ending touch position
 
-        if (touchStartRef.current - touchEnd > 50) {
+        if (touchStartRef.current - touchEnd > 250) {
             // Swipe up detected
             onSwipe('up');
-        } else if (touchEnd - touchStartRef.current > 50) {
+        } else if (touchEnd - touchStartRef.current > 250) {
             // Swipe down detected
             onSwipe('down');
         }

@@ -34,11 +34,11 @@ export default function Reels() {
 
   return (
     
-    // <section className="section grid place-items-center gap-y-5 snap-mandatory snap-y">
+    // <section className="section grid place-items-center gap-y-5 ">
 
 
 
-    //     <div className="app__videos w-full lg:w-[70%] relative rounded-[20px] bg-white h-[75vh] max-w-md max-h-[1200px] overflow-scroll snap-y snap-mandatory">
+    //     <div className="app__videos w-full lg:w-[70%] relative rounded-[20px] bg-white h-[75vh] max-w-md max-h-[1200px] overflow-scroll ">
            
            
            
@@ -48,11 +48,11 @@ export default function Reels() {
 
     // </section>
 
-    <div className="section ">
+    <div className="section snap-mandatory snap-y">
 
       <Swiper
         direction={'vertical'}
-        className="mySwiper h-[80vh] w-full sm:w-[80%]  md:w-[65%] lg:w-[60%] lg:h-[60vh]  rounded-xl"
+        className="mySwiper h-[80vh] w-full sm:w-[80%]  md:w-[60%] lg:w-[40%] lg:h-[60vh]  rounded-xl snap-y snap-mandatory"
       >
 
         {reels.map((reel,index) => (
