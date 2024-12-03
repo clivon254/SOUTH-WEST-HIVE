@@ -9,6 +9,7 @@ import { CiShop } from "react-icons/ci";
 import { IoRestaurant } from "react-icons/io5";
 import { FcAbout } from "react-icons/fc";
 
+
 export const StoreContext = createContext(null)
 
 
@@ -731,7 +732,7 @@ export default function StoreContextProvider(props) {
     }
 
 
-    
+
   return (
 
     <StoreContext.Provider value={contextValue}>
