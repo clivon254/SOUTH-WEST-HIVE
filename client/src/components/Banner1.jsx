@@ -65,7 +65,7 @@ export default function Banner1() {
               <div className="bg-primaryLight/50 dark:bg-primaryDark/50 w-full h-full p-3 overflow-clip">
               
                   <p  className="banner-title text-white text-4xl  lg:text-5xl font-title tracking-wider font-semibold">
-                    Your campus ,your stories unfolding experinces,ideas and insipration
+                    Your campus ,your stories unfolding experiences,ideas and insipration
                   </p>
 
               </div>
