@@ -45,16 +45,20 @@ import Podcast from "./pages/Podcast"
 import UpdatePodcast from "./pages/UpdatePodcast"
 import LandingPage from "./pages/LandingPage"
 import Orders from "./pages/Orders"
+import { useContext } from "react"
+import { StoreContext } from "./context/store"
 
 
 
 function Layout(){
 
-  const {currentUser,token} = useSelector(state => state.user)
+  const {currentUser} = useSelector(state => state.user)
+
+  const {token} = useContext(StoreContext)
 
   return(
 
-    currentUser?.isAdmin && !token ? 
+    currentUser?.isAdmin  &&  token ? 
 
     <div className="w-full h-screen flex flex-col">
 
