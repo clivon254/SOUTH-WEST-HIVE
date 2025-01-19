@@ -246,7 +246,7 @@ export default function CheckOut() {
       <div className="flex flex-col lg:flex-row gap-y-10 gap-x-24">
 
         {/* Billing data */}
-        <div className="w-full lg:w-[55%] space-y-10">
+        <div className="w-full lg:w-[55%] space-y-10">  
 
 
           {/* contact */}

@@ -14,6 +14,7 @@ import ProductCard from './ProductCard';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 
+
 export default function SlideProducts({products}) {
 
     const {productsLoading} = useContext(StoreContext)
